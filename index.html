@@ -61,6 +61,15 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Ro
 .filter-row{display:flex;gap:6px}
 .filter-row select{flex:1;padding:7px 8px;border:1px solid var(--line);border-radius:var(--radius);font-size:13px;background:var(--white);outline:none;color:var(--ink)}
 
+/* Rating checkbox chips */
+.rating-filter{display:flex;flex-direction:column;gap:5px}
+.rating-filter-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+.rating-checks{display:flex;flex-wrap:wrap;gap:4px}
+.rating-checks label{display:inline-flex;align-items:center;gap:4px;font-size:12px;color:var(--ink);border:1px solid var(--line);border-radius:14px;padding:3px 8px;cursor:pointer;background:var(--white);transition:.1s;user-select:none}
+.rating-checks label:hover{border-color:#f59e0b}
+.rating-checks input{accent-color:#f59e0b;width:13px;height:13px;cursor:pointer;margin:0}
+.rating-checks label.on{border-color:#f59e0b;background:#fffbeb;color:#b45309;font-weight:600}
+
 .result-bar{padding:6px 18px 2px;font-size:12px;color:var(--muted)}
 .result-bar b{color:var(--ink)}
 
@@ -260,14 +269,9 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Ro
             <option value="low">Single-market (1 in state)</option>
           </select>
         </div>
-        <div class="filter-row">
-          <select id="ratingSel">
-            <option value="">All ratings</option>
-            <option value="45">4.5+ stars</option>
-            <option value="40">4.0+ stars</option>
-            <option value="low">Below 4.0 ★</option>
-            <option value="unrated">Unrated</option>
-          </select>
+        <div class="rating-filter">
+          <div class="rating-filter-label">Google rating ★</div>
+          <div class="rating-checks" id="ratingChecks"></div>
         </div>
       </div>
       <div class="result-bar"><b id="result-count">0</b> locations<span id="result-of"></span></div>
@@ -443,6 +447,12 @@ function ratingTier(r){
   if(r>=4.0) return 'mid';
   return 'low';
 }
+// Bucket key for the rating checkbox filter: '40' = 4.0 and below, else '41'..'50'
+function ratingBucket(r){
+  if(r==null) return null;
+  if(r<4.05) return '40';
+  return String(Math.round(r*10));
+}
 function ratingHtml(l,baseClass){
   if(l.rating==null) return '';
   const t=ratingTier(l.rating);
@@ -540,6 +550,18 @@ REGIONS.forEach(r=>{ const o=document.createElement('option');o.value=r;o.textCo
 const allYears=[...new Set(LOCATIONS.map(l=>l.y).filter(Boolean))].sort();
 allYears.forEach(y=>{ const o=document.createElement('option');o.value=y;o.textContent=`Opened ${y}`;document.getElementById('yearSel').appendChild(o); });
 
+// Rating filter checkboxes: "≤4.0" then 4.1 → 5.0 in .1 increments
+const ratingBuckets=[{v:'40',label:'≤4.0'}];
+for(let i=41;i<=50;i++) ratingBuckets.push({v:String(i),label:(i/10).toFixed(1)});
+const ratingChecksEl=document.getElementById('ratingChecks');
+ratingBuckets.forEach(b=>{
+  const lab=document.createElement('label');
+  lab.innerHTML=`<input type="checkbox" value="${b.v}"/>${b.label}`;
+  const cb=lab.querySelector('input');
+  cb.addEventListener('change',()=>{ lab.classList.toggle('on',cb.checked); apply(); });
+  ratingChecksEl.appendChild(lab);
+});
+
 // ── Filter state ──
 let filterStatus='all', filterOpenNow=false, activeCard=null, colorByRating=false;
 
@@ -557,7 +579,7 @@ function filteredLocations(){
   const st  = document.getElementById('stateSel').value;
   const yr  = document.getElementById('yearSel').value;
   const den = document.getElementById('densitySel').value;
-  const rat = document.getElementById('ratingSel').value;
+  const ratChecked = new Set([...document.querySelectorAll('#ratingChecks input:checked')].map(c=>c.value));
   return LOCATIONS.filter(l=>{
     if(filterStatus==='live' && l.coming_soon)  return false;
     if(filterStatus==='soon' && !l.coming_soon) return false;
@@ -571,12 +593,7 @@ function filteredLocations(){
       if(den==='mid'&&(c<2||c>4)) return false;
       if(den==='low'&&c>1)        return false;
     }
-    if(rat){
-      if(rat==='unrated' && l.rating!=null) return false;
-      if(rat==='45'  && !(l.rating>=4.5))   return false;
-      if(rat==='40'  && !(l.rating>=4.0))   return false;
-      if(rat==='low' && !(l.rating!=null && l.rating<4.0)) return false;
-    }
+    if(ratChecked.size && !ratChecked.has(ratingBucket(l.rating))) return false;
     if(q && !(`${l.n} ${l.a}`.toLowerCase().includes(q))) return false;
     return true;
   });
@@ -670,7 +687,7 @@ document.getElementById('openNowBtn').addEventListener('click',()=>{
   apply();
 });
 
-['q','regionSel','stateSel','yearSel','densitySel','ratingSel'].forEach(id=>{
+['q','regionSel','stateSel','yearSel','densitySel'].forEach(id=>{
   document.getElementById(id).addEventListener(id==='q'?'input':'change', apply);
 });
 
