@@ -13,6 +13,8 @@
 set -o pipefail
 # launchd runs with a minimal environment — pin PATH so git/curl/gh/python resolve.
 export PATH="/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+# stream python output to the log live (else block-buffering makes a running job look hung)
+export PYTHONUNBUFFERED=1
 cd "$(dirname "$0")" || exit 1
 MODE="${1:?usage: refresh.sh [locations|sba|fdd]}"
 mkdir -p logs
