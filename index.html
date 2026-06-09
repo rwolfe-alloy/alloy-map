@@ -115,11 +115,29 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Ro
 .pop-owner{font-size:12px;color:#4b5563;margin-bottom:5px;display:flex;align-items:center;gap:5px;flex-wrap:wrap}
 .pop-owner .owndot{width:9px;height:9px;border-radius:50%;flex:none;border:1px solid rgba(0,0,0,.15)}
 .pop-owner b{color:var(--ink);font-weight:600}
-.card-sba,.pop-sba{font-size:11.5px;color:#065f46;margin-top:5px;display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+.card-sba,.pop-sba{font-size:11.5px;color:#065f46;margin-top:5px;display:inline-flex;align-items:center;gap:4px;flex-wrap:wrap;text-decoration:none;cursor:pointer}
+.card-sba:hover,.pop-sba:hover{text-decoration:underline}
 .pop-sba{font-size:12px;margin-top:0;margin-bottom:5px}
 .card-sba b,.pop-sba b{color:#047857;font-weight:700}
 .card-sba .sba-meta,.pop-sba .sba-meta{color:var(--muted)}
 .card-sba .sba-ico,.pop-sba .sba-ico{font-size:11px}
+
+/* Loan-detail modal */
+#loan-modal{position:fixed;inset:0;z-index:2000;display:none;align-items:center;justify-content:center;background:rgba(17,24,39,.5)}
+#loan-modal.show{display:flex}
+.loan-card{background:var(--white);border-radius:14px;width:min(380px,92vw);max-height:80vh;display:flex;flex-direction:column;box-shadow:0 12px 40px rgba(0,0,0,.3);overflow:hidden}
+.loan-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--line)}
+.loan-head h3{font-size:15px;font-weight:800;color:var(--ink)}
+.loan-close{border:none;background:none;font-size:22px;line-height:1;color:var(--muted);cursor:pointer;padding:0 2px}
+.loan-close:hover{color:var(--ink)}
+#loan-modal-body{padding:12px 16px 16px;overflow-y:auto}
+.loan-modal-sub{font-size:12px;font-weight:700;color:#047857;margin-bottom:10px}
+.loan-item{border:1px solid var(--line);border-left:3px solid #10b981;border-radius:8px;padding:9px 11px;margin-bottom:8px}
+.loan-amt{font-size:16px;font-weight:800;color:var(--ink);display:flex;align-items:baseline;gap:7px}
+.loan-fy{font-size:11px;font-weight:700;color:var(--muted)}
+.loan-bank{font-size:12.5px;color:var(--ink);margin-top:2px}
+.loan-meta{font-size:11.5px;color:var(--muted);margin-top:3px}
+.loan-src{font-size:10.5px;color:var(--light);margin-top:6px}
 
 .empty-state{padding:40px 20px;text-align:center;color:var(--muted)}
 
@@ -237,14 +255,19 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Ro
 .alloy-dot.rt-none{background:#9ca3af}
 
 /* Star ratings */
-.card-rating{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:700;color:#b45309;margin-top:5px}
+.card-rating{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:700;color:#b45309;margin-top:5px;text-decoration:none;cursor:pointer}
+.card-rating:hover{text-decoration:underline}
 .card-rating .stars{color:#f59e0b;letter-spacing:-1px}
 .card-rating .rcount{color:var(--muted);font-weight:500}
 .card-rating.rt-high{color:#047857}
 .card-rating.rt-low{color:#b91c1c}
-.pop-rating{font-size:12px;font-weight:700;color:#b45309;margin-bottom:5px;display:flex;align-items:center;gap:4px}
+.pop-rating{font-size:12px;font-weight:700;color:#b45309;margin-bottom:5px;display:inline-flex;align-items:center;gap:4px;text-decoration:none;cursor:pointer}
+.pop-rating:hover{text-decoration:underline}
 .pop-rating .stars{color:#f59e0b;letter-spacing:-1px}
 .pop-rating .rcount{color:var(--muted);font-weight:500}
+/* Google profile shortcut button */
+.card-google,.pop-google{color:#1a73e8 !important;font-weight:800 !important}
+.card-google:hover,.pop-google:hover{border-color:#1a73e8 !important;color:#1a73e8 !important}
 
 @media(max-width:760px){
   #app{flex-direction:column}
@@ -438,6 +461,17 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Ro
   </div>
 </div>
 
+<!-- SBA loan detail modal -->
+<div id="loan-modal" onclick="if(event.target===this)hideLoans()">
+  <div class="loan-card">
+    <div class="loan-head">
+      <h3 id="loan-modal-title">SBA 7(a) Loans</h3>
+      <button class="loan-close" onclick="hideLoans()" aria-label="Close">×</button>
+    </div>
+    <div id="loan-modal-body"></div>
+  </div>
+</div>
+
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
 <script>
@@ -530,11 +564,18 @@ function ratingBucket(r){
   if(r<4.05) return '40';
   return String(Math.round(r*10));
 }
+// Link to the location's Google Business Profile (Maps place page) via place_id when available
+function googleProfileUrl(l){
+  const q = encodeURIComponent(`Alloy Personal Training ${l.a || l.n}`);
+  if(l.place_id && /^ChIJ/.test(l.place_id))
+    return `https://www.google.com/maps/search/?api=1&query=${q}&query_place_id=${l.place_id}`;
+  return `https://www.google.com/maps/search/?api=1&query=${q}`;
+}
 function ratingHtml(l,baseClass){
   if(l.rating==null) return '';
   const t=ratingTier(l.rating);
   const cnt=l.review_count!=null ? ` <span class="rcount">(${l.review_count.toLocaleString()})</span>` : '';
-  return `<div class="${baseClass} rt-${t}"><span class="stars">★</span> ${l.rating.toFixed(1)}${cnt}</div>`;
+  return `<a class="${baseClass} rt-${t}" href="${googleProfileUrl(l)}" target="_blank" rel="noopener" title="View on Google"><span class="stars">★</span> ${l.rating.toFixed(1)}${cnt}</a>`;
 }
 
 function makeIcon(type){
@@ -579,8 +620,35 @@ const fmtUSD = n => n>=1e6 ? '$'+(n/1e6).toFixed(n>=1e7?1:2)+'M' : n>=1e3 ? '$'+
 function sbaHtml(l,baseClass){
   const s=sbaByLoc[l.n];
   if(!s) return '';
-  return `<div class="${baseClass}"><span class="sba-ico">🏦</span><b>${fmtUSD(s.total)}</b> SBA 7(a)<span class="sba-meta"> · ${s.count} loan${s.count>1?'s':''}</span></div>`;
+  return `<a class="${baseClass}" href="#" onclick="showLoans('${encodeURIComponent(l.n)}');return false" title="See individual loans"><span class="sba-ico">🏦</span><b>${fmtUSD(s.total)}</b> SBA 7(a)<span class="sba-meta"> · ${s.count} loan${s.count>1?'s':''} ›</span></a>`;
 }
+
+// Loan-detail modal
+const LOAN_STATUS={CURR:'Current','P I F':'Paid in full',PIF:'Paid in full',CHGOFF:'Charged off',
+  EXEMPT:'Exempt',COMMIT:'Committed',CANCLD:'Cancelled',DELINQ:'Delinquent',DEFERD:'Deferred'};
+function showLoans(key){
+  const name=decodeURIComponent(key);
+  const s=sbaByLoc[name]; if(!s) return;
+  const loans=[...s.loans].sort((a,b)=>(b.approvalfy||'').localeCompare(a.approvalfy||'')||b.amount-a.amount);
+  const rows=loans.map(ln=>{
+    const term=ln.terminmonths?`${Math.round(+ln.terminmonths/12*10)/10} yr`:'';
+    const jobs=ln.jobssupported&&+ln.jobssupported?`${ln.jobssupported} jobs`:'';
+    const status=LOAN_STATUS[ln.loanstatus]||ln.loanstatus||'';
+    const meta=[ln.approvaldate,term,jobs,status].filter(Boolean).join(' · ');
+    return `<div class="loan-item">
+      <div class="loan-amt">${fmtUSD(ln.amount)}<span class="loan-fy">FY${ln.approvalfy||''}</span></div>
+      <div class="loan-bank">${ln.bankname||'—'}</div>
+      <div class="loan-meta">${meta}</div>
+    </div>`;
+  }).join('');
+  document.getElementById('loan-modal-body').innerHTML=
+    `<div class="loan-modal-sub">${fmtUSD(s.total)} total · ${s.count} SBA 7(a) loan${s.count>1?'s':''}</div>${rows}`+
+    `<div class="loan-src">Source: SBA 7(a) FOIA dataset (franchise code S4826)</div>`;
+  document.getElementById('loan-modal-title').textContent=name;
+  document.getElementById('loan-modal').classList.add('show');
+}
+function hideLoans(){ document.getElementById('loan-modal').classList.remove('show'); }
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') hideLoans(); });
 
 const cluster = L.markerClusterGroup({maxClusterRadius:40,spiderfyOnMaxZoom:true,showCoverageOnHover:false});
 map.addLayer(cluster);
@@ -638,6 +706,7 @@ LOCATIONS.forEach(l=>{
     l.m ? `<span class="pop-tag">${l.m}</span>` : '',
   ].filter(Boolean).join('');
   const socialLinks = [
+    `<a href="${googleProfileUrl(l)}" target="_blank" rel="noopener" class="pop-social pop-google" title="Google Business Profile">G</a>`,
     l.instagram ? `<a href="https://instagram.com/${l.instagram}" target="_blank" rel="noopener" class="pop-social">IG</a>` : '',
     l.facebook  ? `<a href="https://facebook.com/${l.facebook}"  target="_blank" rel="noopener" class="pop-social">FB</a>` : '',
     l.email     ? `<a href="mailto:${l.email}" class="pop-social">✉</a>` : '',
@@ -740,6 +809,7 @@ function renderList(items){
     ].filter(Boolean).join('');
 
     const socialLinks = [
+      `<a href="${googleProfileUrl(l)}" target="_blank" rel="noopener" class="card-google" title="Google Business Profile">G</a>`,
       l.instagram ? `<a href="https://instagram.com/${l.instagram}" target="_blank" rel="noopener">IG</a>` : '',
       l.facebook  ? `<a href="https://facebook.com/${l.facebook}"  target="_blank" rel="noopener">FB</a>` : '',
     ].filter(Boolean).join('');
@@ -761,7 +831,7 @@ function renderList(items){
       (l.email ? `<div class="card-email"><a href="mailto:${l.email}">✉ ${l.email}</a></div>` : '');
 
     c.addEventListener('click',e=>{
-      if(e.target.tagName==='A') return;
+      if(e.target.closest('a')) return;   // clicks on links (incl. their child spans) shouldn't fly the map
       map.setView([l.lat,l.lng],13,{animate:true});
       cluster.zoomToShowLayer(l._marker,()=>l._marker.openPopup());
       if(activeCard) activeCard.classList.remove('active');
