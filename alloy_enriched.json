@@ -9,7 +9,20 @@
     "p": "470-470-4453",
     "u": "https://alloypersonaltraining.com/location/acworth-ga/",
     "y": "2026",
-    "m": "Atlanta"
+    "m": "Atlanta",
+    "coming_soon": true,
+    "email": "info.acworth@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy_acworth",
+    "facebook": "alloy.acworth"
   },
   {
     "n": "Ahwatukee Foothills, Phoenix, AZ",
@@ -21,7 +34,20 @@
     "p": "602-755-3312",
     "u": "https://alloypersonaltraining.com/location/ahwatukee-foothills-az/",
     "y": "2025",
-    "m": "Phoenix"
+    "m": "Phoenix",
+    "coming_soon": false,
+    "email": "info.ahwatukeefoothills@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy.ahwatukeefoothills",
+    "facebook": "alloy.ahwatukeefoothills"
   },
   {
     "n": "Alamo Heights, TX",
@@ -33,7 +59,20 @@
     "p": "210-934-8818",
     "u": "https://alloypersonaltraining.com/location/alamo-heights-tx/",
     "y": "2024",
-    "m": "San Antonio"
+    "m": "San Antonio",
+    "coming_soon": false,
+    "email": "info.alamoheights@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloyalamoheights",
+    "facebook": "alloy.alamoheights"
   },
   {
     "n": "Alamo Ranch, TX",
@@ -45,7 +84,20 @@
     "p": "(737) 348-0102",
     "u": "https://alloypersonaltraining.com/location/alamo-ranch-tx/",
     "y": "2024",
-    "m": "San Antonio"
+    "m": "San Antonio",
+    "coming_soon": false,
+    "email": "info.alamoranch@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "5AM - 1PM, 4PM - 8PM",
+      "Tue": "5AM - 1PM, 4PM - 8PM",
+      "Wed": "5AM - 1PM, 4PM - 8PM",
+      "Thu": "5AM - 1PM, 4PM - 8PM",
+      "Fri": "5AM - 1PM, 4PM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloyalamoranch",
+    "facebook": "alloy.alamoranch"
   },
   {
     "n": "Algonquin, IL",
@@ -57,7 +109,20 @@
     "p": "224-333-1342",
     "u": "https://alloypersonaltraining.com/location/algonquin-il/",
     "y": "2025",
-    "m": "Chicago"
+    "m": "Chicago",
+    "coming_soon": true,
+    "email": "info.algonquin@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": null,
+    "facebook": "alloy.algonquin"
   },
   {
     "n": "Alpharetta, GA",
@@ -69,7 +134,20 @@
     "p": "770-874-4042",
     "u": "https://alloypersonaltraining.com/location/alphapark-alpharetta-ga/",
     "y": "2025",
-    "m": "Atlanta"
+    "m": "Atlanta",
+    "coming_soon": false,
+    "email": "info.alpharetta@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": null,
+    "facebook": "alloy.alpharetta"
   },
   {
     "n": "Ashburn, VA",
@@ -81,7 +159,20 @@
     "p": "571-202-6243",
     "u": "https://alloypersonaltraining.com/location/ashburn-va/",
     "y": "2025",
-    "m": "Washington DC"
+    "m": "Washington DC",
+    "coming_soon": false,
+    "email": "info.ashburn@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": null,
+    "facebook": "alloy.ashburn"
   },
   {
     "n": "Ballwin, MO",
@@ -93,7 +184,12 @@
     "p": "(636) 251-5385",
     "u": "https://alloypersonaltraining.com/location/ballwin-mo/",
     "y": "2022",
-    "m": "St. Louis"
+    "m": "St. Louis",
+    "coming_soon": false,
+    "email": "info.ballwin@alloypersonaltraining.com",
+    "hours": null,
+    "instagram": "alloyballwin",
+    "facebook": "alloyballwin"
   },
   {
     "n": "Bearden, TN",
@@ -105,7 +201,20 @@
     "p": "(865) 344-1205",
     "u": "https://alloypersonaltraining.com/location/bearden-tn/",
     "y": "2024",
-    "m": "Knoxville"
+    "m": "Knoxville",
+    "coming_soon": false,
+    "email": "info.bearden@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloybearden",
+    "facebook": "alloybearden"
   },
   {
     "n": "Billings, MT",
@@ -117,7 +226,20 @@
     "p": "(406)296-6667",
     "u": "https://alloypersonaltraining.com/location/billings-mt/",
     "y": "2021",
-    "m": null
+    "m": null,
+    "coming_soon": false,
+    "email": "info.billings@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "explore",
+    "facebook": "alloybillings"
   },
   {
     "n": "Birmingham Colonnade, AL",
@@ -129,7 +251,20 @@
     "p": "205-236-1868",
     "u": "https://alloypersonaltraining.com/location/birmingham-colonnade-al/",
     "y": "2025",
-    "m": "Birmingham"
+    "m": "Birmingham",
+    "coming_soon": true,
+    "email": "info.birminghamcolonnade@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": null,
+    "facebook": "alloy.birminghamcolonnade"
   },
   {
     "n": "Birmingham, MI",
@@ -141,7 +276,20 @@
     "p": "248-422-0784",
     "u": "https://alloypersonaltraining.com/location/birmingham-mi/",
     "y": "2025",
-    "m": "Detroit"
+    "m": "Detroit",
+    "coming_soon": true,
+    "email": "info.birmingham@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": null,
+    "facebook": "alloy.birmingham.mi"
   },
   {
     "n": "Bloomington, MN",
@@ -153,7 +301,20 @@
     "p": "952-254-4147",
     "u": "https://alloypersonaltraining.com/location/bloomington-mn/",
     "y": "2025",
-    "m": "Minneapolis-St. Paul"
+    "m": "Minneapolis-St. Paul",
+    "coming_soon": false,
+    "email": "info.bloomington@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy_bloomington",
+    "facebook": "alloy.bloomington.mn"
   },
   {
     "n": "BluHawk, Overland Park, KS",
@@ -165,7 +326,20 @@
     "p": "913-404-5424",
     "u": "https://alloypersonaltraining.com/location/bluhawk-overland-park-ks/",
     "y": "2025",
-    "m": "Kansas City"
+    "m": "Kansas City",
+    "coming_soon": false,
+    "email": "info.bluhawk@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy.bluhawk",
+    "facebook": "alloy.bluhawk"
   },
   {
     "n": "Bonney Lake, WA",
@@ -177,7 +351,20 @@
     "p": "253-400-4545",
     "u": "https://alloypersonaltraining.com/location/bonney-lake-wa/",
     "y": "2024",
-    "m": "Seattle"
+    "m": "Seattle",
+    "coming_soon": false,
+    "email": "info.bonneylake@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy_bonneylake",
+    "facebook": "alloy.bonneylake"
   },
   {
     "n": "Bountiful, UT",
@@ -189,7 +376,20 @@
     "p": "385-399-8106",
     "u": "https://alloypersonaltraining.com/location/bountiful-ut/",
     "y": "2025",
-    "m": "Salt Lake City"
+    "m": "Salt Lake City",
+    "coming_soon": false,
+    "email": "info.bountiful@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy_bountiful",
+    "facebook": "alloy.bountiful"
   },
   {
     "n": "Broadway Park, CO",
@@ -201,7 +401,20 @@
     "p": "(720) 599-2039",
     "u": "https://alloypersonaltraining.com/location/broadway-park-co/",
     "y": "2024",
-    "m": "Denver"
+    "m": "Denver",
+    "coming_soon": false,
+    "email": "info.broadwaypark@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy.broadwaypark",
+    "facebook": "alloy.broadwaypark"
   },
   {
     "n": "Buckhead, Atlanta, GA",
@@ -213,7 +426,20 @@
     "p": "762-245-4442",
     "u": "https://alloypersonaltraining.com/location/buckhead-atlanta-ga/",
     "y": "2024",
-    "m": "Atlanta"
+    "m": "Atlanta",
+    "coming_soon": false,
+    "email": "info.buckhead@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloybuckhead",
+    "facebook": "profile.php"
   },
   {
     "n": "Bull Creek Market, Austin, TX",
@@ -225,7 +451,20 @@
     "p": "737-260-0106",
     "u": "https://alloypersonaltraining.com/location/bull-creek-market-austin-tx/",
     "y": "2023",
-    "m": "Austin"
+    "m": "Austin",
+    "coming_soon": false,
+    "email": "info.bullcreek@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloybullcreek",
+    "facebook": "AlloyBullCreek"
   },
   {
     "n": "Canton, GA",
@@ -237,7 +476,20 @@
     "p": "470-863-1959",
     "u": "https://alloypersonaltraining.com/location/canton-ga/",
     "y": "2026",
-    "m": "Atlanta"
+    "m": "Atlanta",
+    "coming_soon": true,
+    "email": "info.canton@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy_cantonga",
+    "facebook": "alloy.canton"
   },
   {
     "n": "Capitol View, TN",
@@ -249,7 +501,20 @@
     "p": "629-276-7434",
     "u": "https://alloypersonaltraining.com/location/capitol-view-tn/",
     "y": "2024",
-    "m": "Nashville"
+    "m": "Nashville",
+    "coming_soon": false,
+    "email": "info.capitolview@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy.capitolview",
+    "facebook": "alloy.capitolview"
   },
   {
     "n": "Cary, NC",
@@ -261,7 +526,20 @@
     "p": "984-353-2158",
     "u": "https://alloypersonaltraining.com/location/cary-nc/",
     "y": "2024",
-    "m": "Raleigh-Durham"
+    "m": "Raleigh-Durham",
+    "coming_soon": false,
+    "email": "info.cary@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloycarync",
+    "facebook": "alloy.carync"
   },
   {
     "n": "Castle Hills, TX",
@@ -273,7 +551,20 @@
     "p": "(972) 360-9103",
     "u": "https://alloypersonaltraining.com/location/castle-hills-tx/",
     "y": "2023",
-    "m": "Dallas-Fort Worth"
+    "m": "Dallas-Fort Worth",
+    "coming_soon": false,
+    "email": "info.castlehills@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": null,
+    "facebook": "alloycastlehills"
   },
   {
     "n": "Cedar Hills Crossing, Beaverton, OR",
@@ -285,7 +576,20 @@
     "p": "971-449-1172",
     "u": "https://alloypersonaltraining.com/location/cedar-hills-crossing-or/",
     "y": "2025",
-    "m": "Portland"
+    "m": "Portland",
+    "coming_soon": false,
+    "email": "info.cedarhillscrossing@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy_cedarhills",
+    "facebook": "alloy.cedarhillscrossing"
   },
   {
     "n": "Cedar Park, TX",
@@ -297,7 +601,20 @@
     "p": "512-647-2807",
     "u": "https://alloypersonaltraining.com/location/cedar-park-tx/",
     "y": "2025",
-    "m": "Austin"
+    "m": "Austin",
+    "coming_soon": false,
+    "email": "info.cedarpark@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloycedarpark",
+    "facebook": "profile.php"
   },
   {
     "n": "Centennial, CO",
@@ -309,7 +626,20 @@
     "p": "(720) 343-5833",
     "u": "https://alloypersonaltraining.com/location/centennial-co/",
     "y": "2024",
-    "m": "Denver"
+    "m": "Denver",
+    "coming_soon": false,
+    "email": "info.centennial@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloycentennial",
+    "facebook": "alloy.centennial"
   },
   {
     "n": "Charlotte Blakeney, NC",
@@ -321,7 +651,20 @@
     "p": "(704) 761-4628",
     "u": "https://alloypersonaltraining.com/location/charlotte-blakeney-nc/",
     "y": "2021",
-    "m": "Charlotte"
+    "m": "Charlotte",
+    "coming_soon": false,
+    "email": "info.blakeney@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloyptcharlotte",
+    "facebook": "alloyblakeney"
   },
   {
     "n": "Chastain, GA",
@@ -333,7 +676,20 @@
     "p": "(770) 802-1875",
     "u": "https://alloypersonaltraining.com/location/chastain-ga/",
     "y": "2023",
-    "m": "Atlanta"
+    "m": "Atlanta",
+    "coming_soon": false,
+    "email": "info.chastain@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloychastain",
+    "facebook": "alloyChastain"
   },
   {
     "n": "Claymont, MO",
@@ -345,7 +701,12 @@
     "p": "636-422-6010",
     "u": "https://alloypersonaltraining.com/location/claymont-mo/",
     "y": "2023",
-    "m": "St. Louis"
+    "m": "St. Louis",
+    "coming_soon": false,
+    "email": "info.claymont@alloypersonaltraining.com",
+    "hours": null,
+    "instagram": "alloyclaymont",
+    "facebook": "alloyclaymont"
   },
   {
     "n": "Clayton, MO",
@@ -357,7 +718,20 @@
     "p": "(314)816-3135",
     "u": "https://alloypersonaltraining.com/location/clayton-mo/",
     "y": "2026",
-    "m": "St. Louis"
+    "m": "St. Louis",
+    "coming_soon": true,
+    "email": "info.clayton@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy_clayton",
+    "facebook": "alloy.clayton"
   },
   {
     "n": "Colleyville, TX",
@@ -369,7 +743,20 @@
     "p": "817-646-9404",
     "u": "https://alloypersonaltraining.com/location/colleyville-tx/",
     "y": "2023",
-    "m": "Dallas-Fort Worth"
+    "m": "Dallas-Fort Worth",
+    "coming_soon": false,
+    "email": "info.colleyvillevillagelane@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloyvillagelane",
+    "facebook": "profile.php"
   },
   {
     "n": "Colony Place",
@@ -381,7 +768,20 @@
     "p": "(704) 413-2349",
     "u": "https://alloypersonaltraining.com/location/colony-place-nc/",
     "y": "2022",
-    "m": "Charlotte"
+    "m": "Charlotte",
+    "coming_soon": false,
+    "email": "info.colonyplacenc@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": null,
+    "facebook": "alloycolonyplace"
   },
   {
     "n": "Colorado Springs, CO",
@@ -393,7 +793,20 @@
     "p": "719-409-7776",
     "u": "https://alloypersonaltraining.com/location/colorado-springs-co/",
     "y": "2025",
-    "m": "Colorado Springs"
+    "m": "Colorado Springs",
+    "coming_soon": true,
+    "email": "info.coloradosprings@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy_coloradosprings",
+    "facebook": "alloy.coloradosprings"
   },
   {
     "n": "Commack, NY",
@@ -405,7 +818,20 @@
     "p": "(631) 212-0462",
     "u": "https://alloypersonaltraining.com/location/commack-ny/",
     "y": "2024",
-    "m": "New York City"
+    "m": "New York City",
+    "coming_soon": false,
+    "email": "info.commack@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy_commack_ny",
+    "facebook": "alloy.commack"
   },
   {
     "n": "Concord, CA",
@@ -417,7 +843,20 @@
     "p": "925-515-5342",
     "u": "https://alloypersonaltraining.com/location/concord-ca/",
     "y": "2025",
-    "m": "San Francisco Bay Area"
+    "m": "San Francisco Bay Area",
+    "coming_soon": false,
+    "email": "info.concord@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy_concord",
+    "facebook": "alloy.concord"
   },
   {
     "n": "Coppell, TX",
@@ -429,7 +868,20 @@
     "p": "(972) 632-5539",
     "u": "https://alloypersonaltraining.com/location/coppell-tx/",
     "y": "2023",
-    "m": "Dallas-Fort Worth"
+    "m": "Dallas-Fort Worth",
+    "coming_soon": false,
+    "email": "info.coppell@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": null,
+    "facebook": "alloycoppelltx"
   },
   {
     "n": "Cornelius, NC",
@@ -441,7 +893,20 @@
     "p": "(980) 400-2851",
     "u": "https://alloypersonaltraining.com/location/cornelius-nc/",
     "y": "2024",
-    "m": "Charlotte"
+    "m": "Charlotte",
+    "coming_soon": false,
+    "email": "info.cornelius@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy_cornelius",
+    "facebook": "alloy.cornelius"
   },
   {
     "n": "Crescent Station, VA",
@@ -453,7 +918,20 @@
     "p": "(571) 601-3975",
     "u": "https://alloypersonaltraining.com/location/crescent-station-va/",
     "y": "2024",
-    "m": "Washington DC"
+    "m": "Washington DC",
+    "coming_soon": false,
+    "email": "info.crescentstation@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloycrescentstation",
+    "facebook": "alloy.crescentstation"
   },
   {
     "n": "Cross Creek, TX",
@@ -465,7 +943,20 @@
     "p": "346-553-0087",
     "u": "https://alloypersonaltraining.com/location/cross-creek-tx/",
     "y": "2024",
-    "m": "Houston"
+    "m": "Houston",
+    "coming_soon": false,
+    "email": "info.crosscreek@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy_crosscreek",
+    "facebook": "alloy.crosscreek"
   },
   {
     "n": "Cross Timbers, Flower Mound, TX",
@@ -477,7 +968,20 @@
     "p": "469-887-4975",
     "u": "https://alloypersonaltraining.com/location/cross-timbers-tx/",
     "y": "2025",
-    "m": "Dallas-Fort Worth"
+    "m": "Dallas-Fort Worth",
+    "coming_soon": false,
+    "email": "info.crosstimbers@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": null,
+    "facebook": "alloy.crosstimbers"
   },
   {
     "n": "Daybreak, UT",
@@ -489,7 +993,20 @@
     "p": "(801) 877-0506",
     "u": "https://alloypersonaltraining.com/location/alloy-personal-training-daybreak-ut/",
     "y": "2022",
-    "m": "Salt Lake City"
+    "m": "Salt Lake City",
+    "coming_soon": false,
+    "email": "Info.daybreakut@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloydaybreak",
+    "facebook": "alloydaybreak"
   },
   {
     "n": "Des Peres, MO",
@@ -501,7 +1018,20 @@
     "p": "(314) 876-0447",
     "u": "https://alloypersonaltraining.com/location/des-peres-mo/",
     "y": "2023",
-    "m": "St. Louis"
+    "m": "St. Louis",
+    "coming_soon": false,
+    "email": "info.desperes@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloydesperes",
+    "facebook": "profile.php"
   },
   {
     "n": "Dunwoody, GA",
@@ -513,7 +1043,20 @@
     "p": "(678) 916-8832",
     "u": "https://alloypersonaltraining.com/location/dunwoody-ga/",
     "y": "2022",
-    "m": "Atlanta"
+    "m": "Atlanta",
+    "coming_soon": false,
+    "email": "info.dunwoodyga@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "8AM - 12PM",
+      "Sun": "9AM - 12PM"
+    },
+    "instagram": "alloydunwoody",
+    "facebook": "alloydunwoody"
   },
   {
     "n": "East Boca, FL",
@@ -525,7 +1068,20 @@
     "p": "561-680-4407",
     "u": "https://alloypersonaltraining.com/location/east-boca-fl/",
     "y": "2025",
-    "m": "Miami"
+    "m": "Miami",
+    "coming_soon": false,
+    "email": "info.eastboca@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy.eastboca",
+    "facebook": "alloy.eastboca"
   },
   {
     "n": "East Bradenton, FL",
@@ -537,7 +1093,20 @@
     "p": "941-269-1523",
     "u": "https://alloypersonaltraining.com/location/east-bradenton-fl/",
     "y": "2025",
-    "m": "Tampa-St. Pete"
+    "m": "Tampa-St. Pete",
+    "coming_soon": false,
+    "email": "info.eastbradenton@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy_east_bradenton",
+    "facebook": "alloy.eastbradenton"
   },
   {
     "n": "East Brunswick, NJ",
@@ -549,7 +1118,20 @@
     "p": "732-724-1080",
     "u": "https://alloypersonaltraining.com/location/east-brunswick-nj/",
     "y": "2026",
-    "m": "New York City"
+    "m": "New York City",
+    "coming_soon": true,
+    "email": "info.eastbrunswick@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy_eastbrunswick",
+    "facebook": "alloy.eastbrunswick"
   },
   {
     "n": "East Pasadena, CA",
@@ -561,7 +1143,12 @@
     "p": "626-469-7157",
     "u": "https://alloypersonaltraining.com/location/east-pasadena-ca/",
     "y": "2024",
-    "m": "Los Angeles"
+    "m": "Los Angeles",
+    "coming_soon": false,
+    "email": "info.eastpasadena@alloypersonaltraining.com",
+    "hours": null,
+    "instagram": "alloy_eastpasadena",
+    "facebook": "alloy.eastpasadena"
   },
   {
     "n": "Elkridge, MD",
@@ -573,7 +1160,20 @@
     "p": "240-797-1188",
     "u": "https://alloypersonaltraining.com/location/elkridge-md/",
     "y": "2025",
-    "m": "Baltimore"
+    "m": "Baltimore",
+    "coming_soon": false,
+    "email": "info.elkridge@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": null,
+    "facebook": null
   },
   {
     "n": "Encinitas, CA",
@@ -585,7 +1185,20 @@
     "p": "760-454-1626",
     "u": "https://alloypersonaltraining.com/location/encinitas-ca/",
     "y": "2025",
-    "m": "San Diego"
+    "m": "San Diego",
+    "coming_soon": false,
+    "email": "info.encinitas@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": null,
+    "facebook": null
   },
   {
     "n": "Fairfax City, VA",
@@ -597,7 +1210,20 @@
     "p": "703-293-5376",
     "u": "https://alloypersonaltraining.com/location/fairfax-city-va/",
     "y": "2025",
-    "m": "Washington DC"
+    "m": "Washington DC",
+    "coming_soon": false,
+    "email": "info.fairfaxcity@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": null,
+    "facebook": "alloy.fairfaxcity"
   },
   {
     "n": "Fairlawn, OH",
@@ -609,7 +1235,20 @@
     "p": "(330) 964-6954",
     "u": "https://alloypersonaltraining.com/location/fairlawn-oh/",
     "y": "2022",
-    "m": "Cleveland"
+    "m": "Cleveland",
+    "coming_soon": false,
+    "email": "info.fairlawnoh@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloyptfairlawn",
+    "facebook": "alloyfairlawn"
   },
   {
     "n": "Falls Church, VA",
@@ -621,7 +1260,20 @@
     "p": "(571) 601-4079",
     "u": "https://alloypersonaltraining.com/location/falls-church-va/",
     "y": "2025",
-    "m": "Washington DC"
+    "m": "Washington DC",
+    "coming_soon": false,
+    "email": "info.fallschurch@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloyfallschurchva",
+    "facebook": "alloyfallschurchva"
   },
   {
     "n": "Fayetteville, NY",
@@ -633,7 +1285,20 @@
     "p": "315-915-5369",
     "u": "https://alloypersonaltraining.com/location/fayetteville-ny/",
     "y": "2024",
-    "m": null
+    "m": null,
+    "coming_soon": false,
+    "email": "info.fayetteville@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloyfayettevilleny",
+    "facebook": "alloy.fayettevilleny"
   },
   {
     "n": "Fishers Geist, IN",
@@ -645,7 +1310,20 @@
     "p": "317-689-0694",
     "u": "https://alloypersonaltraining.com/location/fishers-geist-in/",
     "y": "2025",
-    "m": "Indianapolis"
+    "m": "Indianapolis",
+    "coming_soon": false,
+    "email": "info.fishersgeist@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloyfishersgeist",
+    "facebook": "alloy.fishersgeist"
   },
   {
     "n": "Five Forks, Simpsonville, SC",
@@ -657,7 +1335,20 @@
     "p": "864-432-6687",
     "u": "https://alloypersonaltraining.com/location/five-forks-simpsonville-sc/",
     "y": "2025",
-    "m": "Greenville"
+    "m": "Greenville",
+    "coming_soon": false,
+    "email": "info.fiveforks@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloyfiveforks",
+    "facebook": "alloy.fiveforks"
   },
   {
     "n": "Fort Collins, CO",
@@ -669,7 +1360,20 @@
     "p": "970-802-5700",
     "u": "https://alloypersonaltraining.com/location/fort-collins-co/",
     "y": "2024",
-    "m": null
+    "m": null,
+    "coming_soon": false,
+    "email": "info.foco@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy_foco",
+    "facebook": "alloy.foco"
   },
   {
     "n": "Fort Mitchell, KY",
@@ -681,7 +1385,20 @@
     "p": "859-251-2881",
     "u": "https://alloypersonaltraining.com/location/fort-mitchell-ky/",
     "y": "2024",
-    "m": "Cincinnati"
+    "m": "Cincinnati",
+    "coming_soon": false,
+    "email": "info.fortmitchell@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloyfortmitchell",
+    "facebook": "alloy.fortmitchell"
   },
   {
     "n": "Fox Valley, Aurora, IL",
@@ -693,7 +1410,20 @@
     "p": "(331) 255-2720",
     "u": "https://alloypersonaltraining.com/location/fox-valley-aurora-il/",
     "y": "2025",
-    "m": "Chicago"
+    "m": "Chicago",
+    "coming_soon": true,
+    "email": "info.foxvalley@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy_foxvalley",
+    "facebook": "alloy.foxvalley"
   },
   {
     "n": "Franklin Lakes, NJ",
@@ -705,7 +1435,20 @@
     "p": "(201) 897-7456",
     "u": "https://alloypersonaltraining.com/location/franklin-lakes-nj/",
     "y": "2023",
-    "m": "New York City"
+    "m": "New York City",
+    "coming_soon": false,
+    "email": "info.franklinlakes@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloyfranklinlakes",
+    "facebook": "profile.php"
   },
   {
     "n": "Geneva, IL",
@@ -717,7 +1460,20 @@
     "p": "630-345-8198",
     "u": "https://alloypersonaltraining.com/location/geneva-il/",
     "y": "2025",
-    "m": "Chicago"
+    "m": "Chicago",
+    "coming_soon": false,
+    "email": "info.geneva@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy_geneva",
+    "facebook": "alloy.geneva"
   },
   {
     "n": "Gleneagles, TX",
@@ -729,7 +1485,20 @@
     "p": "(469) 960-5821",
     "u": "https://alloypersonaltraining.com/location/gleneagles-tx/",
     "y": "2024",
-    "m": "Dallas-Fort Worth"
+    "m": "Dallas-Fort Worth",
+    "coming_soon": false,
+    "email": "info.gleneagles@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloygleneagles",
+    "facebook": "profile.php"
   },
   {
     "n": "Glenview, IL",
@@ -741,7 +1510,20 @@
     "p": "847-200-8768",
     "u": "https://alloypersonaltraining.com/location/glenview-il/",
     "y": "2024",
-    "m": "Chicago"
+    "m": "Chicago",
+    "coming_soon": false,
+    "email": "info.glenview@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy.glenview",
+    "facebook": "alloy.glenview"
   },
   {
     "n": "Greensboro, NC",
@@ -753,7 +1535,20 @@
     "p": "(336) 962-5398",
     "u": "https://alloypersonaltraining.com/location/greensboro-nc/",
     "y": "2026",
-    "m": "Greensboro"
+    "m": "Greensboro",
+    "coming_soon": true,
+    "email": "info.greensboro@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy_greensboro",
+    "facebook": "alloy.greensboro"
   },
   {
     "n": "Greenville, SC",
@@ -765,7 +1560,20 @@
     "p": "(864) 477-3991",
     "u": "https://alloypersonaltraining.com/location/greenville-sc/",
     "y": "2021",
-    "m": "Greenville"
+    "m": "Greenville",
+    "coming_soon": false,
+    "email": "info.greenville@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloyupstate",
+    "facebook": "alloygreenvillesc"
   },
   {
     "n": "Hamilton Mill, Dacula, GA",
@@ -777,7 +1585,20 @@
     "p": "(470) 660-3709",
     "u": "https://alloypersonaltraining.com/location/dacula-ga/",
     "y": "2024",
-    "m": "Atlanta"
+    "m": "Atlanta",
+    "coming_soon": false,
+    "email": "info.dacula@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloydacula",
+    "facebook": "profile.php"
   },
   {
     "n": "Haynes Bridge, Alpharetta, GA",
@@ -789,7 +1610,20 @@
     "p": "(678) 658-3203",
     "u": "https://alloypersonaltraining.com/location/alpharetta-ga/",
     "y": "2022",
-    "m": "Atlanta"
+    "m": "Atlanta",
+    "coming_soon": false,
+    "email": "Info.roswell@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloyhaynesbridgevillage",
+    "facebook": "alloyroswell"
   },
   {
     "n": "Highland, UT",
@@ -801,7 +1635,20 @@
     "p": "(385)220-8990",
     "u": "https://alloypersonaltraining.com/location/alloy-highland-ut/",
     "y": "2021",
-    "m": "Salt Lake City"
+    "m": "Salt Lake City",
+    "coming_soon": false,
+    "email": "info.alpinehighlands@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloyhighland",
+    "facebook": "AlloyPersonalTraining.Highland"
   },
   {
     "n": "Highlands Ranch, CO",
@@ -813,7 +1660,20 @@
     "p": "(720) 669-7403",
     "u": "https://alloypersonaltraining.com/location/highlands-ranch-co/",
     "y": "2024",
-    "m": "Denver"
+    "m": "Denver",
+    "coming_soon": false,
+    "email": "info.highlandsranch@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloyhighlandsranch",
+    "facebook": "alloyhighlandsranch"
   },
   {
     "n": "Hilltop, Virginia Beach, VA",
@@ -825,7 +1685,20 @@
     "p": "757-997-6990",
     "u": "https://alloypersonaltraining.com/location/hilltop-virginia-beach-va/",
     "y": "2023",
-    "m": "Virginia Beach-Norfolk"
+    "m": "Virginia Beach-Norfolk",
+    "coming_soon": false,
+    "email": "info.hilltopvb@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 7PM",
+      "Tue": "6AM - 7PM",
+      "Wed": "6AM - 7PM",
+      "Thu": "6AM - 7PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloyhilltopvb",
+    "facebook": "alloy.hilltopvb"
   },
   {
     "n": "Holladay, UT",
@@ -837,7 +1710,20 @@
     "p": "(801) 679-9447",
     "u": "https://alloypersonaltraining.com/location/holladay-ut/",
     "y": "2021",
-    "m": "Salt Lake City"
+    "m": "Salt Lake City",
+    "coming_soon": false,
+    "email": "info.holladay@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloyholladay",
+    "facebook": "Alloy-Personal-Training-Holladay-101316159053286"
   },
   {
     "n": "Irvine, CA",
@@ -849,7 +1735,20 @@
     "p": "714-978-4926",
     "u": "https://alloypersonaltraining.com/location/irvine-ca/",
     "y": "2024",
-    "m": "Riverside-San Bernardino"
+    "m": "Riverside-San Bernardino",
+    "coming_soon": false,
+    "email": "info.irvine@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 8PM",
+      "Sat": "8AM - 12PM",
+      "Sun": "8AM - 12PM"
+    },
+    "instagram": "alloy_irvine",
+    "facebook": "alloy.irvine"
   },
   {
     "n": "Johns Creek, GA",
@@ -861,7 +1760,20 @@
     "p": "(770) 338-6634",
     "u": "https://alloypersonaltraining.com/location/alloy-johns-creek-ga/",
     "y": "2021",
-    "m": "Atlanta"
+    "m": "Atlanta",
+    "coming_soon": false,
+    "email": "info.johnscreek@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloyjohnscreek",
+    "facebook": "alloyjohnscreek"
   },
   {
     "n": "Juanita-Kirkland, WA",
@@ -873,7 +1785,20 @@
     "p": "(425) 655-1661",
     "u": "https://alloypersonaltraining.com/location/juanita-kirkland-wa/",
     "y": "2025",
-    "m": "Seattle"
+    "m": "Seattle",
+    "coming_soon": false,
+    "email": "info.juanita-kirkland@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy_juanitakirkland",
+    "facebook": "alloy.juanitakirkland"
   },
   {
     "n": "Jupiter, FL",
@@ -885,7 +1810,20 @@
     "p": "(561) 783-5731",
     "u": "https://alloypersonaltraining.com/location/jupiter-fl/",
     "y": "2024",
-    "m": null
+    "m": null,
+    "coming_soon": false,
+    "email": "info.jupiter@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy_jupiter",
+    "facebook": "alloy.jupiterfl"
   },
   {
     "n": "Kaysville, UT",
@@ -897,7 +1835,20 @@
     "p": "385-526-7153",
     "u": "https://alloypersonaltraining.com/location/kaysville-ut/",
     "y": "2024",
-    "m": "Salt Lake City"
+    "m": "Salt Lake City",
+    "coming_soon": false,
+    "email": "info.kaysville@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy.kaysville",
+    "facebook": "alloy.kaysville"
   },
   {
     "n": "King Farm, MD",
@@ -909,7 +1860,20 @@
     "p": "(240) 932-5414",
     "u": "https://alloypersonaltraining.com/location/king-farm-md/",
     "y": "2024",
-    "m": "Washington DC"
+    "m": "Washington DC",
+    "coming_soon": false,
+    "email": "info.kingfarm@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "aptkingfarm",
+    "facebook": "alloykingfarm"
   },
   {
     "n": "La Jolla, CA",
@@ -921,7 +1885,20 @@
     "p": "858-358-5824",
     "u": "https://alloypersonaltraining.com/location/la-jolla-ca/",
     "y": "2026",
-    "m": "San Diego"
+    "m": "San Diego",
+    "coming_soon": true,
+    "email": "info.lajolla@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy_lajolla",
+    "facebook": "alloy.lajolla"
   },
   {
     "n": "Lakeline, TX",
@@ -933,7 +1910,20 @@
     "p": "737-734-2622",
     "u": "https://alloypersonaltraining.com/location/lakeline-tx/",
     "y": "2025",
-    "m": "Austin"
+    "m": "Austin",
+    "coming_soon": false,
+    "email": "info.lakeline@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": null,
+    "facebook": null
   },
   {
     "n": "Layton, UT",
@@ -945,7 +1935,20 @@
     "p": "435-799-2453",
     "u": "https://alloypersonaltraining.com/location/layton-ut/",
     "y": "2025",
-    "m": "Salt Lake City"
+    "m": "Salt Lake City",
+    "coming_soon": false,
+    "email": "info.layton@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy.layton",
+    "facebook": "alloy.layton"
   },
   {
     "n": "League City, TX",
@@ -957,7 +1960,20 @@
     "p": "(281) 717 6114",
     "u": "https://alloypersonaltraining.com/location/league-city-tx/",
     "y": "2022",
-    "m": "Houston"
+    "m": "Houston",
+    "coming_soon": false,
+    "email": "info.leaguecity@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy_leaguecity",
+    "facebook": "alloyleaguecity"
   },
   {
     "n": "Lincoln Park, IL",
@@ -969,7 +1985,20 @@
     "p": "872-314-3111",
     "u": "https://alloypersonaltraining.com/location/lincoln-park-il/",
     "y": "2024",
-    "m": "Chicago"
+    "m": "Chicago",
+    "coming_soon": false,
+    "email": "info.lincolnpark@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy_lincolnpark",
+    "facebook": "alloy.lincolnpark"
   },
   {
     "n": "Lincolnshire, IL",
@@ -981,7 +2010,20 @@
     "p": "847-654-9831",
     "u": "https://alloypersonaltraining.com/location/lincolnshire-il/",
     "y": "2025",
-    "m": "Chicago"
+    "m": "Chicago",
+    "coming_soon": false,
+    "email": "info.lincolnshire@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy_lincolnshire",
+    "facebook": "alloy.lincolnshire"
   },
   {
     "n": "Livingston, NJ",
@@ -993,7 +2035,12 @@
     "p": "973-858-5942",
     "u": "https://alloypersonaltraining.com/location/livingston-nj/",
     "y": "2025",
-    "m": "New York City"
+    "m": "New York City",
+    "coming_soon": false,
+    "email": "info.livingston@alloypersonaltraining.com",
+    "hours": null,
+    "instagram": null,
+    "facebook": null
   },
   {
     "n": "Loveland, CO",
@@ -1005,7 +2052,20 @@
     "p": "970-714-3765",
     "u": "https://alloypersonaltraining.com/location/loveland-co/",
     "y": "2026",
-    "m": "Denver"
+    "m": "Denver",
+    "coming_soon": true,
+    "email": "info.loveland@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": null,
+    "facebook": "alloy.loveland"
   },
   {
     "n": "Madison East, WI",
@@ -1017,7 +2077,20 @@
     "p": "608-200-4995",
     "u": "https://alloypersonaltraining.com/location/madison-east-wi/",
     "y": "2026",
-    "m": null
+    "m": null,
+    "coming_soon": true,
+    "email": "info.madisoneast@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy_madisoneast",
+    "facebook": "alloy.madisoneast"
   },
   {
     "n": "Mason Deerfield, OH",
@@ -1029,7 +2102,20 @@
     "p": "513-998-5868",
     "u": "https://alloypersonaltraining.com/location/mason-deerfield-oh/",
     "y": "2025",
-    "m": "Cincinnati"
+    "m": "Cincinnati",
+    "coming_soon": false,
+    "email": "info.masondeerfield@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": null,
+    "facebook": "alloy.masondeerfield"
   },
   {
     "n": "McKinney, TX",
@@ -1041,7 +2127,20 @@
     "p": "(469) 294-8312",
     "u": "https://alloypersonaltraining.com/location/mckinney-tx/",
     "y": "2024",
-    "m": "Dallas-Fort Worth"
+    "m": "Dallas-Fort Worth",
+    "coming_soon": false,
+    "email": "info.mckinney@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "5AM - 8PM",
+      "Tue": "5AM - 8PM",
+      "Wed": "5AM - 8PM",
+      "Thu": "5AM - 8PM",
+      "Fri": "5AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloymckinney",
+    "facebook": "alloymckinney"
   },
   {
     "n": "Middleton, WI",
@@ -1053,7 +2152,20 @@
     "p": "608-200-4884",
     "u": "https://alloypersonaltraining.com/location/middleton-wi/",
     "y": "2024",
-    "m": null
+    "m": null,
+    "coming_soon": false,
+    "email": "info.middleton@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloymiddleton",
+    "facebook": "alloy.middleton"
   },
   {
     "n": "Moorestown, NJ",
@@ -1065,7 +2177,20 @@
     "p": "609-507-1829",
     "u": "https://alloypersonaltraining.com/location/moorestown-nj/",
     "y": "2024",
-    "m": "Philadelphia"
+    "m": "Philadelphia",
+    "coming_soon": false,
+    "email": "info.moorestown@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloymoorestown",
+    "facebook": "alloymoorestown"
   },
   {
     "n": "Mt. Juliet, TN",
@@ -1077,7 +2202,20 @@
     "p": "(615) 991-0720",
     "u": "https://alloypersonaltraining.com/location/mt-juliet-tn/",
     "y": "2024",
-    "m": "Nashville"
+    "m": "Nashville",
+    "coming_soon": false,
+    "email": "info.northmtjuliet@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloynmtjuliet",
+    "facebook": "nmtjuliet"
   },
   {
     "n": "Murphy, TX",
@@ -1089,7 +2227,20 @@
     "p": "972-997-1209",
     "u": "https://alloypersonaltraining.com/location/murphy-tx/",
     "y": "2024",
-    "m": "Dallas-Fort Worth"
+    "m": "Dallas-Fort Worth",
+    "coming_soon": false,
+    "email": "info.murphy@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloymurphytx",
+    "facebook": "alloy.murphytx"
   },
   {
     "n": "Naperville, IL",
@@ -1101,7 +2252,20 @@
     "p": "(630) 686-7890",
     "u": "https://alloypersonaltraining.com/location/naperville-il/",
     "y": "2023",
-    "m": "Chicago"
+    "m": "Chicago",
+    "coming_soon": false,
+    "email": "info.naperville@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloynorthnaperville",
+    "facebook": "profile.php"
   },
   {
     "n": "North Mansfield, TX",
@@ -1113,7 +2277,20 @@
     "p": "817-409-8848",
     "u": "https://alloypersonaltraining.com/location/north-mansfield-tx/",
     "y": "2024",
-    "m": "Dallas-Fort Worth"
+    "m": "Dallas-Fort Worth",
+    "coming_soon": false,
+    "email": "info.northmansfield@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloynmansfield",
+    "facebook": "alloy.northmansfield"
   },
   {
     "n": "NorthPointe, Ankeny, IA",
@@ -1125,7 +2302,20 @@
     "p": "(515) 466-5404",
     "u": "https://alloypersonaltraining.com/location/north-pointe-ia/",
     "y": "2024",
-    "m": "Des Moines"
+    "m": "Des Moines",
+    "coming_soon": false,
+    "email": null,
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy_northpointe",
+    "facebook": "alloy.northpointe"
   },
   {
     "n": "Northville, MI",
@@ -1137,7 +2327,20 @@
     "p": "(734) 808-3884",
     "u": "https://alloypersonaltraining.com/location/northville-mi/",
     "y": "2023",
-    "m": "Detroit"
+    "m": "Detroit",
+    "coming_soon": false,
+    "email": "info.plymouth@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloynorthville",
+    "facebook": "alloynorthville"
   },
   {
     "n": "Novi, MI",
@@ -1149,7 +2352,20 @@
     "p": "248-940-3443",
     "u": "https://alloypersonaltraining.com/location/novi-mi/",
     "y": "2023",
-    "m": "Detroit"
+    "m": "Detroit",
+    "coming_soon": false,
+    "email": "info.novi@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloynovi",
+    "facebook": "profile.php"
   },
   {
     "n": "O\u2019Fallon, MO",
@@ -1161,7 +2377,20 @@
     "p": "636-339-3815",
     "u": "https://alloypersonaltraining.com/location/ofallon-mo/",
     "y": "2025",
-    "m": "St. Louis"
+    "m": "St. Louis",
+    "coming_soon": true,
+    "email": "info.ofallon@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy_ofallon",
+    "facebook": "alloy.ofallon"
   },
   {
     "n": "Oak Forest, Houston, TX",
@@ -1173,7 +2402,20 @@
     "p": "281-914-4942",
     "u": "https://alloypersonaltraining.com/location/oak-forest-houston-tx/",
     "y": "2025",
-    "m": "Houston"
+    "m": "Houston",
+    "coming_soon": false,
+    "email": "info.oakforest@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy_oakforest",
+    "facebook": "alloy.oakforest"
   },
   {
     "n": "Oak Hill, Austin, TX",
@@ -1185,7 +2427,20 @@
     "p": "(512) 675-1733",
     "u": "https://alloypersonaltraining.com/location/oak-hill-tx/",
     "y": "2023",
-    "m": "Austin"
+    "m": "Austin",
+    "coming_soon": false,
+    "email": "info.oakhill@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloyoakhill",
+    "facebook": "profile.php"
   },
   {
     "n": "Old Tappan, NJ",
@@ -1197,7 +2452,20 @@
     "p": "551-288-8505",
     "u": "https://alloypersonaltraining.com/location/old-tappan-nj/",
     "y": "2025",
-    "m": "New York City"
+    "m": "New York City",
+    "coming_soon": false,
+    "email": "info.oldtappan@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": null,
+    "facebook": "alloy.oldtappan"
   },
   {
     "n": "Old Town, Alexandria, VA",
@@ -1209,7 +2477,20 @@
     "p": "703-686-8404",
     "u": "https://alloypersonaltraining.com/location/old-town-va/",
     "y": "2023",
-    "m": "Washington DC"
+    "m": "Washington DC",
+    "coming_soon": false,
+    "email": "info.alexandria@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloyoldtown",
+    "facebook": "profile.php"
   },
   {
     "n": "Orinda, CA",
@@ -1221,7 +2502,20 @@
     "p": "925-255-7417",
     "u": "https://alloypersonaltraining.com/location/orinda-ca/",
     "y": "2026",
-    "m": "San Francisco Bay Area"
+    "m": "San Francisco Bay Area",
+    "coming_soon": true,
+    "email": "info.orinda@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy_orinda",
+    "facebook": "alloy.orinda"
   },
   {
     "n": "Overland Park, KS",
@@ -1233,7 +2527,20 @@
     "p": "(913) 395-6955",
     "u": "https://alloypersonaltraining.com/location/overland-park-ks/",
     "y": "2024",
-    "m": "Kansas City"
+    "m": "Kansas City",
+    "coming_soon": false,
+    "email": "info.overlandpark@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy_overlandpark",
+    "facebook": "alloy.overlandpark"
   },
   {
     "n": "Palos Verdes, CA",
@@ -1245,7 +2552,20 @@
     "p": "310-683-5410",
     "u": "https://alloypersonaltraining.com/location/palos-verdes-ca/",
     "y": "2024",
-    "m": "Los Angeles"
+    "m": "Los Angeles",
+    "coming_soon": false,
+    "email": "info.palosverdes@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy_palosverdes",
+    "facebook": "alloy.palosverdes"
   },
   {
     "n": "Paradise Valley, Phoenix, AZ",
@@ -1257,7 +2577,20 @@
     "p": "623-343-3271",
     "u": "https://alloypersonaltraining.com/location/paradise-valley-phoenix-az/",
     "y": "2025",
-    "m": "Phoenix"
+    "m": "Phoenix",
+    "coming_soon": false,
+    "email": "info.paradisevalley@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": null,
+    "facebook": "alloy.paradisevalley"
   },
   {
     "n": "Parkway Centre, NC",
@@ -1269,7 +2602,20 @@
     "p": "828-903-8890",
     "u": "https://alloypersonaltraining.com/location/parkway-centre-nc/",
     "y": "2024",
-    "m": "Greenville"
+    "m": "Greenville",
+    "coming_soon": false,
+    "email": "info.parkwaycentre@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloyparkwaycentre",
+    "facebook": "alloy.parkwaycentre"
   },
   {
     "n": "Peachtree City, GA",
@@ -1281,7 +2627,20 @@
     "p": "470-752-5414",
     "u": "https://alloypersonaltraining.com/location/peachtree-city-ga/",
     "y": "2024",
-    "m": "Atlanta"
+    "m": "Atlanta",
+    "coming_soon": false,
+    "email": "info.peachtreecity@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy_peachtreecity",
+    "facebook": "alloy.peachtreecity"
   },
   {
     "n": "Peachtree Corners, GA",
@@ -1293,7 +2652,20 @@
     "p": "678-578-4984",
     "u": "https://alloypersonaltraining.com/location/alloy-peachtree-corners-ga/",
     "y": "2023",
-    "m": "Atlanta"
+    "m": "Atlanta",
+    "coming_soon": false,
+    "email": "info.peachtreecorners@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloypeachtreecorners",
+    "facebook": "profile.php"
   },
   {
     "n": "Pine Township, Wexford, PA",
@@ -1305,7 +2677,20 @@
     "p": "(724) 538-7164",
     "u": "https://alloypersonaltraining.com/location/pine-township-pa/",
     "y": "2024",
-    "m": "Pittsburgh"
+    "m": "Pittsburgh",
+    "coming_soon": false,
+    "email": "info.pinetownship@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloywexford",
+    "facebook": "alloywexford"
   },
   {
     "n": "Pinecrest, FL",
@@ -1317,7 +2702,20 @@
     "p": "786-902-6737",
     "u": "https://alloypersonaltraining.com/location/pinecrest-fl/",
     "y": "2026",
-    "m": "Miami"
+    "m": "Miami",
+    "coming_soon": true,
+    "email": "info.pinecrest@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy_pinecrest",
+    "facebook": "alloy.pinecrest"
   },
   {
     "n": "Pinnacle Hills Rogers, AR",
@@ -1329,7 +2727,20 @@
     "p": "479-398-2504",
     "u": "https://alloypersonaltraining.com/location/pinnacle-hills-ar/",
     "y": "2024",
-    "m": null
+    "m": null,
+    "coming_soon": false,
+    "email": "info.pinnaclehills@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy_pinnaclehills",
+    "facebook": "alloypinnaclehills"
   },
   {
     "n": "Rancho Bernardo Heights, CA",
@@ -1341,7 +2752,20 @@
     "p": "619-604-9311",
     "u": "https://alloypersonaltraining.com/location/rancho-bernardo-heights-ca/",
     "y": "2024",
-    "m": "San Diego"
+    "m": "San Diego",
+    "coming_soon": false,
+    "email": "info.rbh@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy.ranchobernardo",
+    "facebook": "alloy.ranchobernardoheights"
   },
   {
     "n": "Reston, VA",
@@ -1353,7 +2777,20 @@
     "p": "(571) 604-5307",
     "u": "https://alloypersonaltraining.com/location/reston-va/",
     "y": "2025",
-    "m": "Washington DC"
+    "m": "Washington DC",
+    "coming_soon": false,
+    "email": "info.reston@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy.reston",
+    "facebook": "alloy.reston"
   },
   {
     "n": "Riley Fuzzel, Spring, TX",
@@ -1365,7 +2802,20 @@
     "p": "(281) 500-8227",
     "u": "https://alloypersonaltraining.com/location/rileyfuzzel-tx/",
     "y": "2023",
-    "m": "Houston"
+    "m": "Houston",
+    "coming_soon": false,
+    "email": "info.rileyfuzzel@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "5AM - 7PM",
+      "Tue": "5AM - 7PM",
+      "Wed": "5AM - 7PM",
+      "Thu": "5AM - 7PM",
+      "Fri": "5AM - 5PM",
+      "Sat": "7AM - 11PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloyrileyfuzzel",
+    "facebook": "profile.php"
   },
   {
     "n": "Riverside, CA",
@@ -1377,7 +2827,20 @@
     "p": "951-585-5583",
     "u": "https://alloypersonaltraining.com/location/riverside-ca/",
     "y": "2024",
-    "m": "Riverside-San Bernardino"
+    "m": "Riverside-San Bernardino",
+    "coming_soon": false,
+    "email": "info.riverside@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy.riverside",
+    "facebook": "alloy.riverside"
   },
   {
     "n": "Rochester, MI",
@@ -1389,7 +2852,20 @@
     "p": "(248) 951-9379",
     "u": "https://alloypersonaltraining.com/location/rochester-mi/",
     "y": "2023",
-    "m": "Detroit"
+    "m": "Detroit",
+    "coming_soon": false,
+    "email": "info.rochester@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloyrochester",
+    "facebook": "APT.Rochester"
   },
   {
     "n": "Rochester, NY",
@@ -1401,7 +2877,20 @@
     "p": "585-565-5429",
     "u": "https://alloypersonaltraining.com/location/rochester-ny/",
     "y": "2025",
-    "m": null
+    "m": null,
+    "coming_soon": false,
+    "email": "info.rochesterny@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy_rochester_ny",
+    "facebook": "alloy.rochester.ny"
   },
   {
     "n": "Rock Hill, MO",
@@ -1413,7 +2902,20 @@
     "p": "314-626-8299",
     "u": "https://alloypersonaltraining.com/location/rock-hill-mo/",
     "y": "2026",
-    "m": "St. Louis"
+    "m": "St. Louis",
+    "coming_soon": true,
+    "email": "info.rockhill@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "5:30AM - 11:30AM, 3:30PM - 7:30PM",
+      "Tue": "5:30AM - 11:30AM, 3:30PM - 7:30PM",
+      "Wed": "5:30AM - 11:30AM, 3:30PM - 7:30PM",
+      "Thu": "5:30AM - 11:30AM, 3:30PM - 7:30PM",
+      "Fri": "5:30AM - 11:30AM",
+      "Sat": "7:30AM - 11:30AM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy_rockhill",
+    "facebook": "alloy.rockhill"
   },
   {
     "n": "Rossmoor, CA",
@@ -1425,7 +2927,20 @@
     "p": "(562) 669-2426",
     "u": "https://alloypersonaltraining.com/location/rossmoor-ca/",
     "y": "2024",
-    "m": "San Francisco Bay Area"
+    "m": "San Francisco Bay Area",
+    "coming_soon": false,
+    "email": "info.rossmoor@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloyrossmoor",
+    "facebook": "alloyrossmoor"
   },
   {
     "n": "Royal Oak, MI",
@@ -1437,7 +2952,20 @@
     "p": "248-965-5057",
     "u": "https://alloypersonaltraining.com/location/royal-oak-mi/",
     "y": "2025",
-    "m": "Detroit"
+    "m": "Detroit",
+    "coming_soon": false,
+    "email": "info.royaloak@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": null,
+    "facebook": "alloy.royaloak"
   },
   {
     "n": "Saddle River, NJ",
@@ -1449,7 +2977,20 @@
     "p": "551-288-7424",
     "u": "https://alloypersonaltraining.com/location/saddle-river-nj/",
     "y": "2024",
-    "m": "New York City"
+    "m": "New York City",
+    "coming_soon": false,
+    "email": "info.saddleriver@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy.saddleriver",
+    "facebook": "alloy.saddleriver"
   },
   {
     "n": "Sandy Springs, GA",
@@ -1461,7 +3002,20 @@
     "p": "(404) 882-9884",
     "u": "https://alloypersonaltraining.com/location/sandy-springs-ga/",
     "y": "2023",
-    "m": "Atlanta"
+    "m": "Atlanta",
+    "coming_soon": false,
+    "email": "info.sandysprings@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloysandysprings",
+    "facebook": "profile.php"
   },
   {
     "n": "Saugus, MA",
@@ -1473,7 +3027,20 @@
     "p": "(339) 444-1606",
     "u": "https://alloypersonaltraining.com/location/saugus-ma/",
     "y": "2024",
-    "m": "Boston"
+    "m": "Boston",
+    "coming_soon": false,
+    "email": "info.saugus@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy_saugus",
+    "facebook": "alloy.saugus"
   },
   {
     "n": "Schaumburg, IL",
@@ -1485,7 +3052,20 @@
     "p": "(708) 726-8033",
     "u": "https://alloypersonaltraining.com/location/schaumburg-il/",
     "y": "2024",
-    "m": "Chicago"
+    "m": "Chicago",
+    "coming_soon": false,
+    "email": "info.schaumburg@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy.schaumburg",
+    "facebook": "alloy.schaumburg"
   },
   {
     "n": "Scottsdale Grayhawk, AZ",
@@ -1497,7 +3077,20 @@
     "p": "623-294-2925",
     "u": "https://alloypersonaltraining.com/location/scottsdale-grayhawk-az/",
     "y": "2024",
-    "m": "Phoenix"
+    "m": "Phoenix",
+    "coming_soon": false,
+    "email": "info.scottsdalegrayhawk@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloyscottsdalegrayhawk",
+    "facebook": "alloy.scottsdalegrayhawk"
   },
   {
     "n": "Shallowford Falls, Marietta, GA",
@@ -1509,7 +3102,20 @@
     "p": "470-649-1300",
     "u": "https://alloypersonaltraining.com/location/shallowford-falls-ga/",
     "y": "2024",
-    "m": "Atlanta"
+    "m": "Atlanta",
+    "coming_soon": false,
+    "email": "info.shallowfordfalls@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy_eastcobb",
+    "facebook": "alloy.eastcobb"
   },
   {
     "n": "Sienna, TX",
@@ -1521,7 +3127,12 @@
     "p": "(281) 667-0847",
     "u": "https://alloypersonaltraining.com/location/missouri-city-tx/",
     "y": "2022",
-    "m": "Houston"
+    "m": "Houston",
+    "coming_soon": false,
+    "email": "info.sienna@alloypersonaltraining.com",
+    "hours": null,
+    "instagram": "alloysienna",
+    "facebook": "alloysienna"
   },
   {
     "n": "SLP/ St. Louis Park, MN",
@@ -1533,7 +3144,20 @@
     "p": "952-395-1958",
     "u": "https://alloypersonaltraining.com/location/slp-st-louis-park-mn/",
     "y": "2024",
-    "m": "Minneapolis-St. Paul"
+    "m": "Minneapolis-St. Paul",
+    "coming_soon": false,
+    "email": "info.slp@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy_slp",
+    "facebook": "alloy.SLP"
   },
   {
     "n": "Smithtown, NY",
@@ -1545,7 +3169,20 @@
     "p": "631-382-0037",
     "u": "https://alloypersonaltraining.com/location/smithtown-ny/",
     "y": "2025",
-    "m": "New York City"
+    "m": "New York City",
+    "coming_soon": true,
+    "email": "info.smithtown@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy.smithtown",
+    "facebook": "alloy.smithtown"
   },
   {
     "n": "South Las Vegas, NV",
@@ -1557,7 +3194,20 @@
     "p": "(702) 500-0362",
     "u": "https://alloypersonaltraining.com/location/south-las-vegas-nv/",
     "y": "2023",
-    "m": "Las Vegas"
+    "m": "Las Vegas",
+    "coming_soon": false,
+    "email": "info.enterprise@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "5AM - 8PM",
+      "Tue": "5AM - 8PM",
+      "Wed": "5AM - 8PM",
+      "Thu": "5AM - 8PM",
+      "Fri": "5AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloysouthlasvegas",
+    "facebook": "alloysouthlasvegas"
   },
   {
     "n": "South Naperville, IL",
@@ -1569,7 +3219,20 @@
     "p": "331-231-2517",
     "u": "https://alloypersonaltraining.com/location/south-naperville-il/",
     "y": "2024",
-    "m": "Chicago"
+    "m": "Chicago",
+    "coming_soon": false,
+    "email": "info.southnaperville@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy_south_naperville",
+    "facebook": "alloy.south.naperville"
   },
   {
     "n": "South River MD",
@@ -1581,7 +3244,20 @@
     "p": "(410) 421-0918",
     "u": "https://alloypersonaltraining.com/location/south-river-md/",
     "y": "2024",
-    "m": "Baltimore"
+    "m": "Baltimore",
+    "coming_soon": false,
+    "email": "info.southriver@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloysouthriver",
+    "facebook": "AlloySouthRiver"
   },
   {
     "n": "South Tampa, FL",
@@ -1593,7 +3269,20 @@
     "p": "(813) 819-6202",
     "u": "https://alloypersonaltraining.com/location/south-tampa-fl/",
     "y": "2024",
-    "m": "Tampa-St. Pete"
+    "m": "Tampa-St. Pete",
+    "coming_soon": false,
+    "email": "info.southtampa@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloysouthtampa",
+    "facebook": "alloy.southtampa"
   },
   {
     "n": "South Tempe, AZ",
@@ -1605,7 +3294,20 @@
     "p": "602-560-4336",
     "u": "https://alloypersonaltraining.com/location/south-tempe-az/",
     "y": "2025",
-    "m": "Phoenix"
+    "m": "Phoenix",
+    "coming_soon": false,
+    "email": "info.southtempe@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": null,
+    "facebook": "alloy.southtempe"
   },
   {
     "n": "Southlake, TX",
@@ -1617,7 +3319,20 @@
     "p": "(817)214-3924",
     "u": "https://alloypersonaltraining.com/location/southlake-tx/",
     "y": "2025",
-    "m": "Dallas-Fort Worth"
+    "m": "Dallas-Fort Worth",
+    "coming_soon": false,
+    "email": "info.southlake@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": null,
+    "facebook": "alloy.southlake"
   },
   {
     "n": "Spring Creek, OK",
@@ -1629,7 +3344,20 @@
     "p": "(405) 873-6904",
     "u": "https://alloypersonaltraining.com/location/spring-creek-edmond-ok/",
     "y": "2025",
-    "m": "Oklahoma City"
+    "m": "Oklahoma City",
+    "coming_soon": false,
+    "email": "info.springcreek@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": null,
+    "facebook": "alloy.springcreek"
   },
   {
     "n": "St Johns, FL",
@@ -1641,7 +3369,20 @@
     "p": "904-827-7769",
     "u": "https://alloypersonaltraining.com/location/st-johns-fl/",
     "y": "2025",
-    "m": "Jacksonville"
+    "m": "Jacksonville",
+    "coming_soon": true,
+    "email": "info.stjohns@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy_stjohns",
+    "facebook": "alloy.stjohns"
   },
   {
     "n": "Stonebrook Circle, Frisco, TX",
@@ -1653,7 +3394,20 @@
     "p": "469-535-7661",
     "u": "https://alloypersonaltraining.com/location/stonebrook-circle-frisco-tx/",
     "y": "2026",
-    "m": "Dallas-Fort Worth"
+    "m": "Dallas-Fort Worth",
+    "coming_soon": true,
+    "email": "info.stonebrookcircle@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy_stonebrookcircle",
+    "facebook": "alloy.stonebrookcircle"
   },
   {
     "n": "Strongsville, OH",
@@ -1665,7 +3419,20 @@
     "p": "440-641-4915",
     "u": "https://alloypersonaltraining.com/location/strongsville-oh/",
     "y": "2025",
-    "m": "Cleveland"
+    "m": "Cleveland",
+    "coming_soon": false,
+    "email": "info.strongsville@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "5AM - 12PM, 4PM - 8PM",
+      "Tue": "5AM - 12PM, 4PM - 8PM",
+      "Wed": "5AM - 12PM, 4PM - 8PM",
+      "Thu": "5AM - 12PM, 4PM - 8PM",
+      "Fri": "5AM - 12PM, 4PM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": null,
+    "facebook": null
   },
   {
     "n": "Summerfield, NC",
@@ -1677,7 +3444,20 @@
     "p": "(336) 298-7111",
     "u": "https://alloypersonaltraining.com/location/summerfield-nc/",
     "y": "2021",
-    "m": "Greensboro"
+    "m": "Greensboro",
+    "coming_soon": false,
+    "email": "info.summerfield@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloysummerfield",
+    "facebook": "alloysummerfield"
   },
   {
     "n": "Summerlin, NV",
@@ -1689,7 +3469,20 @@
     "p": "(702) 710-0975",
     "u": "https://alloypersonaltraining.com/location/summerlin-nv/",
     "y": "2023",
-    "m": "Las Vegas"
+    "m": "Las Vegas",
+    "coming_soon": false,
+    "email": "info.summerlin@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloysummerlin",
+    "facebook": "alloysuncitysummerlin"
   },
   {
     "n": "Sylvania, OH",
@@ -1701,7 +3494,20 @@
     "p": "(419) 597-5705",
     "u": "https://alloypersonaltraining.com/location/sylvania-oh/",
     "y": "2024",
-    "m": null
+    "m": null,
+    "coming_soon": false,
+    "email": "info.sylvania@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloyohio",
+    "facebook": "alloysylvania"
   },
   {
     "n": "Tanque Verde, Tucson, AZ",
@@ -1713,7 +3519,20 @@
     "p": "520-844-0253",
     "u": "https://alloypersonaltraining.com/location/tanque-verde-tucson-az/",
     "y": "2025",
-    "m": "Tucson"
+    "m": "Tucson",
+    "coming_soon": false,
+    "email": "info.tanqueverde@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy_tanqueverde",
+    "facebook": "alloy.tanque.verde"
   },
   {
     "n": "Taraval, San Francisco, CA",
@@ -1725,7 +3544,20 @@
     "p": "628-277-5587",
     "u": "https://alloypersonaltraining.com/location/taraval-san-francisco-ca/",
     "y": "2026",
-    "m": "San Francisco Bay Area"
+    "m": "San Francisco Bay Area",
+    "coming_soon": true,
+    "email": "info.taraval@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy_taraval",
+    "facebook": "alloy.taraval"
   },
   {
     "n": "Tega Cay, Fort Mill, SC",
@@ -1737,7 +3569,20 @@
     "p": "803-864-2195",
     "u": "https://alloypersonaltraining.com/location/tega-cay-fort-mill-sc/",
     "y": "2025",
-    "m": "Charlotte"
+    "m": "Charlotte",
+    "coming_soon": false,
+    "email": "info.tegacay@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "5:30AM - 8PM",
+      "Tue": "5:30AM - 8PM",
+      "Wed": "5:30AM - 8PM",
+      "Thu": "5:30AM - 8PM",
+      "Fri": "5:30AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy.tegacay",
+    "facebook": "alloy.tegacay"
   },
   {
     "n": "Teravista Crossing, TX",
@@ -1749,7 +3594,20 @@
     "p": "737-338-8400",
     "u": "https://alloypersonaltraining.com/location/teravista-crossing-tx/",
     "y": "2024",
-    "m": "Austin"
+    "m": "Austin",
+    "coming_soon": false,
+    "email": "info.teravistacrossing@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy_teravista_crossing",
+    "facebook": "alloy.teravistacrossing"
   },
   {
     "n": "The Woodlands, TX",
@@ -1761,7 +3619,20 @@
     "p": "936-220-2367",
     "u": "https://alloypersonaltraining.com/location/the-woodlands-tx/",
     "y": "2024",
-    "m": "Houston"
+    "m": "Houston",
+    "coming_soon": false,
+    "email": "info.thewoodlands@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy_thewoodlands",
+    "facebook": "alloythewoodlands"
   },
   {
     "n": "Towson, MD",
@@ -1773,7 +3644,20 @@
     "p": "443-322-3565",
     "u": "https://alloypersonaltraining.com/location/towson-md/",
     "y": "2025",
-    "m": "Baltimore"
+    "m": "Baltimore",
+    "coming_soon": false,
+    "email": "info.towson@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": null,
+    "facebook": null
   },
   {
     "n": "Tustin, CA",
@@ -1785,7 +3669,20 @@
     "p": "657-571-1363",
     "u": "https://alloypersonaltraining.com/location/tustin-ca/",
     "y": "2025",
-    "m": "Riverside-San Bernardino"
+    "m": "Riverside-San Bernardino",
+    "coming_soon": false,
+    "email": "info.tustin@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": null,
+    "facebook": null
   },
   {
     "n": "Twenty Mile Road, CO",
@@ -1797,7 +3694,20 @@
     "p": "720-794-9884",
     "u": "https://alloypersonaltraining.com/location/twenty-mile-road-co/",
     "y": "2024",
-    "m": "Denver"
+    "m": "Denver",
+    "coming_soon": false,
+    "email": "info.twentymileroad@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy_twentymilerd",
+    "facebook": "alloy.twentymileroad"
   },
   {
     "n": "Vintage Park, TX",
@@ -1809,7 +3719,20 @@
     "p": "(832) 909-0854",
     "u": "https://alloypersonaltraining.com/location/vintage-park-tx/",
     "y": "2023",
-    "m": "Houston"
+    "m": "Houston",
+    "coming_soon": false,
+    "email": "info.vintagepark@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloyvintagepark",
+    "facebook": "profile.php"
   },
   {
     "n": "Vista Village, CA",
@@ -1821,7 +3744,20 @@
     "p": "442-216-0090",
     "u": "https://alloypersonaltraining.com/location/vista-village-ca/",
     "y": "2025",
-    "m": "San Diego"
+    "m": "San Diego",
+    "coming_soon": true,
+    "email": "info.vistavillage@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy_vistavillage",
+    "facebook": "alloy.vistavillage"
   },
   {
     "n": "Voss Rd, Houston, TX",
@@ -1833,7 +3769,20 @@
     "p": "(346) 788-1611",
     "u": "https://alloypersonaltraining.com/location/voss-tx/",
     "y": "2024",
-    "m": "Houston"
+    "m": "Houston",
+    "coming_soon": false,
+    "email": "info.voss@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloyvossrdhouston",
+    "facebook": "alloyvossrdhoustontx"
   },
   {
     "n": "Wellington South, Lake Worth, FL",
@@ -1845,7 +3794,20 @@
     "p": "561-831-6844",
     "u": "https://alloypersonaltraining.com/location/wellington-south-lake-worth-fl/",
     "y": "2025",
-    "m": null
+    "m": null,
+    "coming_soon": false,
+    "email": "info.wellingtonsouth@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy.wellingtonsouth",
+    "facebook": "alloy.wellingtonsouth"
   },
   {
     "n": "West Arvada, CO",
@@ -1857,7 +3819,20 @@
     "p": "720-637-2399",
     "u": "https://alloypersonaltraining.com/location/west-arvada-co/",
     "y": "2024",
-    "m": "Denver"
+    "m": "Denver",
+    "coming_soon": false,
+    "email": "info.westarvada@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy_westarvada",
+    "facebook": "alloy.westarvada"
   },
   {
     "n": "West Chester, OH",
@@ -1869,7 +3844,20 @@
     "p": "513-855-6549",
     "u": "https://alloypersonaltraining.com/location/west-chester-oh/",
     "y": "2024",
-    "m": "Cincinnati"
+    "m": "Cincinnati",
+    "coming_soon": false,
+    "email": "info.westchester@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloywestchester",
+    "facebook": "alloywestchester"
   },
   {
     "n": "West Las Vegas, NV",
@@ -1881,7 +3869,20 @@
     "p": "(702) 829-5006",
     "u": "https://alloypersonaltraining.com/location/west-las-vegas-nv/",
     "y": "2022",
-    "m": "Las Vegas"
+    "m": "Las Vegas",
+    "coming_soon": false,
+    "email": "info.westlasvegas@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloywestlasvegas",
+    "facebook": "Alloy-Personal-Training-West-Las-Vegas-104512745670496"
   },
   {
     "n": "West Los Angeles, CA",
@@ -1893,7 +3894,20 @@
     "p": "424-722-6127",
     "u": "https://alloypersonaltraining.com/location/west-la-ca/",
     "y": "2025",
-    "m": "Los Angeles"
+    "m": "Los Angeles",
+    "coming_soon": false,
+    "email": "info.westla@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy.westla",
+    "facebook": "alloy.westla"
   },
   {
     "n": "West Roswell, GA",
@@ -1905,7 +3919,20 @@
     "p": "(770) 629-8853",
     "u": "https://alloypersonaltraining.com/location/westroswell-ga/",
     "y": "2023",
-    "m": "Atlanta"
+    "m": "Atlanta",
+    "coming_soon": false,
+    "email": "info.westroswell@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloywestroswell",
+    "facebook": "alloywestroswell"
   },
   {
     "n": "Westchase, Tampa, FL",
@@ -1917,7 +3944,20 @@
     "p": "813-706-4764",
     "u": "https://alloypersonaltraining.com/location/westchase-tampa-fl/",
     "y": "2026",
-    "m": "Tampa-St. Pete"
+    "m": "Tampa-St. Pete",
+    "coming_soon": true,
+    "email": "info.westchase@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy_westchase",
+    "facebook": "alloy.westchase"
   },
   {
     "n": "Westport, Norwalk, CT",
@@ -1929,7 +3969,20 @@
     "p": "475-203-1825",
     "u": "https://alloypersonaltraining.com/location/westport-norwalk-ct/",
     "y": "2025",
-    "m": "New York City"
+    "m": "New York City",
+    "coming_soon": false,
+    "email": "info.westport@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy_westport",
+    "facebook": "alloy.westportct"
   },
   {
     "n": "Wheaton, IL",
@@ -1941,7 +3994,20 @@
     "p": "331-260-9941",
     "u": "https://alloypersonaltraining.com/location/wheaton-il/",
     "y": "2025",
-    "m": "Chicago"
+    "m": "Chicago",
+    "coming_soon": false,
+    "email": "info.wheaton@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy_wheaton",
+    "facebook": "alloy.wheaton"
   },
   {
     "n": "Wildwood, MO",
@@ -1953,7 +4019,20 @@
     "p": "636-422-5090",
     "u": "https://alloypersonaltraining.com/location/wildwood-mo/",
     "y": "2023",
-    "m": "St. Louis"
+    "m": "St. Louis",
+    "coming_soon": false,
+    "email": "info.wildwood@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM-12PM & 3PM-7PM",
+      "Tue": "6AM-12PM & 3PM-7PM",
+      "Wed": "6AM-12PM & 3PM-7PM",
+      "Thu": "6AM-12PM & 3PM-7PM",
+      "Fri": "6AM-12PM",
+      "Sat": "7AM - 11AM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloywildwood",
+    "facebook": "alloywildwood"
   },
   {
     "n": "Windermere, GA",
@@ -1965,7 +4044,20 @@
     "p": "(470) 524-8301",
     "u": "https://alloypersonaltraining.com/location/windermere-ga/",
     "y": "2024",
-    "m": "Atlanta"
+    "m": "Atlanta",
+    "coming_soon": false,
+    "email": "info.windermere@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy.windermere",
+    "facebook": "alloy.windermere"
   },
   {
     "n": "Winter Park, Casselberry, FL",
@@ -1977,7 +4069,20 @@
     "p": "(407) 564-8848",
     "u": "https://alloypersonaltraining.com/location/winter-park-fl/",
     "y": "2021",
-    "m": "Orlando"
+    "m": "Orlando",
+    "coming_soon": false,
+    "email": "info.winterpark@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloycasselberry",
+    "facebook": "alloywinterpark"
   },
   {
     "n": "Woodinville, WA",
@@ -1989,7 +4094,20 @@
     "p": "425-215-1606",
     "u": "https://alloypersonaltraining.com/location/woodinville-wa/",
     "y": "2025",
-    "m": "Seattle"
+    "m": "Seattle",
+    "coming_soon": true,
+    "email": "info.woodinville@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloywoodinville",
+    "facebook": "alloywoodinville"
   },
   {
     "n": "Huntington Beach, CA",
@@ -2001,7 +4119,20 @@
     "p": "714-475-1279",
     "u": "https://alloypersonaltraining.com/location/huntington-beach-ca/",
     "y": "2025",
-    "m": "Los Angeles"
+    "m": "Los Angeles",
+    "coming_soon": true,
+    "email": "info.huntingtonbeach@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloy_huntingtonbeach",
+    "facebook": "alloy.huntingtonbeach"
   },
   {
     "n": "Alloy Eastside | Greenville, SC",
@@ -2013,7 +4144,20 @@
     "p": "(864) 365 3635",
     "u": "https://alloypersonaltraining.com/location/eastside-sc/",
     "y": "2023",
-    "m": "Greenville"
+    "m": "Greenville",
+    "coming_soon": false,
+    "email": "info.eastsidesc@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloyeastsidesc",
+    "facebook": "alloyeastside"
   },
   {
     "n": "Alloy Rosewood | Columbia, SC",
@@ -2025,6 +4169,19 @@
     "p": "803-866-7464",
     "u": "https://alloypersonaltraining.com/location/rosewood-sc/",
     "y": "2024",
-    "m": null
+    "m": null,
+    "coming_soon": false,
+    "email": "info.rosewood@alloypersonaltraining.com",
+    "hours": {
+      "Mon": "6AM - 8PM",
+      "Tue": "6AM - 8PM",
+      "Wed": "6AM - 8PM",
+      "Thu": "6AM - 8PM",
+      "Fri": "6AM - 7PM",
+      "Sat": "7AM - 12PM",
+      "Sun": "Closed"
+    },
+    "instagram": "alloyrosewood",
+    "facebook": "alloyrosewood"
   }
 ]
