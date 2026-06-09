@@ -33,11 +33,11 @@ case "$MODE" in
     # Resolve the current FY2020-present CSV url (filename carries an "as-of" date
     # that changes each quarter; the resource id is stable).
     RID="d67d3ccb-2002-4134-a288-481b51cd3479"
-    SBA_URL=$(curl -s "https://data.sba.gov/api/3/action/resource_show?id=$RID" \
+    SBA_URL=$(curl -s --connect-timeout 20 --max-time 30 "https://data.sba.gov/api/3/action/resource_show?id=$RID" \
               | $PY -c "import sys,json;print(json.load(sys.stdin)['result']['url'])" 2>>"$LOG")
     [ -z "$SBA_URL" ] && { log "Could not resolve SBA CSV url from CKAN API."; exit 1; }
     log "SBA CSV: $SBA_URL"
-    run curl -s -L "$SBA_URL" -o _sba_7a.csv
+    run curl -s -L --connect-timeout 20 --max-time 900 "$SBA_URL" -o _sba_7a.csv
     run $PY match_sba.py
     ;;
   fdd)

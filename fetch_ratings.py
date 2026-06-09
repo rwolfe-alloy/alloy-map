@@ -38,17 +38,26 @@ def get_key():
 
 def search(query, key):
     body = json.dumps({"textQuery": query})
-    out = subprocess.run([
-        "curl", "-s", "-X", "POST", URL,
+    # curl timeouts + a subprocess backstop so one hung request can't stall the
+    # whole (possibly unattended) run; retry once on timeout/transient failure.
+    cmd = ["curl", "-s", "--connect-timeout", "15", "--max-time", "45",
+        "-X", "POST", URL,
         "-H", "Content-Type: application/json",
         "-H", f"X-Goog-Api-Key: {key}",
         "-H", f"X-Goog-FieldMask: {FIELD_MASK}",
-        "-d", body,
-    ], capture_output=True, text=True).stdout
-    try:
-        return json.loads(out)
-    except json.JSONDecodeError:
-        return {"_parse_error": out[:200]}
+        "-d", body]
+    for attempt in range(2):
+        try:
+            out = subprocess.run(cmd, capture_output=True, text=True, timeout=60).stdout
+        except subprocess.TimeoutExpired:
+            continue
+        try:
+            return json.loads(out)
+        except json.JSONDecodeError:
+            if attempt == 0:
+                continue
+            return {"_parse_error": out[:200]}
+    return {"_parse_error": "timeout"}
 
 
 def main():

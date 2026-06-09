@@ -16,8 +16,13 @@ BASE = "https://apps.dfi.wi.gov/apps/FranchiseSearch"
 COOKIES = "_wi_cookies.txt"
 
 def curl(args):
-    return subprocess.run(["curl","-s","-b",COOKIES,"-c",COOKIES]+args,
-                          capture_output=True, text=True).stdout
+    # generous --max-time: one call downloads the ~7MB FDD PDF
+    try:
+        return subprocess.run(["curl","-s","--connect-timeout","20","--max-time","300",
+                               "-b",COOKIES,"-c",COOKIES]+args,
+                              capture_output=True, text=True, timeout=330).stdout
+    except subprocess.TimeoutExpired:
+        return ""
 
 def hidden_fields(html):
     f = {}

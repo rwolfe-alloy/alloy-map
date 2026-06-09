@@ -33,7 +33,11 @@ REGION = {  # state -> region (matches existing dataset's convention)
  **{s:"West"      for s in "AK CA CO HI ID MT NV OR UT WA WY".split()}}
 
 def curl(url):
-    return subprocess.run(["curl","-s","-L",url], capture_output=True, text=True).stdout
+    try:
+        return subprocess.run(["curl","-s","-L","--connect-timeout","15","--max-time","45",url],
+                              capture_output=True, text=True, timeout=60).stdout
+    except subprocess.TimeoutExpired:
+        return ""
 
 def clean(s): return re.sub(r"\s+"," ",(s or "")).strip()
 
