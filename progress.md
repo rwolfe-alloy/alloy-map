@@ -24,8 +24,12 @@ A self-contained interactive map of all Alloy Personal Training franchise locati
 | `match_owners.py` | Phase 5 — matches franchisee records to locations (email/address/facility) and writes `owner` + `franchisee` |
 | `match_sba.py` | Phase 6 — extracts Alloy 7(a) loans from the SBA FOIA CSV (franchise code S4826) and matches each to a location → `alloy_sba_loans.json` |
 | `alloy_sba_loans.json` | 106 SBA 7(a) loans (amount, bank, year, term, jobs, matched location) — embedded into `index.html` as `SBA_LOANS` |
-| `rebuild_index.py` | Re-embeds `alloy_enriched.json` + `alloy_whitespace.json` into `index.html` (replaces the two `const` data lines in place — no template file) |
-| `.gitignore` | Excludes `.apikey` and `_*` scratch files from commits |
+| `rebuild_index.py` | Re-embeds LOCATIONS + WHITESPACE + SBA_LOANS into `index.html` (replaces the `const` data lines in place — no template file) |
+| `scrape_locations.py` | Re-scrapes locations + hours/email/social/coming_soon and **merge-preserves** Phase 4–6 fields into `alloy_enriched.json` |
+| `fetch_fdd.py` | Auto-downloads the latest registered FDD from WI DFI + extracts Exhibit D → `_exhibitD.txt` (dynamic page detection) |
+| `refresh.sh` | Unattended orchestrator: `locations` / `sba` / `fdd` modes → rebuild → commit + push (only if data changed); logs to `logs/` |
+| `setup_schedule.sh` | Installs the launchd jobs (monthly / quarterly / annual) that run `refresh.sh` |
+| `.gitignore` | Excludes `.apikey`, `logs/`, `*.csv`, `*.pdf`, and `_*` scratch files |
 
 ---
 
@@ -133,6 +137,29 @@ Each record has these fields:
 | PublicaMundi GitHub GeoJSON | US states boundaries for choropleth | Fetched at runtime by browser |
 | Wisconsin DFI Franchise Search | Full 2026 Alloy FDD PDF (free, no paywall) | ASP.NET form POST (see Phase 5 below) |
 | Google Places API (New) | ★ ratings + review counts + `ChIJ…` place_ids | `places:searchText` REST endpoint |
+| SBA 7(a) FOIA (data.sba.gov) | Franchise-coded 7(a) loans (S4826) | CKAN `resource_show` API → CSV download |
+
+---
+
+## Automated Refresh *(unattended, via launchd)*
+
+Installed by `./setup_schedule.sh` (per-user LaunchAgents in `~/Library/LaunchAgents/com.alloymap.*`). Each job runs `refresh.sh <mode>`, which runs the scrapers/matchers, rebuilds `index.html`, and **commits + pushes to `main` only if tracked data changed** (GitHub Pages auto-deploys). All runs log to `logs/`.
+
+| Job | Schedule | Mode | What it refreshes |
+|---|---|---|---|
+| `com.alloymap.monthly` | 1st of month, 06:00 | `locations` | Re-scrape locations + hours/social, then Google ratings |
+| `com.alloymap.quarterly` | 1st of Jan/Apr/Jul/Oct, 07:00 | `sba` | Re-pull SBA 7(a) CSV (URL resolved via CKAN API) + re-match |
+| `com.alloymap.annual` | May 1, 08:00 | `fdd` | Download new FDD from WI DFI + re-parse ownership |
+
+**Why these cadences:** locations/ratings move continuously (≈1 opening/week) → monthly; the SBA FOIA file reposts ~quarterly; the FDD is filed once a year (≈April, year-end snapshot). Ownership is therefore inherently up to ~12 months stale and SBA lags ~1 quarter — a limit of the public sources.
+
+**Operational notes:**
+- LaunchAgents run in the user session, so git's `osxkeychain` credential helper works for `git push` while logged in. Jobs missed while the Mac is asleep/off run at next wake.
+- `refresh.sh` pins `PATH` and uses `/usr/local/bin/python3` (the interpreter with `pdfplumber`).
+- The monthly ratings step needs `.apikey` to persist (so don't rotate the key away if you want unattended ratings).
+- A bad scrape (<90% of current location count) **aborts before any push**, so it can't overwrite good data with garbage.
+- The `fdd` job is the most fragile (gov ASP.NET portal + 275-page PDF layout) — check `logs/refresh-fdd-*.log` each spring; fall back to the manual steps in Phase 5 if it fails.
+- Manage jobs: `launchctl list | grep alloymap`; remove with `launchctl bootout gui/$(id -u)/com.alloymap.<job>`.
 
 ---
 

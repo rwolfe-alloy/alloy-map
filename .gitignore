@@ -13,3 +13,7 @@ _*.csv
 
 # Large source PDFs (re-downloadable from WI DFI — see progress.md)
 *.pdf
+
+# Refresh job logs
+logs/
+__pycache__/
