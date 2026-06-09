@@ -1,0 +1,114 @@
+[
+  {
+    "name": "Sacramento",
+    "state": "CA",
+    "lat": 38.582,
+    "lng": -121.494,
+    "pop": 2400000
+  },
+  {
+    "name": "Columbus",
+    "state": "OH",
+    "lat": 39.961,
+    "lng": -82.999,
+    "pop": 2100000
+  },
+  {
+    "name": "Providence",
+    "state": "RI",
+    "lat": 41.824,
+    "lng": -71.413,
+    "pop": 1700000
+  },
+  {
+    "name": "Milwaukee",
+    "state": "WI",
+    "lat": 43.039,
+    "lng": -87.907,
+    "pop": 1600000
+  },
+  {
+    "name": "Louisville",
+    "state": "KY",
+    "lat": 38.253,
+    "lng": -85.759,
+    "pop": 1400000
+  },
+  {
+    "name": "Memphis",
+    "state": "TN",
+    "lat": 35.149,
+    "lng": -90.052,
+    "pop": 1360000
+  },
+  {
+    "name": "Richmond",
+    "state": "VA",
+    "lat": 37.541,
+    "lng": -77.434,
+    "pop": 1300000
+  },
+  {
+    "name": "New Orleans",
+    "state": "LA",
+    "lat": 29.951,
+    "lng": -90.072,
+    "pop": 1300000
+  },
+  {
+    "name": "Buffalo",
+    "state": "NY",
+    "lat": 42.886,
+    "lng": -78.879,
+    "pop": 1200000
+  },
+  {
+    "name": "Hartford",
+    "state": "CT",
+    "lat": 41.765,
+    "lng": -72.685,
+    "pop": 1200000
+  },
+  {
+    "name": "Tulsa",
+    "state": "OK",
+    "lat": 36.154,
+    "lng": -95.993,
+    "pop": 1050000
+  },
+  {
+    "name": "Omaha",
+    "state": "NE",
+    "lat": 41.258,
+    "lng": -95.938,
+    "pop": 980000
+  },
+  {
+    "name": "Albuquerque",
+    "state": "NM",
+    "lat": 35.085,
+    "lng": -106.651,
+    "pop": 920000
+  },
+  {
+    "name": "Boise",
+    "state": "ID",
+    "lat": 43.615,
+    "lng": -116.202,
+    "pop": 780000
+  },
+  {
+    "name": "Little Rock",
+    "state": "AR",
+    "lat": 34.746,
+    "lng": -92.29,
+    "pop": 750000
+  },
+  {
+    "name": "Spokane",
+    "state": "WA",
+    "lat": 47.659,
+    "lng": -117.426,
+    "pop": 600000
+  }
+]
