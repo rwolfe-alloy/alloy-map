@@ -1,0 +1,7 @@
+# API keys — never commit
+.apikey
+*.apikey
+
+# Scratch / scrape intermediates
+_*.html
+_*.json

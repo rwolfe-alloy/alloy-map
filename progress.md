@@ -15,10 +15,13 @@ A self-contained interactive map of all Alloy Personal Training franchise locati
 
 | File | Description |
 |---|---|
-| `index.html` | The complete map app — ~125KB, all data embedded |
+| `index.html` | The complete map app — ~145KB, all data embedded |
 | `alloy_enriched.json` | Master dataset — 169 locations with all fields (see schema below) |
 | `alloy_locations.json` | Original clean locations (lat/lng/address/phone/url) — kept as source of truth |
 | `alloy_whitespace.json` | 16 major metros (500k+ pop) with no Alloy within 50 miles |
+| `fetch_ratings.py` | Phase 4 — fetches Google Places ★ rating + review count per location (needs API key) |
+| `rebuild_index.py` | Re-embeds `alloy_enriched.json` + `alloy_whitespace.json` into `index.html` (replaces the two `const` data lines in place — no template file) |
+| `.gitignore` | Excludes `.apikey` and `_*` scratch files from commits |
 
 ---
 
@@ -43,6 +46,9 @@ Each record has these fields:
 | `hours` | object | Scraped from location page | 164/169 — `{Mon,Tue,Wed,Thu,Fri,Sat,Sun}` each `"6AM - 8PM"` or `"Closed"` |
 | `instagram` | string | Scraped (per-location only) | 144/169 — handle only, no URL prefix |
 | `facebook` | string | Scraped (per-location only) | 162/169 — handle only |
+| `place_id` | string | Google Places API (New) | 169/169 — canonical `ChIJ…` id (replaced the proto token) |
+| `rating` | float\|null | Google Places API (New) | 157/169 — null when no live Google listing (coming-soon) |
+| `review_count` | int\|null | Google Places API (New) | 157/169 |
 
 **Note on email:** Alloy uses Cloudflare email obfuscation (`data-cfemail` hex attribute). Decoded via XOR — first byte is key, remaining bytes XOR'd to get email string. Pattern is consistently `info.[location]@alloypersonaltraining.com`.
 
@@ -56,6 +62,7 @@ Each record has these fields:
 - **Openings by year:** 2021: 8, 2022: 9, 2023: 24, 2024: 60, 2025: 54, 2026: 14
 - **Hours:** 157/164 locations open at 6AM Mon–Fri; 163/164 closed Sunday
 - **16 whitespace metros** (largest: Sacramento 2.4M, Columbus 2.1M, Providence 1.7M)
+- **Google ratings:** 157/169 rated, **network avg 4.96★** across 7,160 reviews; 151 at 4.8–5.0, none below 4.0 (lowest 4.1). 12 unrated (11 coming-soon + 1 brand-new listing)
 
 ---
 
@@ -127,15 +134,8 @@ curl -s "https://alloypersonaltraining.com/wp-json/wp/v2/location?per_page=100&p
 # 3. Run enrichment + scrape
 python3 scrape_locations.py  # (restore from git history if needed)
 
-# 4. Rebuild index.html
-python3 -c "
-import json
-tpl  = open('_template3.html').read()
-data = json.dumps(json.load(open('alloy_enriched.json')),  separators=(',',':'))
-ws   = json.dumps(json.load(open('alloy_whitespace.json')), separators=(',',':'))
-out  = tpl.replace('/*__DATA__*/[]/*__END__*/', data).replace('/*__WS__*/[]/*__WS_END__*/', ws)
-open('index.html','w').write(out)
-"
+# 4. Rebuild index.html (re-embeds the two const data lines in place)
+python3 rebuild_index.py
 
 # 5. Push
 git add index.html alloy_enriched.json alloy_whitespace.json
@@ -147,17 +147,19 @@ git push
 
 ## Deployment Plan — Remaining Phases
 
-### Phase 4 — Google Places Ratings *(next up)*
-- **Requires:** Google Cloud project + Places API key (free tier is sufficient — 169 lookups)
-- **Data available:** `placeId` field exists in the raw JS on `/locations/` page (base64 proto format, accepted by Places API)
-- **What to build:**
-  - One-time batch fetch: star rating + review count per location
-  - Add `rating` and `review_count` to `alloy_enriched.json`
-  - Map pins color-shifted green→red by rating (4.5+ green, 4.0–4.5 yellow, <4.0 red)
-  - Star rating + review count on cards
-  - Rating threshold filter (e.g. "4.5+ stars only")
-  - Analytics chart: rating distribution across network; flag any below 4.0
-- **Re-extract placeIds:** They're in the raw `var locations = [...]` array on the locations page as `placeId` field
+### Phase 4 — Google Places Ratings ✅ *(COMPLETE)*
+
+Star ratings + review counts fetched for all 169 locations and shipped.
+
+- **API:** Uses the **Places API (New)** `places:searchText` endpoint (POST with `X-Goog-Api-Key` + `X-Goog-FieldMask` headers) — the legacy Find Place endpoint is **not** enabled on the project, so the script targets the new API. Text query is `"Alloy Personal Training {address}"`; takes the top result. This also returned canonical `ChIJ…` place_ids, which replaced the base64 proto tokens.
+- **`fetch_ratings.py`:** reads key from `.apikey` / `$GOOGLE_PLACES_API_KEY` / argv; `curl` (SSL workaround); writes `rating`, `review_count`, `place_id` back into `alloy_enriched.json`; stops early on API errors.
+- **Results:** 157/169 rated, avg **4.96★**, 7,160 reviews, none below 4.0. 12 unrated (coming-soon / brand-new listings).
+- **Frontend (`index.html`):**
+  - ★ rating + review count on **cards** and **popups** (hidden when null).
+  - **Rating filter:** All / 4.5+ / 4.0+ / Below 4.0 / Unrated.
+  - **"Color by rating"** map-layer toggle — recolors live pins by tier (4.5+ green, 4.0–4.5 amber, <4.0 red, unrated gray) + bottom-left legend. Independent of the open/live/soon scheme.
+  - **Analytics:** "Avg Google ★" + "Below 4.0 ★" stat cards + Rating Distribution chart.
+- **Gotcha for re-runs:** if the key only has *Places API (New)* enabled, the legacy endpoint returns `REQUEST_DENIED` ("calling a legacy API"). `fetch_ratings.py` already uses the new endpoint.
 
 ### Phase 5 — FDD Franchisee Ownership
 - **Data source:** Public Franchise Disclosure Documents filed with state regulators
