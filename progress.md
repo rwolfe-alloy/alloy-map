@@ -15,13 +15,15 @@ A self-contained interactive map of all Alloy Personal Training franchise locati
 
 | File | Description |
 |---|---|
-| `index.html` | The complete map app — ~161KB, all data embedded |
+| `index.html` | The complete map app — ~180KB, all data embedded |
 | `alloy_enriched.json` | Master dataset — 169 locations with all fields (see schema below) |
 | `alloy_locations.json` | Original clean locations (lat/lng/address/phone/url) — kept as source of truth |
 | `alloy_whitespace.json` | 16 major metros (500k+ pop) with no Alloy within 50 miles |
 | `fetch_ratings.py` | Phase 4 — fetches Google Places ★ rating + review count per location (needs API key) |
 | `parse_fdd.py` | Phase 5 — parses Exhibit D (franchisee list) from the 2026 FDD text dump into `_fdd_franchisees.json` |
 | `match_owners.py` | Phase 5 — matches franchisee records to locations (email/address/facility) and writes `owner` + `franchisee` |
+| `match_sba.py` | Phase 6 — extracts Alloy 7(a) loans from the SBA FOIA CSV (franchise code S4826) and matches each to a location → `alloy_sba_loans.json` |
+| `alloy_sba_loans.json` | 106 SBA 7(a) loans (amount, bank, year, term, jobs, matched location) — embedded into `index.html` as `SBA_LOANS` |
 | `rebuild_index.py` | Re-embeds `alloy_enriched.json` + `alloy_whitespace.json` into `index.html` (replaces the two `const` data lines in place — no template file) |
 | `.gitignore` | Excludes `.apikey` and `_*` scratch files from commits |
 
@@ -68,6 +70,7 @@ Each record has these fields:
 - **16 whitespace metros** (largest: Sacramento 2.4M, Columbus 2.1M, Providence 1.7M)
 - **Google ratings:** 157/169 rated, **network avg 4.96★** across 7,160 reviews; 151 at 4.8–5.0, none below 4.0 (lowest 4.1). 12 unrated (11 coming-soon + 1 brand-new listing)
 - **Ownership (2026 FDD):** 151/169 matched to a franchisee operator (149 with owner name); **122 operators, 20 multi-unit** (49 locations). Largest: John Farkas, Daniel Atkins, Trey Ely (4 each). 18 unmatched (company-owned or opened after Dec 2025)
+- **SBA 7(a) financing:** **$26.4M** across 106 loans (FY2022–26), 95 matched to 55 locations; avg $249K, median $317K, 581 jobs supported. **Huntington National Bank = 85 of 106 loans** (dominant Alloy SBA lender). Top-funded: Falls Church VA $812K (4 loans)
 
 ---
 
@@ -89,12 +92,14 @@ Each record has these fields:
 
 ### Sidebar — Analytics Tab
 - Stat cards: Total, States, Pipeline (coming soon count), Opened 2025–26, Avg Google ★, Below 4.0 ★
+- **SBA 7(a) Financing section** *(Phase 6)*: stat cards (capital deployed, loans, avg loan, jobs supported) + "Loans Approved by Year" and "Top SBA Lenders" charts
 - Bar charts: Rating Distribution, Openings by Year, By Region, Top 12 States
 
 ### Sidebar — Ownership Tab *(Phase 5)*
 - Stat cards: Operators, Multi-unit operators
 - "Largest Multi-Unit Operators" bar chart (colored per operator)
 - Full operator list (multi-unit then single) — click an operator to fly the map to all their locations
+- Each operator row also shows total **SBA 7(a)** capital across their locations *(Phase 6)*
 
 ### Sidebar — Whitespace Tab
 - 16 uncovered major metros, sorted by population
@@ -107,12 +112,14 @@ Each record has these fields:
 - **Color by rating** — recolors live pins green/amber/red by Google ★ tier
 - **Color by operator** — recolors pins by franchisee operator (multi-unit each a distinct color); mutually exclusive with Color by rating
 
-### Popup (per location)
+### Popup / Cards (per location)
 - Name with green "open now" dot or amber "Coming Soon" badge
 - Address, region/year/metro tags
+- Google ★ rating + review count *(Phase 4)*
+- Franchisee owner + entity with operator color dot + "N units" badge *(Phase 5)*
+- **SBA 7(a) funding badge** — total + loan count for funded locations *(Phase 6)*
 - Collapsible hours schedule (today's day highlighted in red)
-- Phone, Directions, Details links
-- IG / FB / email links
+- Phone, Directions, Details links · IG / FB / email links
 
 ---
 
@@ -193,9 +200,21 @@ Franchisee owner + entity for 151/169 locations, plus an Ownership tab, color-by
 - **Pipeline to refresh:** `parse_fdd.py` → `match_owners.py` → `rebuild_index.py`.
 - **Gotchas:** (1) zip extraction must take the *last* 5-digit group — a 5-digit street number (e.g. 25030) otherwise masks the zip. (2) Strip leading `*` footnote markers before person-name detection. (3) Exhibit D state headers occasionally mis-track across columns, so the franchisee record's `state` field is unreliable — match on email/address/facility, not state.
 
-### Phase 6 — SBA Loan Data
-- **Source:** Treasury/SBA public loan data (7a loans by franchisee)
-- Signals capital commitment and financing method per franchisee
+### Phase 6 — SBA Loan Data ✅ *(COMPLETE)*
+
+$26.4M of SBA 7(a) financing into the Alloy system, mapped to locations + operators, with a financing analytics section.
+
+- **Source:** SBA 7(a) FOIA dataset, **FY2020-present** CSV (data.sba.gov, ~144 MB / 374K rows, as of 2026-03-31). Direct CSV download (no auth):
+  `https://data.sba.gov/en/dataset/0ff8e8e9-b967-4f4e-987c-6ac78c575087/resource/d67d3ccb-2002-4134-a288-481b51cd3479/download/foia-7a-fy2020-present-asof-260331.csv`
+- **Filter:** rows where `franchisename` contains "alloy personal" — **franchise code S4826** ("Alloy Personal Traning", SBA's typo). 106 loans, FY2022–26.
+- **Match (`match_sba.py`):** each loan → location by `borrzip`==location zip ∩/then franchisee-entity name (from Phase 5) → 95/106 matched to 55 locations. Writes `alloy_sba_loans.json` (embedded as `SBA_LOANS`).
+- **Frontend:**
+  - SBA funding badge on **cards + popups** (total + loan count) for funded locations.
+  - **Analytics → "SBA 7(a) Financing"** section: stat cards (capital deployed, loans, avg size, jobs supported) + "Loans Approved by Year" + "Top SBA Lenders" charts.
+  - **Ownership tab** rows show each operator's total SBA capital.
+- **Pipeline:** `match_sba.py` → `rebuild_index.py` (now embeds LOCATIONS + WHITESPACE + SBA_LOANS).
+- **Key finding:** Huntington National Bank originated 85 of 106 loans — the de-facto Alloy SBA lender. Loan pattern is typically two per franchisee: a small ~$25–30K startup loan + a larger ~$300–500K build-out loan.
+- **Note:** the FOIA CSV (`_sba_7a.csv`) is gitignored; re-download from the URL above. Loan amounts are `grossapproval`; only loans SBA coded to franchise S4826 are captured (a franchisee financing via 504, conventional, or uncoded 7(a) won't appear).
 
 ---
 

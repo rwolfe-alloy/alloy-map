@@ -6,6 +6,10 @@
 _*.html
 _*.json
 _*.txt
+_*.csv
+
+# Large source datasets (re-downloadable — see progress.md)
+*.csv
 
 # Large source PDFs (re-downloadable from WI DFI — see progress.md)
 *.pdf
