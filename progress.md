@@ -15,11 +15,13 @@ A self-contained interactive map of all Alloy Personal Training franchise locati
 
 | File | Description |
 |---|---|
-| `index.html` | The complete map app — ~145KB, all data embedded |
+| `index.html` | The complete map app — ~161KB, all data embedded |
 | `alloy_enriched.json` | Master dataset — 169 locations with all fields (see schema below) |
 | `alloy_locations.json` | Original clean locations (lat/lng/address/phone/url) — kept as source of truth |
 | `alloy_whitespace.json` | 16 major metros (500k+ pop) with no Alloy within 50 miles |
 | `fetch_ratings.py` | Phase 4 — fetches Google Places ★ rating + review count per location (needs API key) |
+| `parse_fdd.py` | Phase 5 — parses Exhibit D (franchisee list) from the 2026 FDD text dump into `_fdd_franchisees.json` |
+| `match_owners.py` | Phase 5 — matches franchisee records to locations (email/address/facility) and writes `owner` + `franchisee` |
 | `rebuild_index.py` | Re-embeds `alloy_enriched.json` + `alloy_whitespace.json` into `index.html` (replaces the two `const` data lines in place — no template file) |
 | `.gitignore` | Excludes `.apikey` and `_*` scratch files from commits |
 
@@ -49,6 +51,8 @@ Each record has these fields:
 | `place_id` | string | Google Places API (New) | 169/169 — canonical `ChIJ…` id (replaced the proto token) |
 | `rating` | float\|null | Google Places API (New) | 157/169 — null when no live Google listing (coming-soon) |
 | `review_count` | int\|null | Google Places API (New) | 157/169 |
+| `owner` | string | 2026 FDD Exhibit D | 149/169 — franchisee owner person name |
+| `franchisee` | string | 2026 FDD Exhibit D | 130/169 — franchisee legal entity (LLC/Inc) |
 
 **Note on email:** Alloy uses Cloudflare email obfuscation (`data-cfemail` hex attribute). Decoded via XOR — first byte is key, remaining bytes XOR'd to get email string. Pattern is consistently `info.[location]@alloypersonaltraining.com`.
 
@@ -63,6 +67,7 @@ Each record has these fields:
 - **Hours:** 157/164 locations open at 6AM Mon–Fri; 163/164 closed Sunday
 - **16 whitespace metros** (largest: Sacramento 2.4M, Columbus 2.1M, Providence 1.7M)
 - **Google ratings:** 157/169 rated, **network avg 4.96★** across 7,160 reviews; 151 at 4.8–5.0, none below 4.0 (lowest 4.1). 12 unrated (11 coming-soon + 1 brand-new listing)
+- **Ownership (2026 FDD):** 151/169 matched to a franchisee operator (149 with owner name); **122 operators, 20 multi-unit** (49 locations). Largest: John Farkas, Daniel Atkins, Trey Ely (4 each). 18 unmatched (company-owned or opened after Dec 2025)
 
 ---
 
@@ -83,8 +88,13 @@ Each record has these fields:
 - **Cards** show: region tag, year tag, metro tag, "Open now" or "Opening [year]" badge, phone, directions, IG/FB links, email
 
 ### Sidebar — Analytics Tab
-- Stat cards: Total, States, Pipeline (coming soon count), Opened 2025–26
-- Bar charts: Openings by Year, By Region, Top 12 States
+- Stat cards: Total, States, Pipeline (coming soon count), Opened 2025–26, Avg Google ★, Below 4.0 ★
+- Bar charts: Rating Distribution, Openings by Year, By Region, Top 12 States
+
+### Sidebar — Ownership Tab *(Phase 5)*
+- Stat cards: Operators, Multi-unit operators
+- "Largest Multi-Unit Operators" bar chart (colored per operator)
+- Full operator list (multi-unit then single) — click an operator to fly the map to all their locations
 
 ### Sidebar — Whitespace Tab
 - 16 uncovered major metros, sorted by population
@@ -94,6 +104,8 @@ Each record has these fields:
 - **State density choropleth** — GeoJSON loaded from PublicaMundi CDN at runtime; state colors by location count; legend shown
 - **Coverage radius** — 1 / 2 / 5 / 10 mile selectable circles; rebuilds on size change
 - **Whitespace metros** — gray pins for the 16 uncovered metros
+- **Color by rating** — recolors live pins green/amber/red by Google ★ tier
+- **Color by operator** — recolors pins by franchisee operator (multi-unit each a distinct color); mutually exclusive with Color by rating
 
 ### Popup (per location)
 - Name with green "open now" dot or amber "Coming Soon" badge
@@ -112,6 +124,8 @@ Each record has these fields:
 | `alloypersonaltraining.com/wp-json/wp/v2/location` | Post dates (opening year proxy) | WordPress REST API, paginated 100/page |
 | Individual location pages (`/location/[slug]/`) | Hours, email, social handles, coming_soon | `curl` batch scrape, 10 concurrent workers |
 | PublicaMundi GitHub GeoJSON | US states boundaries for choropleth | Fetched at runtime by browser |
+| Wisconsin DFI Franchise Search | Full 2026 Alloy FDD PDF (free, no paywall) | ASP.NET form POST (see Phase 5 below) |
+| Google Places API (New) | ★ ratings + review counts + `ChIJ…` place_ids | `places:searchText` REST endpoint |
 
 ---
 
@@ -161,19 +175,23 @@ Star ratings + review counts fetched for all 169 locations and shipped.
   - **Analytics:** "Avg Google ★" + "Below 4.0 ★" stat cards + Rating Distribution chart.
 - **Gotcha for re-runs:** if the key only has *Places API (New)* enabled, the legacy endpoint returns `REQUEST_DENIED` ("calling a legacy API"). `fetch_ratings.py` already uses the new endpoint.
 
-### Phase 5 — FDD Franchisee Ownership
-- **Data source:** Public Franchise Disclosure Documents filed with state regulators
-  - CA: DFPI portal — https://docqnet.dfpi.ca.gov/
-  - WA: DFI — https://www.dfi.wa.gov/
-  - MD, IL, NY, VA also require FDD registration (free PDF downloads)
-  - Item 20 = complete franchisee list with name, address, phone, open/closed dates
-- **What to build:**
-  - Parse Item 20 tables from FDD PDFs (likely need `pdfplumber` or `pypdf2`)
-  - Match franchisees to locations by address/city
-  - Add `owner_name` field to enriched dataset
-  - Color-code map pins by owner (multi-unit operators show as same color)
-  - New "Ownership" tab: table of franchisees sortable by unit count
-  - Analytics: "Multi-unit operators" chart
+### Phase 5 — FDD Franchisee Ownership ✅ *(COMPLETE)*
+
+Franchisee owner + entity for 151/169 locations, plus an Ownership tab, color-by-operator map mode, and multi-unit analytics — all from the **2026 Alloy FDD**.
+
+- **Source obtained:** Wisconsin DFI Franchise Search (free, full PDF, no paywall). Filing **#641123, Alloy Personal Training LLC, registered 4/20/2026**. The CA DFPI / FranChimp routes are Cloudflare-gated; WI DFI is the reliable free source.
+  - **How to re-download** (ASP.NET, viewstate POST — session-specific, do via `curl` with a cookie jar):
+    1. GET `https://apps.dfi.wi.gov/apps/FranchiseSearch/MainSearch.aspx`, save cookies, scrape all `__VIEWSTATE*` hidden fields (split across `__VIEWSTATE`, `__VIEWSTATE1`, … per `__VIEWSTATEFIELDCOUNT`).
+    2. POST `txtName=Alloy` + `btnSearch` → follow the `Object moved` redirect → results list → grab the registered filing's `details.aspx?id=…&hash=…`.
+    3. GET the details page, scrape its `__VIEWSTATE*`, POST `upload_downloadFile=Download` → returns the FDD PDF (~7.4 MB).
+- **Parse:** `pdfplumber` (installed via pip). FDD is 275 pages; **Exhibit D** (p150–167) = "LIST OF FRANCHISEES (as of Dec 31, 2025)" — a two-column directory. Column-aware word extraction (split at x≈300), entries delimited by their `Phone` line. → `parse_fdd.py` → 197 franchisee records (entity, facility, owner person, email, address).
+- **Match:** `match_owners.py` joins franchisee records to the 169 locations by **email (exact) → zip+street-no → facility-name token overlap**. 151 matched, 0 wrong (spot-verified). Writes `owner` + `franchisee` into `alloy_enriched.json`.
+- **Frontend (`index.html`):**
+  - Owner + entity line on **cards** and **popups** (colored dot + "N units" badge for multi-unit operators).
+  - **"Color by operator"** map-layer toggle — each multi-unit operator a distinct color, single-unit slate, unmatched gray; bottom-left legend lists top operators. Mutually exclusive with "Color by rating".
+  - **New "Ownership" tab:** operator/multi-unit stat cards, "Largest Multi-Unit Operators" bar chart, and a full operator list (multi-unit then single) — click any operator to fly the map to their locations.
+- **Pipeline to refresh:** `parse_fdd.py` → `match_owners.py` → `rebuild_index.py`.
+- **Gotchas:** (1) zip extraction must take the *last* 5-digit group — a 5-digit street number (e.g. 25030) otherwise masks the zip. (2) Strip leading `*` footnote markers before person-name detection. (3) Exhibit D state headers occasionally mis-track across columns, so the franchisee record's `state` field is unreliable — match on email/address/facility, not state.
 
 ### Phase 6 — SBA Loan Data
 - **Source:** Treasury/SBA public loan data (7a loans by franchisee)

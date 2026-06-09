@@ -5,3 +5,7 @@
 # Scratch / scrape intermediates
 _*.html
 _*.json
+_*.txt
+
+# Large source PDFs (re-downloadable from WI DFI — see progress.md)
+*.pdf
