@@ -227,10 +227,16 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Ro
         <input type="checkbox" id="toggleChoropleth"/>
         State density
       </label>
-      <label class="layer-row">
-        <input type="checkbox" id="toggleRadius"/>
-        10-mi coverage
-      </label>
+      <div class="layer-row">
+        <input type="checkbox" id="toggleRadius" style="flex:none"/>
+        <span style="flex:1">Coverage radius</span>
+        <select id="radiusSel" style="border:1px solid var(--line);border-radius:6px;padding:2px 4px;font-size:12px;background:var(--white);outline:none;color:var(--ink)">
+          <option value="1">1 mi</option>
+          <option value="2">2 mi</option>
+          <option value="5">5 mi</option>
+          <option value="10" selected>10 mi</option>
+        </select>
+      </div>
       <label class="layer-row">
         <input type="checkbox" id="toggleWhitespace"/>
         Whitespace metros
@@ -461,12 +467,15 @@ WHITESPACE.forEach(w=>{
 });
 
 // ── Coverage radius ──
-LOCATIONS.forEach(l=>{
-  radiusGroup.addLayer(L.circle([l.lat,l.lng],{
-    radius:16093,  // 10 miles in meters
-    color:'#e1251b',weight:1,opacity:.35,fillColor:'#e1251b',fillOpacity:.05
-  }));
-});
+function buildRadiusLayer(miles){
+  radiusGroup.clearLayers();
+  const meters=miles*1609.34;
+  LOCATIONS.forEach(l=>{
+    radiusGroup.addLayer(L.circle([l.lat,l.lng],{
+      radius:meters,color:'#e1251b',weight:1,opacity:.35,fillColor:'#e1251b',fillOpacity:.05
+    }));
+  });
+}
 
 // ── Choropleth ──
 const CHORO_COLORS=['#f3f4f6','#fee2e2','#fca5a5','#f87171','#ef4444','#dc2626','#991b1b'];
@@ -514,7 +523,17 @@ async function toggleChoropleth(on){
 // ── Layer toggles ──
 document.getElementById('toggleChoropleth').addEventListener('change',e=>toggleChoropleth(e.target.checked));
 document.getElementById('toggleRadius').addEventListener('change',e=>{
-  if(e.target.checked) radiusGroup.addTo(map); else map.removeLayer(radiusGroup);
+  if(e.target.checked){
+    buildRadiusLayer(+document.getElementById('radiusSel').value);
+    radiusGroup.addTo(map);
+  } else {
+    map.removeLayer(radiusGroup);
+  }
+});
+document.getElementById('radiusSel').addEventListener('change',()=>{
+  if(document.getElementById('toggleRadius').checked){
+    buildRadiusLayer(+document.getElementById('radiusSel').value);
+  }
 });
 document.getElementById('toggleWhitespace').addEventListener('change',e=>{
   if(e.target.checked) wsMarkerGroup.addTo(map); else map.removeLayer(wsMarkerGroup);
