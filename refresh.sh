@@ -22,7 +22,8 @@ LOG="logs/refresh-$MODE-$(date +%Y%m%d-%H%M%S).log"
 PY=/usr/local/bin/python3        # the interpreter that has pdfplumber installed
 
 log(){ echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*" | tee -a "$LOG"; }
-run(){ log "RUN: $*"; "$@" >>"$LOG" 2>&1 || { log "FAILED ($?): $*"; exit 1; }; }
+notify(){ osascript -e "display notification \"$2\" with title \"Alloy Map · $1\"" 2>/dev/null || true; }
+run(){ log "RUN: $*"; "$@" >>"$LOG" 2>&1 || { log "FAILED ($?): $*"; notify "refresh $MODE FAILED" "$* — see $LOG"; exit 1; }; }
 
 log "=== refresh '$MODE' starting ==="
 
@@ -50,10 +51,13 @@ case "$MODE" in
   *) log "unknown mode '$MODE'"; exit 2 ;;
 esac
 
+# Snapshot + changelog of what changed (vs last committed version), before rebuild
+run $PY snapshot.py "$(date '+%Y-%m-%d')"
+
 run $PY rebuild_index.py
 
 # Commit + push only if tracked data actually changed
-git add alloy_enriched.json alloy_sba_loans.json index.html 2>/dev/null
+git add alloy_enriched.json alloy_sba_loans.json index.html CHANGELOG.md snapshots 2>/dev/null
 if git diff --cached --quiet; then
   log "No data changes — nothing to commit."
 elif [ -n "$DRY_RUN" ]; then
@@ -64,9 +68,9 @@ else
   MSG="Auto-refresh ($MODE): $(date '+%Y-%m-%d')"
   git commit -q -m "$MSG" >>"$LOG" 2>&1
   if git push origin main >>"$LOG" 2>&1; then
-    log "Committed + pushed: $MSG"
+    log "Committed + pushed: $MSG"; notify "refreshed ($MODE)" "$MSG — deployed"
   else
-    log "Commit made but PUSH FAILED — will retry next run."
+    log "Commit made but PUSH FAILED — will retry next run."; notify "refresh $MODE: push failed" "committed locally; will retry"
   fi
 fi
 log "=== refresh '$MODE' done ==="
