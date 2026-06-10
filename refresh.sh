@@ -47,6 +47,7 @@ case "$MODE" in
     run $PY fetch_fdd.py
     run $PY parse_fdd.py
     run $PY match_owners.py
+    $PY parse_item19.py alloy_fdd_latest.pdf >>"$LOG" 2>&1 || log "WARN: Item 19 parse failed (keeping previous)."
     ;;
   *) log "unknown mode '$MODE'"; exit 2 ;;
 esac
@@ -57,7 +58,7 @@ run $PY snapshot.py "$(date '+%Y-%m-%d')"
 run $PY rebuild_index.py
 
 # Commit + push only if tracked data actually changed
-git add alloy_enriched.json alloy_sba_loans.json index.html CHANGELOG.md snapshots 2>/dev/null
+git add alloy_enriched.json alloy_sba_loans.json alloy_item19.json index.html CHANGELOG.md snapshots 2>/dev/null
 if git diff --cached --quiet; then
   log "No data changes — nothing to commit."
 elif [ -n "$DRY_RUN" ]; then

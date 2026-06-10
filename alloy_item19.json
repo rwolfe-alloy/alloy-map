@@ -1,0 +1,71 @@
+{
+ "source": "Alloy 2026 FDD, Item 19 (Financial Performance Representations)",
+ "period": "2025 Measurement Period (Jan\u2013Dec 2025)",
+ "revenue_by_quartile": {
+  "First Quartile": {
+   "count": 18,
+   "avg": 554978,
+   "max": 726675,
+   "min": 481374,
+   "median": 540157
+  },
+  "Second Quartile": {
+   "count": 18,
+   "avg": 428009,
+   "max": 473864,
+   "min": 389121,
+   "median": 422735
+  },
+  "Third Quartile": {
+   "count": 18,
+   "avg": 352011,
+   "max": 387984,
+   "min": 316816,
+   "median": 353306
+  },
+  "Fourth Quartile": {
+   "count": 19,
+   "avg": 252824,
+   "max": 315342,
+   "min": 132350,
+   "median": 267187
+  }
+ },
+ "revenue_by_maturity": {
+  "Open 12-24 Months": {
+   "count": 45,
+   "avg": 371358,
+   "max": 633526,
+   "min": 132350,
+   "median": 377483
+  },
+  "Open 24-36 Months": {
+   "count": 16,
+   "avg": 424181,
+   "max": 638400,
+   "min": 209073,
+   "median": 425724
+  },
+  "Open 36+ Months": {
+   "count": 12,
+   "avg": 444633,
+   "max": 726675,
+   "min": 194317,
+   "median": 442473
+  }
+ },
+ "avg_monthly_memberships": {
+  "avg": 93.0,
+  "max": 212.0,
+  "min": 34.0,
+  "median": 89.0
+ },
+ "revenue_per_member": {
+  "avg": 347.79,
+  "max": 415.07,
+  "min": 252.93,
+  "median": 350.37
+ },
+ "avg_monthly_retention_pct": 90.33,
+ "system_auv": 394981
+}

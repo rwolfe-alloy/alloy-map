@@ -30,6 +30,8 @@ A self-contained interactive map of all Alloy Personal Training franchise locati
 | `refresh.sh` | Unattended orchestrator: `locations` / `sba` / `fdd` modes → rebuild → commit + push (only if data changed); logs to `logs/` |
 | `setup_schedule.sh` | Installs the launchd jobs (monthly / quarterly / annual) that run `refresh.sh` |
 | `snapshot.py` | Saves a dated copy of `alloy_enriched.json` to `snapshots/` and prepends a "what changed" entry to `CHANGELOG.md` each refresh |
+| `parse_item19.py` | Parses FDD **Item 19** (financial performance) → `alloy_item19.json` (revenue by quartile/maturity, memberships, retention) |
+| `alloy_item19.json` | Parsed Item 19 figures — embedded into `index.html` as `ITEM19` |
 | `CHANGELOG.md` | Auto-generated history of data changes (new/dropped locations, rating/owner/status changes) |
 | `snapshots/` | Dated point-in-time copies of the dataset (the time-series record) |
 | `ROADMAP.md` | Prioritized next-phase backlog |
@@ -79,6 +81,7 @@ Each record has these fields:
 - **Google ratings:** 157/169 rated, **network avg 4.96★** across 7,160 reviews; 151 at 4.8–5.0, none below 4.0 (lowest 4.1). 12 unrated (11 coming-soon + 1 brand-new listing)
 - **Ownership (2026 FDD):** 151/169 matched to a franchisee operator (149 with owner name); **122 operators, 20 multi-unit** (49 locations). Largest: John Farkas, Daniel Atkins, Trey Ely (4 each). 18 unmatched (company-owned or opened after Dec 2025)
 - **SBA 7(a) financing:** **$26.4M** across 106 loans (FY2022–26), 95 matched to 55 locations; avg $249K, median $317K, 581 jobs supported. **Huntington National Bank = 85 of 106 loans** (dominant Alloy SBA lender). Top-funded: Falls Church VA $812K (4 loans)
+- **Unit economics (2026 FDD Item 19, 2025 period):** **system AUV ~$395K**; quartile avgs $555K → $253K; by maturity $371K (12–24mo) → $445K (36+mo); ~93 members/unit, ~$348 rev/member/mo, 90.3% monthly retention
 
 ---
 
@@ -103,6 +106,7 @@ Each record has these fields:
 ### Sidebar — Analytics Tab
 - Stat cards: Total, States, Pipeline (coming soon count), Opened 2025–26, Avg Google ★, Below 4.0 ★
 - **SBA 7(a) Financing section** *(Phase 6)*: stat cards (capital deployed, loans, avg loan, jobs supported) + "Loans Approved by Year" and "Top SBA Lenders" charts
+- **Unit Economics section (FDD Item 19)** *(Phase 8)*: System AUV, avg members/unit, revenue/member, monthly retention + "Avg Revenue by Maturity" and "by Quartile" charts
 - Bar charts: Rating Distribution, Openings by Year, By Region, Top 12 States
 
 ### Sidebar — Ownership Tab *(Phase 5–7)*
@@ -130,6 +134,7 @@ Each record has these fields:
 - Google ★ rating + review count *(Phase 4)*
 - Franchisee owner + entity with operator color dot + "N units" badge *(Phase 5)*
 - **SBA 7(a) funding badge** — total + loan count for funded locations *(Phase 6)*
+- **Estimated revenue** — FDD Item 19 maturity-cohort average by opening year (labeled estimate) *(Phase 8)*
 - Collapsible hours schedule (today's day highlighted in red)
 - Phone, Directions, Details links · IG / FB / email links
 
