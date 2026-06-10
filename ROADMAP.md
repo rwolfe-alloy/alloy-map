@@ -15,8 +15,8 @@ The next leap is to **synthesize it into a single ranked view of rollup targets*
 
 | # | Item | Why it matters | Impact | Effort |
 |---|---|---|---|---|
-| 1 | **Operator "rollup score"** — composite of unit count × avg rating × SBA capital × tenure, with a sortable, weighted table | Turns the map from a data viewer into a deal-sourcing tool: "who are the 10 best multi-unit operators to approach?" | ⭐ | M |
-| 2 | **Operator profile / one-pager** — click an operator → modal with their units, ratings, total capital, lenders, map | The artifact you'd actually send to a partner or use in a pitch | ⭐ | M |
+| 1 | **Operator "rollup score"** ✅ *(done)* — composite of units × avg rating × SBA capital × tenure; sortable ranked "Acquisition targets" list in the Ownership tab | Turns the map from a data viewer into a deal-sourcing tool | ⭐ | — |
+| 2 | **Operator profile / one-pager** ✅ *(done)* — click an operator → modal with units, ratings, reviews, capital, loans, lenders, tenure, location list + "show on map" | The artifact you'd actually send to a partner | ⭐ | — |
 | 3 | **Trade-area overlap / cannibalization** — flag units within N miles of each other | Rollup diligence: which markets are saturated vs. defensible | ◐ | M |
 
 ---
@@ -49,8 +49,8 @@ The next leap is to **synthesize it into a single ranked view of rollup targets*
 
 | # | Item | Why it matters | Impact | Effort |
 |---|---|---|---|---|
-| 14 | **Export** — CSV/PDF of the current filtered view, operator table, loan table | People want the data *out* for spreadsheets/decks | ⭐ | S |
-| 15 | **Shareable deep links** — encode active filters/tab in the URL | Send a colleague "the 4.5★ TX multi-unit view" | ◐ | S |
+| 14 | **Export** ✅ *(done)* — CSV of the current filtered locations (Locations tab) and the ranked operator table (Ownership tab) | People want the data *out* for spreadsheets/decks | ⭐ | — |
+| 15 | **Shareable deep links** ✅ *(done)* — active filters/search/tab encoded in the URL, restored on load | Send a colleague "the 4.5★ TX multi-unit view" | ◐ | — |
 | 16 | **Address search / "nearest Alloy"** — geocode an address, fly + list nearest | Common first thing a user tries | ◐ | S |
 | 17 | **Mobile polish + dark mode** | Currently desktop-first | ○ | M |
 
@@ -61,8 +61,8 @@ The next leap is to **synthesize it into a single ranked view of rollup targets*
 | # | Item | Why it matters | Impact | Effort |
 |---|---|---|---|---|
 | 18 | **curl timeouts + unbuffered logging** ✅ *(done this session)* | Hardened every curl with `--max-time` + a subprocess backstop + one retry (insurance against a genuinely stalled request), and set `PYTHONUNBUFFERED` so logs stream live instead of looking hung | ⭐ | — |
-| 19 | **Hard per-step timeout + failure notification** — wrap steps; on failure send a macOS notification / email | "Runs without intervention" needs to *tell you* when it can't (the first validation run looked stuck for 2 min — it was fine, but you'd want a real signal when it isn't) | ⭐ | S |
-| 20 | **Historical snapshots / changelog** — keep dated copies of `alloy_enriched.json`, auto-write a "what changed" diff each refresh | Enables every time-series feature above (#5, #11); cheap to start now | ⭐ | S |
+| 19 | **Failure notifications** ✅ *(done)* — `refresh.sh` posts a macOS notification on any failed step (and on a successful deploy) | "Runs without intervention" needs to *tell you* when it can't | ⭐ | — |
+| 20 | **Historical snapshots / changelog** ✅ *(done)* — `snapshot.py` saves a dated copy of `alloy_enriched.json` and prepends a "what changed" entry to `CHANGELOG.md` each refresh | Enables every time-series feature above (#5, #11) | ⭐ | — |
 | 21 | **Manual-override file** — `overrides.json` for the ~18 unmatched owners / ~14 ungeocoded gaps and known fixes | Recover the long tail the fuzzy match misses, survives re-runs | ◐ | S |
 | 22 | **Per-field confidence / "as-of" dates** in the UI | Honest provenance: ownership is ~annual, SBA ~quarterly, ratings monthly | ○ | M |
 
@@ -70,8 +70,9 @@ The next leap is to **synthesize it into a single ranked view of rollup targets*
 
 ## Suggested sequence
 
-1. **#20 snapshots + #19 failure alerts** — small, and they harden the automation you just built (and unlock time-series).
-2. **#1–2 operator scoring + profile** — the flagship rollup payoff, using data you already have.
-3. **#14 export + #15 deep links** — make the insights portable.
-4. **#4 Item 19 AUV** — the highest-value new dataset, parsed from the FDD you already download.
-5. Layer in the rest (demographics, competitors, 504) as appetite allows.
+1. ~~#20 snapshots + #19 failure alerts~~ ✅ **done** — automation hardened; time-series history now accumulating.
+2. ~~#1–2 operator scoring + profile~~ ✅ **done** — ranked "Acquisition targets" list + operator profile modal.
+3. ~~#14 export + #15 deep links~~ ✅ **done** — CSV export + shareable URL state.
+4. **#4 Item 19 AUV** ← *next* — the highest-value new dataset, parsed from the FDD you already download.
+5. **#5 closure/churn tracking** — now feasible since snapshots are being kept.
+6. Layer in the rest (demographics, competitors, 504, trade-area overlap) as appetite allows.

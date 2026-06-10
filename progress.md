@@ -29,6 +29,10 @@ A self-contained interactive map of all Alloy Personal Training franchise locati
 | `fetch_fdd.py` | Auto-downloads the latest registered FDD from WI DFI + extracts Exhibit D → `_exhibitD.txt` (dynamic page detection) |
 | `refresh.sh` | Unattended orchestrator: `locations` / `sba` / `fdd` modes → rebuild → commit + push (only if data changed); logs to `logs/` |
 | `setup_schedule.sh` | Installs the launchd jobs (monthly / quarterly / annual) that run `refresh.sh` |
+| `snapshot.py` | Saves a dated copy of `alloy_enriched.json` to `snapshots/` and prepends a "what changed" entry to `CHANGELOG.md` each refresh |
+| `CHANGELOG.md` | Auto-generated history of data changes (new/dropped locations, rating/owner/status changes) |
+| `snapshots/` | Dated point-in-time copies of the dataset (the time-series record) |
+| `ROADMAP.md` | Prioritized next-phase backlog |
 | `.gitignore` | Excludes `.apikey`, `logs/`, `*.csv`, `*.pdf`, and `_*` scratch files |
 
 ---
@@ -90,8 +94,10 @@ Each record has these fields:
 ### Sidebar — Locations Tab
 - **Status pills:** All 169 / Live 144 / Soon 25
 - **Open Now toggle** — filters to currently open locations, per-state IANA timezone
-- **Filters:** Region, State, Year Opened, Density (≥5 / 2–4 / single-market)
+- **Filters:** Region, State, Year Opened, Density (≥5 / 2–4 / single-market), Google rating checkboxes
 - **Search:** name + address full-text
+- **⬇ CSV export** of the current filtered view *(Phase 7)*
+- **Shareable deep links** *(Phase 7)*: active filters/search/tab encode into the URL and restore on load
 - **Cards** show: region tag, year tag, metro tag, "Open now" or "Opening [year]" badge, phone, directions, IG/FB links, email
 
 ### Sidebar — Analytics Tab
@@ -99,11 +105,13 @@ Each record has these fields:
 - **SBA 7(a) Financing section** *(Phase 6)*: stat cards (capital deployed, loans, avg loan, jobs supported) + "Loans Approved by Year" and "Top SBA Lenders" charts
 - Bar charts: Rating Distribution, Openings by Year, By Region, Top 12 States
 
-### Sidebar — Ownership Tab *(Phase 5)*
+### Sidebar — Ownership Tab *(Phase 5–7)*
 - Stat cards: Operators, Multi-unit operators
 - "Largest Multi-Unit Operators" bar chart (colored per operator)
-- Full operator list (multi-unit then single) — click an operator to fly the map to all their locations
-- Each operator row also shows total **SBA 7(a)** capital across their locations *(Phase 6)*
+- **"Acquisition targets — ranked"** *(Phase 7)*: every operator ranked by a **rollup score** (0–100, composite of units 35% × avg rating 25% × SBA capital 25% × tenure 15%); sortable by score / units / rating / capital / name
+- Each row shows units · avg ★ · SBA capital · since-year, with a tier-colored score badge
+- **Click any operator → profile modal** *(Phase 7)*: units, avg rating, reviews, SBA capital, loans, tenure, states, lenders, per-location list, and "Show all on map"
+- **⬇ CSV export** of the ranked operator table *(Phase 7)*
 
 ### Sidebar — Whitespace Tab
 - 16 uncovered major metros, sorted by population
@@ -152,6 +160,8 @@ Installed by `./setup_schedule.sh` (per-user LaunchAgents in `~/Library/LaunchAg
 | `com.alloymap.annual` | May 1, 08:00 | `fdd` | Download new FDD from WI DFI + re-parse ownership |
 
 **Why these cadences:** locations/ratings move continuously (≈1 opening/week) → monthly; the SBA FOIA file reposts ~quarterly; the FDD is filed once a year (≈April, year-end snapshot). Ownership is therefore inherently up to ~12 months stale and SBA lags ~1 quarter — a limit of the public sources.
+
+Each run also **snapshots the dataset + appends to `CHANGELOG.md`** (`snapshot.py`) before committing, and posts a **macOS notification** on failure or successful deploy.
 
 **Operational notes:**
 - LaunchAgents run in the user session, so git's `osxkeychain` credential helper works for `git push` while logged in. Jobs missed while the Mac is asleep/off run at next wake.

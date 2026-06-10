@@ -70,7 +70,9 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Ro
 .rating-checks input{accent-color:#f59e0b;width:13px;height:13px;cursor:pointer;margin:0}
 .rating-checks label.on{border-color:#f59e0b;background:#fffbeb;color:#b45309;font-weight:600}
 
-.result-bar{padding:6px 18px 2px;font-size:12px;color:var(--muted)}
+.result-bar{padding:6px 18px 2px;font-size:12px;color:var(--muted);display:flex;align-items:center;justify-content:space-between;gap:8px}
+.export-btn{border:1px solid var(--line);border-radius:7px;background:var(--white);color:var(--muted);font-size:11px;font-weight:700;padding:3px 9px;cursor:pointer;transition:.1s;white-space:nowrap}
+.export-btn:hover{border-color:var(--red);color:var(--red)}
 .result-bar b{color:var(--ink)}
 
 #list{flex:1;overflow-y:auto;padding:4px 10px 16px}
@@ -122,9 +124,9 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Ro
 .card-sba .sba-meta,.pop-sba .sba-meta{color:var(--muted)}
 .card-sba .sba-ico,.pop-sba .sba-ico{font-size:11px}
 
-/* Loan-detail modal */
-#loan-modal{position:fixed;inset:0;z-index:2000;display:none;align-items:center;justify-content:center;background:rgba(17,24,39,.5)}
-#loan-modal.show{display:flex}
+/* Loan-detail + operator modals */
+#loan-modal,#op-modal{position:fixed;inset:0;z-index:2000;display:none;align-items:center;justify-content:center;background:rgba(17,24,39,.5)}
+#loan-modal.show,#op-modal.show{display:flex}
 .loan-card{background:var(--white);border-radius:14px;width:min(380px,92vw);max-height:80vh;display:flex;flex-direction:column;box-shadow:0 12px 40px rgba(0,0,0,.3);overflow:hidden}
 .loan-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--line)}
 .loan-head h3{font-size:15px;font-weight:800;color:var(--ink)}
@@ -192,6 +194,30 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Ro
 .op-count{font-size:12px;font-weight:800;color:#6d28d9;background:#f5f3ff;border:1px solid #ddd6fe;border-radius:12px;padding:2px 9px;flex:none}
 .op-count.single{color:var(--muted);background:var(--bg);border-color:var(--line)}
 .own-section-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin:14px 0 8px}
+/* rollup-scored operator list */
+.own-list-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:16px 0 8px}
+#opSort{border:1px solid var(--line);border-radius:8px;padding:4px 8px;font-size:12px;background:var(--white);color:var(--ink);outline:none;cursor:pointer}
+.op-rank{font-size:12px;font-weight:800;color:#9ca3af;width:22px;text-align:center;flex:none}
+.op-metrics{display:flex;flex-wrap:wrap;gap:4px 10px;font-size:11.5px;color:var(--muted);margin-top:3px}
+.op-metrics b{color:var(--ink)}
+.op-score{font-size:14px;font-weight:800;border-radius:10px;padding:3px 9px;flex:none;min-width:34px;text-align:center}
+.op-score.t-hi{color:#065f46;background:#d1fae5}
+.op-score.t-mid{color:#92400e;background:#fef3c7}
+.op-score.t-lo{color:#6b7280;background:#f3f4f6}
+/* operator profile modal */
+.opm-score{display:flex;align-items:center;gap:6px}
+.opm-score-l{font-size:9px;line-height:1.05;color:var(--muted);text-transform:uppercase;font-weight:700}
+.opm-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.opm-stat{background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:8px 6px;text-align:center}
+.opm-v{font-size:16px;font-weight:800;color:var(--ink);line-height:1}
+.opm-l{font-size:10px;color:var(--muted);margin-top:3px}
+.opm-section{font-size:12px;color:var(--muted);margin-bottom:8px}
+.opm-loclist-h{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin:10px 0 6px}
+.opm-loc{display:flex;justify-content:space-between;gap:8px;padding:5px 0;border-bottom:1px solid var(--line);font-size:12.5px}
+.opm-loc-n{color:var(--ink);font-weight:600}
+.opm-loc-m{color:var(--muted);white-space:nowrap;flex:none}
+.opm-mapbtn{margin-top:12px;width:100%;border:1px solid var(--red);background:var(--red-bg);color:var(--red);font-weight:700;font-size:13px;border-radius:9px;padding:9px;cursor:pointer}
+.opm-mapbtn:hover{background:var(--red);color:var(--white)}
 
 /* ── Map ── */
 #map-container{flex:1;position:relative}
@@ -333,7 +359,7 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Ro
           <div class="rating-checks" id="ratingChecks"></div>
         </div>
       </div>
-      <div class="result-bar"><b id="result-count">0</b> locations<span id="result-of"></span></div>
+      <div class="result-bar"><span><b id="result-count">0</b> locations<span id="result-of"></span></span><button id="exportLocs" class="export-btn" title="Export current view to CSV">⬇ CSV</button></div>
       <div id="list"></div>
     </div>
 
@@ -397,6 +423,19 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Ro
       <div class="chart-section">
         <h3>Largest Multi-Unit Operators</h3>
         <div id="chart-operators"></div>
+      </div>
+      <div class="own-list-head">
+        <span class="own-section-label" style="margin:0">Acquisition targets — ranked</span>
+        <div style="display:flex;gap:6px;align-items:center">
+          <select id="opSort" title="Sort operators by">
+            <option value="score">Rollup score</option>
+            <option value="units">Units</option>
+            <option value="rating">Avg rating</option>
+            <option value="capital">SBA capital</option>
+            <option value="name">Name</option>
+          </select>
+          <button id="exportOps" class="export-btn" title="Export operators to CSV">⬇ CSV</button>
+        </div>
       </div>
       <div id="own-list"></div>
     </div>
@@ -469,6 +508,20 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Ro
       <button class="loan-close" onclick="hideLoans()" aria-label="Close">×</button>
     </div>
     <div id="loan-modal-body"></div>
+  </div>
+</div>
+
+<!-- Operator profile modal -->
+<div id="op-modal" onclick="if(event.target===this)hideOperator()">
+  <div class="loan-card">
+    <div class="loan-head">
+      <div style="display:flex;align-items:center;gap:10px">
+        <h3 id="op-modal-title">Operator</h3>
+        <span id="op-modal-score" class="opm-score"></span>
+      </div>
+      <button class="loan-close" onclick="hideOperator()" aria-label="Close">×</button>
+    </div>
+    <div id="op-modal-body"></div>
   </div>
 </div>
 
@@ -648,7 +701,7 @@ function showLoans(key){
   document.getElementById('loan-modal').classList.add('show');
 }
 function hideLoans(){ document.getElementById('loan-modal').classList.remove('show'); }
-document.addEventListener('keydown',e=>{ if(e.key==='Escape') hideLoans(); });
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ hideLoans(); if(typeof hideOperator==='function') hideOperator(); } });
 
 const cluster = L.markerClusterGroup({maxClusterRadius:40,spiderfyOnMaxZoom:true,showCoverageOnHover:false});
 map.addLayer(cluster);
@@ -846,7 +899,61 @@ function renderList(items){
   }
 }
 
-function apply(){ renderList(filteredLocations()); }
+function apply(){ renderList(filteredLocations()); serializeState(); }
+
+// ── CSV export ──
+function downloadCSV(filename, rows){
+  const csv=rows.map(r=>r.map(c=>{
+    const s=(c==null?'':String(c));
+    return /[",\n]/.test(s) ? '"'+s.replace(/"/g,'""')+'"' : s;
+  }).join(',')).join('\n');
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
+  a.download=filename; a.click(); URL.revokeObjectURL(a.href);
+}
+function exportLocations(){
+  const items=filteredLocations();
+  const rows=[['Name','Address','State','Region','Metro','Year','Status','Rating','Reviews','Owner','Franchisee','SBA Total','SBA Loans','Phone','Email']];
+  items.forEach(l=>{ const s=sbaByLoc[l.n]||{};
+    rows.push([l.n,l.a,l.s,l.r,l.m,l.y,l.coming_soon?'Coming soon':'Live',l.rating??'',l.review_count??'',l.owner||'',l.franchisee||'',s.total||'',s.count||'',l.p||'',l.email||'']);
+  });
+  downloadCSV(`alloy-locations-${items.length}.csv`, rows);
+}
+function exportOperators(){
+  computeOperatorMetrics();
+  const rows=[['Rank','Operator','Units','AvgRating','Reviews','SBA Capital','SBA Loans','EarliestYear','Tenure','RollupScore','States','Locations']];
+  operatorList.slice().sort(OP_SORT[opSortMode]||OP_SORT.score).forEach((o,i)=>{
+    rows.push([i+1,o.name,o.count,o.avgRating?o.avgRating.toFixed(2):'',o.totalReviews,o.sbaTotal,o.sbaCount,o.earliestYear||'',o.tenure,o.score,o.states.join('|'),o.locs.map(l=>l.n).join('|')]);
+  });
+  downloadCSV('alloy-operators.csv', rows);
+}
+
+// ── Deep links (filters ⇄ URL) ──
+let _restoring=false;
+function serializeState(){
+  if(_restoring) return;
+  const p=new URLSearchParams();
+  const q=document.getElementById('q').value.trim(); if(q)p.set('q',q);
+  if(filterStatus!=='all')p.set('status',filterStatus);
+  if(filterOpenNow)p.set('open','1');
+  ['region','state','year','density'].forEach(k=>{ const v=document.getElementById(k+'Sel').value; if(v)p.set(k,v); });
+  const rats=[...document.querySelectorAll('#ratingChecks input:checked')].map(c=>c.value); if(rats.length)p.set('rating',rats.join(','));
+  const tab=document.querySelector('.tab-btn.active')?.dataset.tab; if(tab&&tab!=='locations')p.set('tab',tab);
+  const qs=p.toString();
+  history.replaceState(null,'',qs?('?'+qs):location.pathname);
+}
+function restoreState(){
+  const p=new URLSearchParams(location.search);
+  if(![...p].length) return;
+  _restoring=true;
+  if(p.get('q'))document.getElementById('q').value=p.get('q');
+  if(p.get('status')){ filterStatus=p.get('status'); document.querySelectorAll('.spill').forEach(b=>b.classList.toggle('active',b.dataset.status===filterStatus)); }
+  if(p.get('open')){ filterOpenNow=true; document.getElementById('openNowBtn').classList.add('active'); }
+  ['region','state','year','density'].forEach(k=>{ const v=p.get(k); if(v!=null)document.getElementById(k+'Sel').value=v; });
+  if(p.get('rating')){ const set=new Set(p.get('rating').split(',')); document.querySelectorAll('#ratingChecks input').forEach(c=>{ c.checked=set.has(c.value); c.closest('label').classList.toggle('on',c.checked); }); }
+  const tab=p.get('tab'); if(tab)document.querySelector(`.tab-btn[data-tab="${tab}"]`)?.click();
+  _restoring=false;
+}
 
 // Status pills
 document.querySelectorAll('.spill').forEach(btn=>{
@@ -948,11 +1055,51 @@ function renderSbaAnalytics(){
   barChart('chart-sba-bank', top.map(([b,v])=>({l:b,v})), 'purple');
 }
 
-// ── Ownership (2026 FDD) ──
+// ── Ownership (2026 FDD) + rollup scoring ──
+// Composite "rollup score" (0-100) per operator from units, avg rating, SBA capital, tenure.
+let _opMetricsReady=false;
+function computeOperatorMetrics(){
+  if(_opMetricsReady) return;
+  const CUR_YEAR=2026;
+  operatorList.forEach(op=>{
+    const rated=op.locs.filter(l=>l.rating!=null);
+    op.avgRating=rated.length ? rated.reduce((s,l)=>s+l.rating,0)/rated.length : null;
+    op.totalReviews=op.locs.reduce((s,l)=>s+(l.review_count||0),0);
+    let sbaTotal=0, sbaCount=0; const lenders={};
+    op.locs.forEach(l=>{ const s=sbaByLoc[l.n]; if(s){ sbaTotal+=s.total; sbaCount+=s.count; s.loans.forEach(ln=>{lenders[ln.bankname]=(lenders[ln.bankname]||0)+1;}); }});
+    op.sbaTotal=sbaTotal; op.sbaCount=sbaCount;
+    op.lenders=Object.entries(lenders).sort((a,b)=>b[1]-a[1]);
+    const years=op.locs.map(l=>+l.y).filter(Boolean);
+    op.earliestYear=years.length ? Math.min(...years) : null;
+    op.tenure=op.earliestYear ? CUR_YEAR-op.earliestYear : 0;
+    op.states=[...new Set(op.locs.map(l=>l.s))];
+  });
+  const norm=vals=>{ const mn=Math.min(...vals), mx=Math.max(...vals); return v=> mx>mn ? (v-mn)/(mx-mn) : 0.5; };
+  const nUnits=norm(operatorList.map(o=>o.count));
+  const nCap=norm(operatorList.map(o=>o.sbaTotal));
+  const nTen=norm(operatorList.map(o=>o.tenure));
+  const rated=operatorList.filter(o=>o.avgRating!=null).map(o=>o.avgRating);
+  const rMin=rated.length?Math.min(...rated):4, rMax=rated.length?Math.max(...rated):5;
+  const nRating=v=> v==null?0.5 : (rMax>rMin?(v-rMin)/(rMax-rMin):0.5);
+  operatorList.forEach(o=>{
+    o.score=Math.round(100*(0.35*nUnits(o.count)+0.25*nRating(o.avgRating)+0.25*nCap(o.sbaTotal)+0.15*nTen(o.tenure)));
+  });
+  _opMetricsReady=true;
+}
+let opSortMode='score';
+const OP_SORT={
+  score:  (a,b)=>b.score-a.score||b.count-a.count,
+  units:  (a,b)=>b.count-a.count||b.score-a.score,
+  rating: (a,b)=>(b.avgRating||0)-(a.avgRating||0)||b.count-a.count,
+  capital:(a,b)=>b.sbaTotal-a.sbaTotal||b.count-a.count,
+  name:   (a,b)=>a.name.localeCompare(b.name),
+};
+function scoreTier(s){ return s>=66?'hi':s>=40?'mid':'lo'; }
+
 function renderOwnership(){
+  computeOperatorMetrics();
   const known=operatorList.reduce((s,o)=>s+o.count,0);
   const multi=operatorList.filter(o=>o.count>1);
-  const singles=operatorList.filter(o=>o.count===1);
   const unmatched=LOCATIONS.length-known;
 
   document.getElementById('own-operators').textContent=operatorList.length;
@@ -962,50 +1109,86 @@ function renderOwnership(){
     `From the Alloy 2026 FDD (franchisees as of Dec 31, 2025). ${unmatched} location${unmatched!==1?'s':''} unmatched — company-owned or opened since.`;
 
   // Chart: largest multi-unit operators
-  const top=multi.slice(0,12), maxv=Math.max(...top.map(o=>o.count),1);
+  const top=multi.slice().sort((a,b)=>b.count-a.count).slice(0,12), maxv=Math.max(...top.map(o=>o.count),1);
   document.getElementById('chart-operators').innerHTML = top.length ? top.map(o=>`
     <div class="bar-row">
       <div class="bar-lbl" title="${o.name}">${o.name}</div>
-      <div class="bar-track">
-        <div class="bar-fill" style="width:${(o.count/maxv*100).toFixed(1)}%;background:${o.color}"></div>
-      </div>
+      <div class="bar-track"><div class="bar-fill" style="width:${(o.count/maxv*100).toFixed(1)}%;background:${o.color}"></div></div>
       <span class="bar-num">${o.count}</span>
     </div>`).join('') : '<div style="font-size:12px;color:var(--muted)">No multi-unit operators found.</div>';
 
-  // List: multi-unit then single-unit; click flies map to operator's locations
-  const opSba=o=>o.locs.reduce((s,l)=>s+((sbaByLoc[l.n]||{}).total||0),0);
-  const row=o=>{
-    const sba=opSba(o);
-    return `
+  // Ranked operator list (sortable; click → profile modal)
+  const sorted=operatorList.slice().sort(OP_SORT[opSortMode]||OP_SORT.score);
+  const row=(o,i)=>`
     <div class="op-row" data-op="${encodeURIComponent(o.name)}">
+      <div class="op-rank">${i+1}</div>
       <div class="op-dot" style="background:${o.color}"></div>
       <div class="op-info">
         <div class="op-name">${o.name}</div>
-        <div class="op-locs">${o.locs.map(l=>l.n).join(' · ')}</div>
-        ${sba?`<div class="op-sba">🏦 ${fmtUSD(sba)} SBA 7(a)</div>`:''}
+        <div class="op-metrics">
+          <span><b>${o.count}</b> unit${o.count>1?'s':''}</span>
+          ${o.avgRating!=null?`<span>★ ${o.avgRating.toFixed(1)}</span>`:''}
+          ${o.sbaTotal?`<span>🏦 ${fmtUSD(o.sbaTotal)}</span>`:''}
+          ${o.earliestYear?`<span>since ${o.earliestYear}</span>`:''}
+        </div>
       </div>
-      <div class="op-count${o.count>1?'':' single'}">${o.count}</div>
+      <div class="op-score t-${scoreTier(o.score)}" title="Rollup score (units × rating × capital × tenure)">${o.score}</div>
     </div>`;
-  };
   const listEl=document.getElementById('own-list');
-  listEl.innerHTML='<div class="own-section-label">Multi-unit operators</div>'+multi.map(row).join('')
-    +'<div class="own-section-label">Single-unit operators</div>'+singles.map(row).join('');
+  listEl.innerHTML=sorted.map(row).join('');
   listEl.querySelectorAll('.op-row').forEach(r=>{
-    r.addEventListener('click',()=>{
-      const op=operatorList.find(o=>o.name===decodeURIComponent(r.dataset.op)); if(!op) return;
-      if(op.locs.length===1){ const l=op.locs[0]; map.setView([l.lat,l.lng],13,{animate:true}); cluster.zoomToShowLayer(l._marker,()=>l._marker.openPopup()); return; }
-      try{ map.fitBounds(L.featureGroup(op.locs.map(l=>l._marker)).getBounds().pad(.3),{maxZoom:11}); }catch(e){}
-    });
+    r.addEventListener('click',()=>showOperator(r.dataset.op));
   });
 
   // Map legend (top operators + single/unknown swatches)
-  const top8=multi.slice(0,8);
+  const byUnits=multi.slice().sort((a,b)=>b.count-a.count), top8=byUnits.slice(0,8);
   document.getElementById('owner-legend').innerHTML='<h4>Operator</h4>'
     +top8.map(o=>`<div class="legend-row"><div class="legend-swatch" style="background:${o.color}"></div> ${o.name} (${o.count})</div>`).join('')
-    +(multi.length>8?`<div class="legend-row" style="color:var(--muted)">+${multi.length-8} more multi-unit</div>`:'')
+    +(byUnits.length>8?`<div class="legend-row" style="color:var(--muted)">+${byUnits.length-8} more multi-unit</div>`:'')
     +'<div class="legend-row"><div class="legend-swatch" style="background:#cbd5e1"></div> Single-unit</div>'
     +'<div class="legend-row"><div class="legend-swatch" style="background:#e5e7eb"></div> Not in 2026 FDD</div>';
 }
+
+// Operator profile modal
+function operatorMapFocus(op){
+  hideOperator();
+  document.querySelector('.tab-btn[data-tab=locations]')?.click?.();
+  if(op.locs.length===1){ const l=op.locs[0]; map.setView([l.lat,l.lng],13,{animate:true}); cluster.zoomToShowLayer(l._marker,()=>l._marker.openPopup()); return; }
+  try{ map.fitBounds(L.featureGroup(op.locs.map(l=>l._marker)).getBounds().pad(.3),{maxZoom:11}); }catch(e){}
+}
+let _focusOp=null;
+function showOperator(key){
+  const op=operatorList.find(o=>o.name===decodeURIComponent(key)); if(!op) return;
+  _focusOp=op;
+  const stat=(v,l)=>`<div class="opm-stat"><div class="opm-v">${v}</div><div class="opm-l">${l}</div></div>`;
+  const stats=[
+    stat(op.count,'Units'),
+    stat(op.avgRating!=null?op.avgRating.toFixed(1)+'★':'—','Avg rating'),
+    stat(op.totalReviews.toLocaleString(),'Reviews'),
+    stat(op.sbaTotal?fmtUSD(op.sbaTotal):'—','SBA capital'),
+    stat(op.sbaCount||'—','Loans'),
+    stat(op.earliestYear?op.tenure+'y':'—','Tenure'),
+  ].join('');
+  const locs=op.locs.slice().sort((a,b)=>(b.rating||0)-(a.rating||0)).map(l=>{
+    const s=sbaByLoc[l.n];
+    return `<div class="opm-loc">
+      <span class="opm-loc-n">${l.n}</span>
+      <span class="opm-loc-m">${l.rating!=null?'★ '+l.rating.toFixed(1):'—'}${s?' · 🏦 '+fmtUSD(s.total):''}${l.coming_soon?' · soon':''}</span>
+    </div>`;
+  }).join('');
+  const lenders=op.lenders.length?`<div class="opm-section">Lender${op.lenders.length>1?'s':''}: ${op.lenders.map(([b,n])=>`${b} (${n})`).join(', ')}</div>`:'';
+  document.getElementById('op-modal-title').textContent=op.name;
+  document.getElementById('op-modal-score').innerHTML=`<span class="op-score t-${scoreTier(op.score)}" style="font-size:15px">${op.score}</span><span class="opm-score-l">rollup<br>score</span>`;
+  document.getElementById('op-modal-body').innerHTML=
+    `<div class="opm-stats">${stats}</div>`+
+    `<div class="opm-section">${op.states.join(', ')} · franchisee: ${op.franchisee?'':''}${[...new Set(op.locs.map(l=>l.franchisee).filter(Boolean))].join(', ')||'—'}</div>`+
+    lenders+
+    `<div class="opm-loclist-h">Locations (${op.locs.length})</div>${locs}`+
+    `<button class="opm-mapbtn" onclick="operatorMapFocus(_focusOp)">📍 Show all on map</button>`;
+  document.getElementById('op-modal').classList.add('show');
+}
+function hideOperator(){ document.getElementById('op-modal').classList.remove('show'); }
+document.getElementById('opSort').addEventListener('change',e=>{ opSortMode=e.target.value; renderOwnership(); });
 
 // ── Whitespace ──
 function renderWhitespace(){
@@ -1090,8 +1273,13 @@ document.querySelectorAll('.tab-btn').forEach(btn=>{
     document.getElementById('tab-analytics').style.display  = tab==='analytics' ? 'block':'none';
     document.getElementById('tab-ownership').style.display  = tab==='ownership' ? 'block':'none';
     document.getElementById('tab-whitespace').style.display = tab==='whitespace' ? 'block':'none';
+    serializeState();
   });
 });
+
+// Export buttons
+document.getElementById('exportLocs').addEventListener('click',exportLocations);
+document.getElementById('exportOps').addEventListener('click',exportOperators);
 
 // ── Init ──
 renderList(LOCATIONS);
@@ -1099,6 +1287,8 @@ renderAnalytics();
 renderSbaAnalytics();
 renderOwnership();
 renderWhitespace();
+restoreState();   // apply filters/tab from URL (shareable deep links)
+if([...new URLSearchParams(location.search)].length) apply();
 
 // Refresh open-now status every 60s
 setInterval(()=>{
