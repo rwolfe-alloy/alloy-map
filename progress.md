@@ -97,6 +97,13 @@ Each record has these fields:
 - **Dashed amber pins** — coming soon locations
 - **Gray pins** — whitespace metros (toggleable layer)
 
+### Sidebar — Overview Tab *(Phase 10 / Theme 1 — default landing)*
+- **Hero KPI board** — 9 headline metrics (locations, states, live/soon, avg ★, system AUV, survival, SBA capital, operators, multi-unit)
+- **Auto-generated Deal Memo** — narrative synthesis of the whole dataset (regenerates with each refresh)
+- **Top Markets** — every metro ranked by a rollup-opportunity score (units × est. revenue × rating); sortable; click to fly the map
+- **Acquisition Basket** — add operators (from their profile) to model a roll-up; live tally of units / states / est. revenue / SBA debt (persists via localStorage)
+- **Implied Valuation lens** — est. revenue × adjustable EBITDA margin × EV/EBITDA multiple → implied EBITDA + EV (basket if selected, else whole network)
+
 ### Sidebar — Locations Tab
 - **Status pills:** All 169 / Live 144 / Soon 25
 - **Open Now toggle** — filters to currently open locations, per-state IANA timezone

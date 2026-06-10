@@ -8,6 +8,16 @@ Legend — **Impact**: ⭐ high / ◐ medium / ○ nice-to-have · **Effort**: S
 
 ---
 
+## 🚀 "Next-level" theme rollout *(rolling out one theme at a time for review)*
+
+- **Theme 1 — Synthesis & decision layer** ✅ *(Phase 10)* — Executive **Overview tab**: hero KPIs, auto-generated **deal memo**, **Top-Markets** rollup ranking, **acquisition basket** builder, **implied-valuation** lens.
+- **Theme 2 — Market intelligence** *(next)* — demographics (Census), competitor density (Places), site-quality / market-attractiveness score, drive-time trade areas.
+- **Theme 3 — Time & trajectory** — growth time-lapse, projected-openings pipeline map (FDD Item 20 Table 5), cohort/ramp analysis.
+- **Theme 4 — Context & credibility** — peer-franchise benchmarking, franchise economics (FDD Items 5–7), methodology/sources page.
+- **Theme 5 — Presentation** — one-click PDF report, dark mode, mobile polish.
+
+---
+
 ## 🎯 Flagship: Phase 7 — Acquisition-Target Scoring
 
 The data is all here (units, ratings, capital, tenure, lender) but it's shown in separate tabs.

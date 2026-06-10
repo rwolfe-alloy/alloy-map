@@ -37,7 +37,39 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Ro
 .tab-btn.active{color:var(--red);border-bottom-color:var(--red)}
 
 /* ── Locations tab ── */
-#tab-locations{display:flex;flex-direction:column;flex:1;overflow:hidden}
+#tab-locations{display:none;flex-direction:column;flex:1;overflow:hidden}
+#tab-overview{display:block;flex:1;overflow-y:auto;padding:16px}
+.ov-hero{background:linear-gradient(135deg,#fff5f4,#fff);border:1px solid #fca5a5;border-radius:12px;padding:14px 16px;margin-bottom:14px}
+.ov-hero h2{font-size:18px;font-weight:800;color:var(--ink)}
+#ov-tagline{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.4}
+.ov-kpis{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:20px}
+.ov-kpi{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:9px 6px;text-align:center}
+.ov-kpi .v{font-size:18px;font-weight:800;color:var(--ink);line-height:1.05}
+.ov-kpi .l{font-size:10px;color:var(--muted);margin-top:3px}
+.ov-kpi.red .v{color:var(--red)}.ov-kpi.green .v{color:#059669}.ov-kpi.blue .v{color:#1d4ed8}.ov-kpi.amber .v{color:var(--amber)}
+.ov-section{margin-bottom:22px}
+.ov-section h3{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:10px}
+.ov-auto{font-weight:500;color:var(--light);text-transform:none;letter-spacing:0;font-size:11px}
+.ov-memo{font-size:13px;line-height:1.65;color:var(--ink)}
+.ov-memo b{color:var(--red)}
+.ov-sub{font-size:11.5px;color:var(--muted)}
+.mkt-row{display:flex;align-items:center;gap:10px;padding:9px 11px;border:1px solid var(--line);border-radius:10px;margin-bottom:6px;cursor:pointer;transition:.12s}
+.mkt-row:hover{border-color:var(--red);background:var(--red-bg)}
+.mkt-rank{font-size:12px;font-weight:800;color:#d1d5db;width:20px;text-align:center;flex:none}
+.mkt-info{flex:1;min-width:0}
+.mkt-name{font-weight:700;font-size:13.5px}
+.mkt-meta{font-size:11.5px;color:var(--muted);margin-top:2px;display:flex;gap:10px;flex-wrap:wrap}
+.mkt-meta b{color:var(--ink)}
+.basket-empty{font-size:12.5px;color:var(--muted);border:1px dashed var(--line);border-radius:10px;padding:14px;text-align:center;line-height:1.5}
+.basket-sum{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;margin-bottom:10px}
+.basket-item{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 10px;border:1px solid var(--line);border-radius:8px;margin-bottom:5px;font-size:12px}
+.basket-rm{border:none;background:none;color:var(--muted);cursor:pointer;font-size:16px;line-height:1;padding:0 2px}
+.basket-rm:hover{color:var(--red)}
+.basket-clear{font-size:11px;color:var(--muted);background:none;border:none;cursor:pointer;text-decoration:underline;margin-top:2px}
+.ov-val-inputs{display:flex;gap:16px;margin-bottom:12px;font-size:12.5px;color:var(--muted);align-items:center}
+.ov-val-inputs input{width:56px;border:1px solid var(--line);border-radius:6px;padding:4px 6px;font-size:13px;margin:0 3px;outline:none}
+.opm-basketbtn{margin-top:8px;width:100%;border:1px solid var(--red);background:var(--white);color:var(--red);font-weight:700;font-size:12.5px;border-radius:9px;padding:8px;cursor:pointer}
+.opm-basketbtn.in{background:var(--red);color:#fff}
 .filters{padding:10px 14px;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:7px}
 
 /* Status pills */
@@ -334,10 +366,52 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Ro
     </div>
 
     <div class="tabs">
-      <button class="tab-btn active" data-tab="locations">Locations</button>
+      <button class="tab-btn active" data-tab="overview">Overview</button>
+      <button class="tab-btn" data-tab="locations">Locations</button>
       <button class="tab-btn" data-tab="analytics">Analytics</button>
       <button class="tab-btn" data-tab="ownership">Ownership</button>
       <button class="tab-btn" data-tab="whitespace">Whitespace</button>
+    </div>
+
+    <!-- OVERVIEW TAB -->
+    <div id="tab-overview">
+      <div class="ov-hero">
+        <h2 id="ov-title">Alloy Personal Training</h2>
+        <p id="ov-tagline"></p>
+      </div>
+      <div class="ov-kpis" id="ov-kpis"></div>
+      <div class="ov-section">
+        <h3>Deal Memo <span class="ov-auto">· auto-generated</span></h3>
+        <div class="ov-memo" id="ov-memo"></div>
+      </div>
+      <div class="ov-section">
+        <h3>Top Markets <span class="ov-auto">· by rollup opportunity</span></h3>
+        <div class="own-list-head" style="margin-top:0">
+          <span class="ov-sub" id="ov-markets-sub"></span>
+          <select id="mktSort" title="Sort markets by">
+            <option value="score">Opportunity</option>
+            <option value="units">Units</option>
+            <option value="revenue">Est. revenue</option>
+            <option value="rating">Avg rating</option>
+          </select>
+        </div>
+        <div id="ov-markets"></div>
+      </div>
+      <div class="ov-section">
+        <h3>Acquisition Basket <span class="ov-auto">· build a roll-up</span></h3>
+        <div id="ov-basket"></div>
+      </div>
+      <div class="ov-section">
+        <h3>Implied Valuation <span class="ov-auto">· rough model</span></h3>
+        <div class="ov-val">
+          <div class="ov-val-inputs">
+            <label>EBITDA margin <input type="number" id="val-margin" value="20" min="1" max="60" step="1">%</label>
+            <label>EV / EBITDA <input type="number" id="val-mult" value="5" min="1" max="15" step="0.5">×</label>
+          </div>
+          <div id="ov-val-out"></div>
+          <div class="ie-note">Rough model on FDD Item 19 cohort-average revenue × your margin/multiple assumptions. Illustrative only — not a valuation. Applies to the basket if any operators are selected, else the whole network.</div>
+        </div>
+      </div>
     </div>
 
     <!-- LOCATIONS TAB -->
@@ -1008,7 +1082,7 @@ function serializeState(){
   if(filterOpenNow)p.set('open','1');
   ['region','state','year','density'].forEach(k=>{ const v=document.getElementById(k+'Sel').value; if(v)p.set(k,v); });
   const rats=[...document.querySelectorAll('#ratingChecks input:checked')].map(c=>c.value); if(rats.length)p.set('rating',rats.join(','));
-  const tab=document.querySelector('.tab-btn.active')?.dataset.tab; if(tab&&tab!=='locations')p.set('tab',tab);
+  const tab=document.querySelector('.tab-btn.active')?.dataset.tab; if(tab&&tab!=='overview')p.set('tab',tab);
   const qs=p.toString();
   history.replaceState(null,'',qs?('?'+qs):location.pathname);
 }
@@ -1313,7 +1387,8 @@ function showOperator(key){
     `<div class="opm-section">${op.states.join(', ')} · franchisee: ${[...new Set(op.locs.map(l=>l.franchisee).filter(Boolean))].join(', ')||'—'}</div>`+
     lenders+
     `<div class="opm-loclist-h">Locations (${op.locs.length})</div>${locs}`+
-    `<button class="opm-mapbtn" onclick="operatorMapFocus(_focusOp)">📍 Show all on map</button>`;
+    `<button class="opm-mapbtn" onclick="operatorMapFocus(_focusOp)">📍 Show all on map</button>`+
+    `<button class="opm-basketbtn${basket.has(op.name)?' in':''}" id="opm-basketbtn" onclick="toggleBasket('${encodeURIComponent(op.name)}')">${basket.has(op.name)?'✓ In basket':'➕ Add to acquisition basket'}</button>`;
   document.getElementById('op-modal').classList.add('show');
 }
 function hideOperator(){ document.getElementById('op-modal').classList.remove('show'); }
@@ -1399,6 +1474,7 @@ document.querySelectorAll('.tab-btn').forEach(btn=>{
     const locs = document.getElementById('tab-locations');
     locs.style.display  = tab==='locations' ? 'flex' : 'none';
     locs.style.flexDirection = 'column';
+    document.getElementById('tab-overview').style.display   = tab==='overview' ? 'block':'none';
     document.getElementById('tab-analytics').style.display  = tab==='analytics' ? 'block':'none';
     document.getElementById('tab-ownership').style.display  = tab==='ownership' ? 'block':'none';
     document.getElementById('tab-whitespace').style.display = tab==='whitespace' ? 'block':'none';
@@ -1410,6 +1486,144 @@ document.querySelectorAll('.tab-btn').forEach(btn=>{
 document.getElementById('exportLocs').addEventListener('click',exportLocations);
 document.getElementById('exportOps').addEventListener('click',exportOperators);
 
+// ── Overview / decision layer (Theme 1) ──
+let basket = new Set((()=>{ try{ return JSON.parse(localStorage.getItem('alloyBasket')||'[]'); }catch(e){ return []; } })());
+function saveBasket(){ try{ localStorage.setItem('alloyBasket', JSON.stringify([...basket])); }catch(e){} }
+function operatorByName(n){ return operatorList.find(o=>o.name===n); }
+
+function marketData(){
+  const byMetro={};
+  LOCATIONS.forEach(l=>{ if(l.m){ (byMetro[l.m]=byMetro[l.m]||[]).push(l); } });
+  const arr=Object.entries(byMetro).map(([name,locs])=>{
+    const rated=locs.filter(l=>l.rating!=null), ops=new Set(locs.map(operatorOf).filter(Boolean));
+    return { name, locs, units:locs.length, operators:ops.size,
+      avgRating: rated.length? rated.reduce((s,l)=>s+l.rating,0)/rated.length : null,
+      estRevenue: locs.reduce((s,l)=>s+(estRevenue(l)||0),0),
+      sba: locs.reduce((s,l)=>s+((sbaByLoc[l.n]||{}).total||0),0),
+      states:[...new Set(locs.map(l=>l.s))] };
+  });
+  const norm=v=>{ const mn=Math.min(...v),mx=Math.max(...v); return x=> mx>mn?(x-mn)/(mx-mn):0.5; };
+  const nU=norm(arr.map(m=>m.units)), nR=norm(arr.map(m=>m.estRevenue));
+  arr.forEach(m=>{ const rt=m.avgRating!=null?Math.max(0,Math.min(1,(m.avgRating-4))):0.5;
+    m.score=Math.round(100*(0.45*nU(m.units)+0.35*nR(m.estRevenue)+0.20*rt)); });
+  return arr;
+}
+let mktSortMode='score';
+const MKT_SORT={score:(a,b)=>b.score-a.score,units:(a,b)=>b.units-a.units||b.score-a.score,
+  revenue:(a,b)=>b.estRevenue-a.estRevenue,rating:(a,b)=>(b.avgRating||0)-(a.avgRating||0)};
+
+function dealMemo(){
+  computeOperatorMetrics();
+  const total=LOCATIONS.length, live=LOCATIONS.filter(l=>!l.coming_soon).length, soon=total-live;
+  const states=new Set(LOCATIONS.map(l=>l.s)).size;
+  const rated=LOCATIONS.filter(l=>l.rating!=null);
+  const avgR=rated.length?(rated.reduce((s,l)=>s+l.rating,0)/rated.length):null;
+  const reviews=LOCATIONS.reduce((s,l)=>s+(l.review_count||0),0);
+  const sba=SBA_LOANS.reduce((s,l)=>s+(l.amount||0),0);
+  const hunt=SBA_LOANS.filter(l=>/huntington/i.test(l.bankname||'')).length;
+  const huntPct=SBA_LOANS.length?Math.round(hunt/SBA_LOANS.length*100):0;
+  const multi=operatorList.filter(o=>o.count>1);
+  const topOps=multi.slice().sort((a,b)=>b.count-a.count).slice(0,3).map(o=>o.name).join(', ');
+  let survival=null, opened=0, closed=0;
+  if(CHURN.systemwide){ opened=CHURN.systemwide.reduce((s,y)=>s+y.opened,0); closed=CHURN.systemwide.reduce((s,y)=>s+y.closed,0); survival=opened?((opened-closed)/opened*100):null; }
+  const auv=ITEM19.system_auv;
+  const yrs={}; LOCATIONS.forEach(l=>{ if(l.y) yrs[l.y]=(yrs[l.y]||0)+1; });
+  const firstYr=Math.min(...Object.keys(yrs).map(Number));
+  return `<b>Alloy Personal Training</b> is a ${total}-unit personal-training franchise across <b>${states} states</b> `+
+    `(${live} live, ${soon} coming soon), scaled from a handful of units in ${firstYr} to ${total} today. `+
+    (survival!=null?`The system shows durable fundamentals — <b>${survival.toFixed(1)}% outlet survival</b> (${closed} closures of ${opened} opened ${'’'}23–${'’'}25)`:'')+
+    (auv?`, an estimated system AUV of <b>${fmtUSD(auv)}</b>`:'')+
+    (avgR?`, and a <b>${avgR.toFixed(2)}★</b> average rating across ${reviews.toLocaleString()} Google reviews`:'')+`. `+
+    `Ownership is fragmented across <b>${operatorList.length} operators</b>, with <b>${multi.length} multi-unit operators</b>`+
+    (topOps?` (led by ${topOps})`:'')+` as natural roll-up targets. `+
+    (sba?`<b>${fmtUSD(sba)}</b> of SBA 7(a) financing has flowed into the system${huntPct?`, ${huntPct}% from a single lender`:''}. `:'')+
+    `${WHITESPACE.length} major metros remain without an Alloy.`;
+}
+
+function renderOverview(){
+  computeOperatorMetrics();
+  const total=LOCATIONS.length, live=LOCATIONS.filter(l=>!l.coming_soon).length, soon=total-live;
+  const states=new Set(LOCATIONS.map(l=>l.s)).size;
+  const rated=LOCATIONS.filter(l=>l.rating!=null);
+  const avgR=rated.length?(rated.reduce((s,l)=>s+l.rating,0)/rated.length):null;
+  const sba=SBA_LOANS.reduce((s,l)=>s+(l.amount||0),0);
+  const multi=operatorList.filter(o=>o.count>1).length;
+  let survival=null;
+  if(CHURN.systemwide){ const o=CHURN.systemwide.reduce((s,y)=>s+y.opened,0), c=CHURN.systemwide.reduce((s,y)=>s+y.closed,0); survival=o?((o-c)/o*100):null; }
+  const kpis=[
+    {v:total,l:'Locations',c:'red'},
+    {v:states,l:'States'},
+    {v:`${live} / ${soon}`,l:'Live / Soon'},
+    {v:avgR?avgR.toFixed(2)+'★':'—',l:'Avg rating',c:'amber'},
+    {v:ITEM19.system_auv?fmtUSD(ITEM19.system_auv):'—',l:'System AUV',c:'blue'},
+    {v:survival!=null?survival.toFixed(1)+'%':'—',l:'Survival',c:'green'},
+    {v:fmtUSD(sba),l:'SBA capital',c:'green'},
+    {v:operatorList.length,l:'Operators'},
+    {v:multi,l:'Multi-unit ops'},
+  ];
+  document.getElementById('ov-kpis').innerHTML=kpis.map(k=>`<div class="ov-kpi ${k.c||''}"><div class="v">${k.v}</div><div class="l">${k.l}</div></div>`).join('');
+  document.getElementById('ov-tagline').textContent=`Franchise roll-up analysis · ${total} locations · ${states} states · public data + FDD-derived estimates`;
+  document.getElementById('ov-memo').innerHTML=dealMemo();
+  renderMarkets();
+  renderBasket();
+}
+function renderMarkets(){
+  const arr=marketData().sort(MKT_SORT[mktSortMode]||MKT_SORT.score);
+  document.getElementById('ov-markets-sub').textContent=`${arr.length} metros with an Alloy`;
+  document.getElementById('ov-markets').innerHTML=arr.slice(0,15).map((m,i)=>`
+    <div class="mkt-row" data-mkt="${encodeURIComponent(m.name)}">
+      <div class="mkt-rank">${i+1}</div>
+      <div class="mkt-info">
+        <div class="mkt-name">${m.name}</div>
+        <div class="mkt-meta"><span><b>${m.units}</b> units</span><span><b>${m.operators}</b> op${m.operators>1?'s':''}</span>${m.estRevenue?`<span>📈 ${fmtUSD(m.estRevenue)}</span>`:''}${m.avgRating!=null?`<span>★ ${m.avgRating.toFixed(1)}</span>`:''}</div>
+      </div>
+      <div class="op-score t-${scoreTier(m.score)}">${m.score}</div>
+    </div>`).join('');
+  document.querySelectorAll('#ov-markets .mkt-row').forEach(r=>r.addEventListener('click',()=>{
+    const m=marketData().find(x=>x.name===decodeURIComponent(r.dataset.mkt)); if(!m) return;
+    try{ map.fitBounds(L.featureGroup(m.locs.map(l=>l._marker)).getBounds().pad(.3),{maxZoom:10}); }catch(e){}
+  }));
+}
+function toggleBasket(key){
+  const name=decodeURIComponent(key);
+  if(basket.has(name)) basket.delete(name); else basket.add(name);
+  saveBasket(); renderBasket();
+  const b=document.getElementById('opm-basketbtn');
+  if(b && _focusOp && _focusOp.name===name){ b.classList.toggle('in',basket.has(name)); b.textContent=basket.has(name)?'✓ In basket':'➕ Add to acquisition basket'; }
+}
+function clearBasket(){ basket.clear(); saveBasket(); renderBasket(); }
+function renderBasket(){
+  const el=document.getElementById('ov-basket');
+  const ops=[...basket].map(operatorByName).filter(Boolean);
+  if(!ops.length){ el.innerHTML='<div class="basket-empty">No operators selected yet. Open an operator in the <b>Ownership</b> tab and "Add to acquisition basket" to model a roll-up here.</div>'; renderValuation(); return; }
+  const units=ops.reduce((s,o)=>s+o.count,0), rev=ops.reduce((s,o)=>s+o.estRevenue,0);
+  const sba=ops.reduce((s,o)=>s+o.sbaTotal,0), states=new Set(ops.flatMap(o=>o.states)).size;
+  el.innerHTML=`<div class="basket-sum">
+      <div class="ov-kpi"><div class="v">${units}</div><div class="l">Units</div></div>
+      <div class="ov-kpi"><div class="v">${states}</div><div class="l">States</div></div>
+      <div class="ov-kpi blue"><div class="v">${fmtUSD(rev)}</div><div class="l">Est. revenue</div></div>
+      <div class="ov-kpi green"><div class="v">${fmtUSD(sba)}</div><div class="l">SBA debt</div></div>
+    </div>`+
+    ops.map(o=>`<div class="basket-item"><span><b>${o.name}</b> · ${o.count} units · ${o.estRevenue?fmtUSD(o.estRevenue):'—'}</span><button class="basket-rm" onclick="toggleBasket('${encodeURIComponent(o.name)}')" title="Remove">×</button></div>`).join('')+
+    `<button class="basket-clear" onclick="clearBasket()">Clear basket (${ops.length})</button>`;
+  renderValuation();
+}
+function renderValuation(){
+  const margin=(+document.getElementById('val-margin').value||20)/100;
+  const mult=+document.getElementById('val-mult').value||5;
+  const ops=[...basket].map(operatorByName).filter(Boolean);
+  const scope=ops.length?'basket':'network';
+  const rev=ops.length? ops.reduce((s,o)=>s+o.estRevenue,0) : LOCATIONS.reduce((s,l)=>s+(estRevenue(l)||0),0);
+  const ebitda=rev*margin, ev=ebitda*mult;
+  document.getElementById('ov-val-out').innerHTML=`<div class="basket-sum" style="grid-template-columns:1fr 1fr 1fr">
+      <div class="ov-kpi"><div class="v">${fmtUSD(rev)}</div><div class="l">Est. revenue · ${scope}</div></div>
+      <div class="ov-kpi amber"><div class="v">${fmtUSD(ebitda)}</div><div class="l">Implied EBITDA</div></div>
+      <div class="ov-kpi green"><div class="v" style="font-size:22px">${fmtUSD(ev)}</div><div class="l">Implied EV</div></div>
+    </div>`;
+}
+document.getElementById('mktSort').addEventListener('change',e=>{ mktSortMode=e.target.value; renderMarkets(); });
+['val-margin','val-mult'].forEach(id=>document.getElementById(id).addEventListener('input',renderValuation));
+
 // ── Init ──
 renderList(LOCATIONS);
 renderAnalytics();
@@ -1417,6 +1631,7 @@ renderSbaAnalytics();
 renderItem19Analytics();
 renderChurn();
 renderOwnership();
+renderOverview();
 renderWhitespace();
 restoreState();   // apply filters/tab from URL (shareable deep links)
 if([...new URLSearchParams(location.search)].length) apply();
