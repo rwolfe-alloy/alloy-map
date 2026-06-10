@@ -1,0 +1,152 @@
+{
+ "source": "Alloy 2026 FDD \u2014 Item 20 (Outlets) + Exhibit E (franchisees who left)",
+ "as_of": "2025-12-31",
+ "systemwide": [
+  {
+   "year": 2023,
+   "start": 12,
+   "opened": 18,
+   "closed": 0,
+   "reacquired": 0,
+   "end": 30
+  },
+  {
+   "year": 2024,
+   "start": 30,
+   "opened": 48,
+   "closed": 1,
+   "reacquired": 0,
+   "end": 77
+  },
+  {
+   "year": 2025,
+   "start": 77,
+   "opened": 54,
+   "closed": 3,
+   "reacquired": 0,
+   "end": 128
+  }
+ ],
+ "departed": [
+  {
+   "facility": "APT Casselberry FL",
+   "reason": "Transfer",
+   "never_opened": false
+  },
+  {
+   "facility": "APT Johns Creek GA",
+   "reason": "Transfer",
+   "never_opened": false
+  },
+  {
+   "facility": "APT Shallowford Falls, GA",
+   "reason": "Transfer",
+   "never_opened": false
+  },
+  {
+   "facility": "APT Northville MI",
+   "reason": "Transfer",
+   "never_opened": false
+  },
+  {
+   "facility": "APT Novi, MI",
+   "reason": "Transfer",
+   "never_opened": false
+  },
+  {
+   "facility": "APT Creve Couer MO",
+   "reason": "Closed",
+   "never_opened": false
+  },
+  {
+   "facility": "APT Enterprise NV",
+   "reason": "Transfer",
+   "never_opened": false
+  },
+  {
+   "facility": "APT Summerlin",
+   "reason": "Transfer",
+   "never_opened": false
+  },
+  {
+   "facility": "APT West Las Vegas NV",
+   "reason": "Transfer",
+   "never_opened": false
+  },
+  {
+   "facility": "APT South Tulsa, OK",
+   "reason": "Closed",
+   "never_opened": false
+  },
+  {
+   "facility": "APT Oak Hill, TX",
+   "reason": "Transfer",
+   "never_opened": false
+  },
+  {
+   "facility": "APT Frisco, TX",
+   "reason": "Closed",
+   "never_opened": false
+  },
+  {
+   "facility": "APT Castle Hills, TX",
+   "reason": "Transfer",
+   "never_opened": false
+  },
+  {
+   "facility": "APT GlenEagles TX",
+   "reason": "Transfer",
+   "never_opened": false
+  },
+  {
+   "facility": "APT Gates of Prosper TX",
+   "reason": "Closed",
+   "never_opened": false
+  },
+  {
+   "facility": "APT Highland UT",
+   "reason": "Transfer",
+   "never_opened": false
+  },
+  {
+   "facility": "APT Daybreak UT",
+   "reason": "Transfer",
+   "never_opened": false
+  },
+  {
+   "facility": "APT Yorba Linda CA",
+   "reason": "Terminated",
+   "never_opened": true
+  },
+  {
+   "facility": "APT Midtown Atlanta GA",
+   "reason": "Terminated",
+   "never_opened": true
+  },
+  {
+   "facility": "APT East Cobb, GA",
+   "reason": "Terminated",
+   "never_opened": true
+  },
+  {
+   "facility": "APT Tulsa OK-location 2",
+   "reason": "Terminated",
+   "never_opened": true
+  },
+  {
+   "facility": "APT Brentwood TN",
+   "reason": "Terminated",
+   "never_opened": true
+  },
+  {
+   "facility": "APT Katy, TX",
+   "reason": "Terminated",
+   "never_opened": true
+  },
+  {
+   "facility": "APT Seattle WA",
+   "reason": "Terminated",
+   "never_opened": true
+  }
+ ]
+}

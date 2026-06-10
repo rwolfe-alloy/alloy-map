@@ -26,7 +26,7 @@ The next leap is to **synthesize it into a single ranked view of rollup targets*
 | # | Item | Why it matters | Impact | Effort |
 |---|---|---|---|---|
 | 4 | **FDD Item 19 (financial performance / AUV)** ✅ *(done)* — `parse_item19.py` extracts 2025 revenue by quartile + maturity cohort, memberships, rev/member, retention → "Unit Economics" analytics section + per-location/operator estimated revenue (cohort-average) | Revenue ≈ the single most valuable field for valuation | ⭐ | — |
-| 5 | **Closure / churn tracking** — diff each monthly snapshot, flag units that went dark | Survivorship + operator risk; today we only see what's currently live | ⭐ | M |
+| 5 | **Closure / churn tracking** ✅ *(done)* — `parse_churn.py` pulls FDD Item 20 outlet flow + Exhibit E (departed franchisees) → "Network Churn" analytics section (96.7% survival, departed list w/ reasons). Snapshot diffs extend this going forward. | Survivorship + operator risk | ⭐ | — |
 | 6 | **SBA 504 + earlier 7(a) files** — pull the 504 dataset and FY2010–2019 7(a) | Completes the financing picture (504 funds real estate; some loans predate FY2020) | ◐ | M |
 | 7 | **Demographics overlay** — median income / population density per trade area (Census ACS) | Site-quality signal; explains rating/ramp differences | ◐ | M |
 | 8 | **Competitor density** — Orangetheory / F45 / StretchLab nearby (Places API) | Competitive context per market | ○ | M |
@@ -74,5 +74,7 @@ The next leap is to **synthesize it into a single ranked view of rollup targets*
 2. ~~#1–2 operator scoring + profile~~ ✅ **done** — ranked "Acquisition targets" list + operator profile modal.
 3. ~~#14 export + #15 deep links~~ ✅ **done** — CSV export + shareable URL state.
 4. ~~#4 Item 19 AUV~~ ✅ **done** — Unit Economics section + estimated revenue per location/operator.
-5. **#5 closure/churn tracking** ← *next* — now feasible since snapshots are being kept (diff month-over-month).
-6. Layer in the rest (demographics, competitors, 504, trade-area overlap) as appetite allows.
+5. ~~#5 closure/churn tracking~~ ✅ **done** — Network Churn section from FDD Item 20 + Exhibit E; snapshot diffs extend it over time.
+6. Layer in the rest (demographics #7, competitors #8, SBA 504 #6, trade-area overlap #3) as appetite allows.
+
+**Note:** the public-data + estimates build is now a fairly complete POC. The next big unlock is the **proprietary per-location KPIs** — to be wired into a **local-only private build** (gitignored, never pushed) when provided.
