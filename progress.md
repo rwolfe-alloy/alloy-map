@@ -35,6 +35,10 @@ A self-contained interactive map of all Alloy Personal Training franchise locati
 | `parse_churn.py` | Parses FDD **Item 20** outlet flow + **Exhibit E** (departed franchisees) → `alloy_churn.json` |
 | `alloy_churn.json` | Systemwide outlet open/close by year + departed-franchisee list — embedded as `CHURN` |
 | `build_trends.py` | Distills `snapshots/` into month-over-month trends (review velocity, rating moves, went-live, lost listings) → `alloy_trends.json` |
+| `validate.py` | **Data validation gate** — sanity bounds on every dataset; runs in `refresh.sh` before commit, a failure aborts the push |
+| `fetch_demographics.py` | Theme 2 — Census ACS income+population per location zip (ZCTA) + whitespace metro (CBSA), via keyless Census Reporter API → `alloy_demog.json` |
+| `fetch_competitors.py` | Theme 2 — Orangetheory/F45/StretchLab counts within 5mi of each location, 15mi of each whitespace metro (Places API) → `alloy_competitors.json` |
+| `alloy_demog.json` / `alloy_competitors.json` | Market-intelligence data — embedded as `DEMOG` / `COMPETITORS` |
 | `alloy_trends.json` | Network series + latest-period per-location deltas — embedded as `TRENDS` |
 | `CHANGELOG.md` | Auto-generated history of data changes (new/dropped locations, rating/owner/status changes) |
 | `snapshots/` | Dated point-in-time copies of the dataset (the time-series record) |
@@ -87,6 +91,7 @@ Each record has these fields:
 - **SBA 7(a) financing:** **$26.4M** across 106 loans (FY2022–26), 95 matched to 55 locations; avg $249K, median $317K, 581 jobs supported. **Huntington National Bank = 85 of 106 loans** (dominant Alloy SBA lender). Top-funded: Falls Church VA $812K (4 loans)
 - **Unit economics (2026 FDD Item 19, 2025 period):** **system AUV ~$395K**; quartile avgs $555K → $253K; by maturity $371K (12–24mo) → $445K (36+mo); ~93 members/unit, ~$348 rev/member/mo, 90.3% monthly retention
 - **Network churn (2026 FDD Item 20 + Exhibit E):** **96.7% outlet survival** — only 4 closures of 120 opened (2023–25); franchised outlets 12→30→77→128; 13 ownership transfers, 7 signed-but-never-opened
+- **Market intelligence (Census ACS + Places, Phase 12):** median Alloy trade-area (zip) income **$125K** (range $59K–$250K) — validates the affluent-suburb strategy; median 6 boutique competitors within 5mi (3 competitor-free sites; most contested: Lincoln Park IL, 25). Top whitespace opportunity: **Sacramento (score 80)**
 
 ---
 
@@ -131,8 +136,9 @@ Each record has these fields:
 - **Click any operator → profile modal** *(Phase 7)*: units, avg rating, reviews, SBA capital, loans, tenure, states, lenders, per-location list, and "Show all on map"
 - **⬇ CSV export** of the ranked operator table *(Phase 7)*
 
-### Sidebar — Whitespace Tab
-- 16 uncovered major metros, sorted by population
+### Sidebar — Whitespace Tab *(scored in Phase 12)*
+- 16 uncovered major metros **ranked by opportunity score** (population 40% × median income 35% × competitive openness 25%)
+- Each row: metro population · 💰 CBSA median income · 🥊 competitors within 15mi · score badge
 - Click any row to fly map to that location
 
 ### Map Layer Toggles (top-right)
@@ -141,7 +147,8 @@ Each record has these fields:
 - **Whitespace metros** — gray pins for the 16 uncovered metros
 - **Color by rating** — recolors live pins green/amber/red by Google ★ tier
 - **Color by operator** — recolors pins by franchisee operator (multi-unit each a distinct color)
-- **Color by momentum** *(Phase 11)* — recolors pins by review velocity (🔥 hot ≥15/mo, growing, opened-this-period, listing-lost, steady); the three color modes are mutually exclusive
+- **Color by momentum** *(Phase 11)* — recolors pins by review velocity (🔥 hot ≥15/mo, growing, opened-this-period, listing-lost, steady)
+- **Color by site quality** *(Phase 12 / Theme 2)* — recolors pins by trade-area score (income 50% × population 25% × competitive openness 25%); all four color modes are mutually exclusive
 
 ### Popup / Cards (per location)
 - Name with green "open now" dot or amber "Coming Soon" badge
@@ -151,6 +158,7 @@ Each record has these fields:
 - **SBA 7(a) funding badge** — total + loan count for funded locations *(Phase 6)*
 - **Estimated revenue** — FDD Item 19 maturity-cohort average by opening year (labeled estimate) *(Phase 8)*
 - **Momentum badge** — 🔥/▲ review velocity, rating moves, 🆕 opened-this-period, ⚠️ listing-lost *(Phase 11)*
+- **Market badge** — 💰 trade-area median income · 🥊 competitors within 5mi · site-quality chip *(Phase 12)*
 - Collapsible hours schedule (today's day highlighted in red)
 - Phone, Directions, Details links · IG / FB / email links
 

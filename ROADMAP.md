@@ -11,7 +11,7 @@ Legend — **Impact**: ⭐ high / ◐ medium / ○ nice-to-have · **Effort**: S
 ## 🚀 "Next-level" theme rollout *(rolling out one theme at a time for review)*
 
 - **Theme 1 — Synthesis & decision layer** ✅ *(Phase 10)* — Executive **Overview tab**: hero KPIs, auto-generated **deal memo**, **Top-Markets** rollup ranking, **acquisition basket** builder, **implied-valuation** lens.
-- **Theme 2 — Market intelligence** *(next)* — demographics (Census), competitor density (Places), site-quality / market-attractiveness score, drive-time trade areas.
+- **Theme 2 — Market intelligence** ✅ *(Phase 12)* — Census ACS demographics (zip + CBSA), competitor density (OTF/F45/StretchLab via Places), **site-quality score** + map layer, **scored Whitespace ranking**, income in Top Markets. *(Drive-time trade areas deferred.)*
 - **Theme 3 — Time & trajectory** — growth time-lapse, projected-openings pipeline map (FDD Item 20 Table 5), cohort/ramp analysis. *Partially started (Phase 11): snapshot-based **Trending** — review-velocity leaderboard, momentum map layer, watch list.*
 - **Theme 4 — Context & credibility** — peer-franchise benchmarking, franchise economics (FDD Items 5–7), methodology/sources page.
 - **Theme 5 — Presentation** — one-click PDF report, dark mode, mobile polish.
@@ -38,8 +38,8 @@ The next leap is to **synthesize it into a single ranked view of rollup targets*
 | 4 | **FDD Item 19 (financial performance / AUV)** ✅ *(done)* — `parse_item19.py` extracts 2025 revenue by quartile + maturity cohort, memberships, rev/member, retention → "Unit Economics" analytics section + per-location/operator estimated revenue (cohort-average) | Revenue ≈ the single most valuable field for valuation | ⭐ | — |
 | 5 | **Closure / churn tracking** ✅ *(done)* — `parse_churn.py` pulls FDD Item 20 outlet flow + Exhibit E (departed franchisees) → "Network Churn" analytics section (96.7% survival, departed list w/ reasons). Snapshot diffs extend this going forward. | Survivorship + operator risk | ⭐ | — |
 | 6 | **SBA 504 + earlier 7(a) files** — pull the 504 dataset and FY2010–2019 7(a) | Completes the financing picture (504 funds real estate; some loans predate FY2020) | ◐ | M |
-| 7 | **Demographics overlay** — median income / population density per trade area (Census ACS) | Site-quality signal; explains rating/ramp differences | ◐ | M |
-| 8 | **Competitor density** — Orangetheory / F45 / StretchLab nearby (Places API) | Competitive context per market | ○ | M |
+| 7 | **Demographics overlay** ✅ *(done, Phase 12)* — zip-level income/population via Census Reporter (keyless ACS) | Site-quality signal | ◐ | — |
+| 8 | **Competitor density** ✅ *(done, Phase 12)* — OTF/F45/StretchLab within 5mi per location, 15mi per whitespace metro | Competitive context per market | ○ | — |
 | 9 | **Multi-state FDD cross-check** — pull MN/CA/WA FDDs too | Validates the franchisee list and catches franchisees missed in one filing | ○ | L |
 
 ---
@@ -50,7 +50,7 @@ The next leap is to **synthesize it into a single ranked view of rollup targets*
 |---|---|---|---|---|
 | 10 | **Network growth time-lapse** — animate openings by year on the map | Tells the growth story at a glance | ◐ | S |
 | 11 | **Cohort analysis** — rating & review volume vs. unit age | Do older units rate higher? Where's the ramp? | ◐ | M |
-| 12 | **Whitespace *scoring*** — rank uncovered metros by opportunity (pop × income × competitor gap), not just population | Makes the Whitespace tab actionable for expansion | ◐ | M |
+| 12 | **Whitespace *scoring*** ✅ *(done, Phase 12)* — metros ranked by pop × income × competitive openness | Makes the Whitespace tab actionable | ◐ | — |
 | 13 | **Cross-source reconciliation** — FDD outlet count vs. website vs. SBA loan count | A trust/QA dashboard; surfaces data gaps | ○ | S |
 
 ---

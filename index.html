@@ -157,6 +157,13 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Ro
 .card-sba .sba-ico,.pop-sba .sba-ico{font-size:11px}
 .card-er,.pop-er{font-size:11.5px;color:#1e40af;margin-top:5px;display:flex;align-items:center;gap:4px;cursor:help}
 .card-tr,.pop-tr{font-size:11.5px;font-weight:600;color:#c2410c;margin-top:5px;display:flex;align-items:center;gap:4px;flex-wrap:wrap;cursor:help}
+.card-mi,.pop-mi{font-size:11.5px;color:#475569;margin-top:5px;display:flex;align-items:center;gap:4px;flex-wrap:wrap;cursor:help}
+.pop-mi{font-size:12px;margin-top:0;margin-bottom:5px}
+.mi-sq{font-size:10px;font-weight:800;border-radius:9px;padding:1px 6px;margin-left:2px}
+.mi-sq.sq-high{color:#065f46;background:#d1fae5}
+.mi-sq.sq-mid{color:#3f6212;background:#ecfccb}
+.mi-sq.sq-low{color:#92400e;background:#fef3c7}
+.mi-sq.sq-poor{color:#991b1b;background:#fee2e2}
 .pop-tr{font-size:12px;margin-top:0;margin-bottom:5px}
 .pop-er{font-size:12px;margin-top:0;margin-bottom:5px}
 .card-er b,.pop-er b{font-weight:700}
@@ -289,9 +296,9 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Ro
 /* Rating legend */
 #rating-legend{position:absolute;bottom:28px;left:10px;z-index:900;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:8px 12px;box-shadow:0 2px 8px rgba(0,0,0,.08);display:none}
 #rating-legend h4{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:6px}
-#owner-legend,#momentum-legend{position:absolute;bottom:28px;left:10px;z-index:900;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:8px 12px;box-shadow:0 2px 8px rgba(0,0,0,.08);display:none;max-height:46vh;overflow-y:auto;max-width:230px}
-#momentum-legend h4 span{font-weight:500;color:var(--light);text-transform:none;letter-spacing:0}
-#owner-legend h4,#momentum-legend h4{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:6px}
+#owner-legend,#momentum-legend,#sq-legend{position:absolute;bottom:28px;left:10px;z-index:900;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:8px 12px;box-shadow:0 2px 8px rgba(0,0,0,.08);display:none;max-height:46vh;overflow-y:auto;max-width:230px}
+#momentum-legend h4 span,#sq-legend h4 span{font-weight:500;color:var(--light);text-transform:none;letter-spacing:0}
+#owner-legend h4,#momentum-legend h4,#sq-legend h4{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:6px}
 
 /* Brand legend */
 #brand-legend{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);z-index:900;background:var(--white);border:1px solid var(--line);border-radius:20px;padding:5px 14px;box-shadow:0 1px 8px rgba(0,0,0,.08);font-size:12px;white-space:nowrap;color:var(--muted)}
@@ -592,7 +599,7 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Ro
     <div id="tab-whitespace">
       <div class="ws-header">
         <p id="ws-headline">0 major U.S. metros without an Alloy</p>
-        <span>Metros 500k+ population sorted by size — expansion opportunities</span>
+        <span>Metros 500k+ population ranked by opportunity — population × income × competitive openness</span>
       </div>
       <div id="ws-list"></div>
     </div>
@@ -628,6 +635,9 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Ro
       <label class="layer-row">
         <input type="checkbox" id="toggleMomentum"/>Color by momentum
       </label>
+      <label class="layer-row">
+        <input type="checkbox" id="toggleSQ"/>Color by site quality
+      </label>
     </div>
     <div id="rating-legend">
       <h4>Google rating</h4>
@@ -645,6 +655,14 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Ro
       <div class="legend-row"><div class="legend-swatch" style="background:#dc2626"></div> Listing lost ⚠️</div>
       <div class="legend-row"><div class="legend-swatch" style="background:#cbd5e1"></div> Steady</div>
       <div class="legend-row"><div class="legend-swatch" style="background:#e5e7eb"></div> Coming soon / n·a</div>
+    </div>
+    <div id="sq-legend">
+      <h4>Site quality <span>· income × pop × openness</span></h4>
+      <div class="legend-row"><div class="legend-swatch" style="background:#059669"></div> Prime (70+)</div>
+      <div class="legend-row"><div class="legend-swatch" style="background:#84cc16"></div> Strong (50–70)</div>
+      <div class="legend-row"><div class="legend-swatch" style="background:#d97706"></div> Fair (35–50)</div>
+      <div class="legend-row"><div class="legend-swatch" style="background:#dc2626"></div> Weak (<35)</div>
+      <div class="legend-row"><div class="legend-swatch" style="background:#e5e7eb"></div> No data</div>
     </div>
     <div id="choro-legend">
       <h4>Locations per state</h4>
@@ -694,6 +712,8 @@ const SBA_LOANS = [{"borrname":"DCMR Enterprise, LLC","borrcity":"Missouri City"
 const ITEM19 = {"source":"Alloy 2026 FDD, Item 19 (Financial Performance Representations)","period":"2025 Measurement Period (Jan\u2013Dec 2025)","revenue_by_quartile":{"First Quartile":{"count":18,"avg":554978,"max":726675,"min":481374,"median":540157},"Second Quartile":{"count":18,"avg":428009,"max":473864,"min":389121,"median":422735},"Third Quartile":{"count":18,"avg":352011,"max":387984,"min":316816,"median":353306},"Fourth Quartile":{"count":19,"avg":252824,"max":315342,"min":132350,"median":267187}},"revenue_by_maturity":{"Open 12-24 Months":{"count":45,"avg":371358,"max":633526,"min":132350,"median":377483},"Open 24-36 Months":{"count":16,"avg":424181,"max":638400,"min":209073,"median":425724},"Open 36+ Months":{"count":12,"avg":444633,"max":726675,"min":194317,"median":442473}},"avg_monthly_memberships":{"avg":93.0,"max":212.0,"min":34.0,"median":89.0},"revenue_per_member":{"avg":347.79,"max":415.07,"min":252.93,"median":350.37},"avg_monthly_retention_pct":90.33,"system_auv":394981};
 const CHURN = {"source":"Alloy 2026 FDD \u2014 Item 20 (Outlets) + Exhibit E (franchisees who left)","as_of":"2025-12-31","systemwide":[{"year":2023,"start":12,"opened":18,"closed":0,"reacquired":0,"end":30},{"year":2024,"start":30,"opened":48,"closed":1,"reacquired":0,"end":77},{"year":2025,"start":77,"opened":54,"closed":3,"reacquired":0,"end":128}],"departed":[{"facility":"APT Casselberry FL","reason":"Transfer","never_opened":false},{"facility":"APT Johns Creek GA","reason":"Transfer","never_opened":false},{"facility":"APT Shallowford Falls, GA","reason":"Transfer","never_opened":false},{"facility":"APT Northville MI","reason":"Transfer","never_opened":false},{"facility":"APT Novi, MI","reason":"Transfer","never_opened":false},{"facility":"APT Creve Couer MO","reason":"Closed","never_opened":false},{"facility":"APT Enterprise NV","reason":"Transfer","never_opened":false},{"facility":"APT Summerlin","reason":"Transfer","never_opened":false},{"facility":"APT West Las Vegas NV","reason":"Transfer","never_opened":false},{"facility":"APT South Tulsa, OK","reason":"Closed","never_opened":false},{"facility":"APT Oak Hill, TX","reason":"Transfer","never_opened":false},{"facility":"APT Frisco, TX","reason":"Closed","never_opened":false},{"facility":"APT Castle Hills, TX","reason":"Transfer","never_opened":false},{"facility":"APT GlenEagles TX","reason":"Transfer","never_opened":false},{"facility":"APT Gates of Prosper TX","reason":"Closed","never_opened":false},{"facility":"APT Highland UT","reason":"Transfer","never_opened":false},{"facility":"APT Daybreak UT","reason":"Transfer","never_opened":false},{"facility":"APT Yorba Linda CA","reason":"Terminated","never_opened":true},{"facility":"APT Midtown Atlanta GA","reason":"Terminated","never_opened":true},{"facility":"APT East Cobb, GA","reason":"Terminated","never_opened":true},{"facility":"APT Tulsa OK-location 2","reason":"Terminated","never_opened":true},{"facility":"APT Brentwood TN","reason":"Terminated","never_opened":true},{"facility":"APT Katy, TX","reason":"Terminated","never_opened":true},{"facility":"APT Seattle WA","reason":"Terminated","never_opened":true}]};
 const TRENDS = {"period":{"from":"2026-06-09","to":"2026-07-01","days":22},"network":[{"d":"2026-06-09","total":169,"live":144,"rated":157,"reviews":7166,"avg_rating":4.956},{"d":"2026-07-01","total":169,"live":149,"rated":156,"reviews":7101,"avg_rating":4.931}],"locations":{"Alamo Heights, TX":{"dr":27,"vel":36.8},"Alamo Ranch, TX":{"dr":7,"vel":9.5},"Ashburn, VA":{"dr":7,"vel":9.5},"Ballwin, MO":{"dr":2,"vel":2.7},"Bearden, TN":{"dr":1,"vel":1.4},"Bloomington, MN":{"dr":1,"vel":1.4},"Bonney Lake, WA":{"dr":2,"vel":2.7},"Bountiful, UT":{"dr":7,"vel":9.5},"Broadway Park, CO":{"dr":3,"vel":4.1},"Buckhead, Atlanta, GA":{"dr":2,"vel":2.7},"Bull Creek Market, Austin, TX":{"dr":1,"vel":1.4},"Capitol View, TN":{"dr":2,"vel":2.7},"Cary, NC":{"dr":1,"vel":1.4},"Cedar Hills Crossing, Beaverton, OR":{"dr":2,"vel":2.7,"drat":0.2},"Cedar Park, TX":{"dr":1,"vel":1.4},"Chastain, GA":{"dr":-1,"vel":-1.4},"Claymont, MO":{"dr":4,"vel":5.5},"Colleyville, TX":{"dr":1,"vel":1.4},"Colorado Springs, CO":{"dr":2,"vel":2.7,"went_live":true},"Concord, CA":{"dr":10,"vel":13.6},"Cross Timbers, Flower Mound, TX":{"dr":-1,"vel":-1.4},"Daybreak, UT":{"dr":1,"vel":1.4},"Des Peres, MO":{"dr":1,"vel":1.4},"East Boca, FL":{"dr":6,"vel":8.2},"East Bradenton, FL":{"dr":3,"vel":4.1},"East Brunswick, NJ":{"lost_listing":true},"East Pasadena, CA":{"dr":1,"vel":1.4},"Encinitas, CA":{"dr":1,"vel":1.4},"Fairlawn, OH":{"dr":-1,"vel":-1.4},"Greenville, SC":{"dr":1,"vel":1.4},"Hamilton Mill, Dacula, GA":{"dr":7,"vel":9.5},"Irvine, CA":{"dr":1,"vel":1.4},"Johns Creek, GA":{"dr":-1,"vel":-1.4},"La Jolla, CA":{"went_live":true},"Lincolnshire, IL":{"dr":1,"vel":1.4},"Livingston, NJ":{"dr":4,"vel":5.5},"Mt. Juliet, TN":{"dr":3,"vel":4.1},"Naperville, IL":{"dr":4,"vel":5.5},"North Mansfield, TX":{"dr":2,"vel":2.7},"NorthPointe, Ankeny, IA":{"dr":-6,"vel":-8.2},"O\u2019Fallon, MO":{"dr":1,"vel":1.4,"went_live":true},"Oak Forest, Houston, TX":{"dr":10,"vel":13.6,"drat":-0.2},"Oak Hill, Austin, TX":{"dr":30,"vel":40.9},"Old Town, Alexandria, VA":{"dr":-1,"vel":-1.4},"Orinda, CA":{"dr":-16,"vel":-21.8},"Overland Park, KS":{"dr":1,"vel":1.4},"Paradise Valley, Phoenix, AZ":{"dr":6,"vel":8.2},"Parkway Centre, NC":{"dr":1,"vel":1.4},"Pine Township, Wexford, PA":{"dr":2,"vel":2.7},"Pinecrest, FL":{"dr":6,"vel":8.2},"Reston, VA":{"dr":2,"vel":2.7},"Riverside, CA":{"dr":1,"vel":1.4},"Rochester, MI":{"dr":1,"vel":1.4},"Rochester, NY":{"dr":8,"vel":10.9},"Saddle River, NJ":{"dr":1,"vel":1.4},"Sandy Springs, GA":{"dr":-1,"vel":-1.4},"Schaumburg, IL":{"dr":1,"vel":1.4},"Scottsdale Grayhawk, AZ":{"dr":3,"vel":4.1},"Sienna, TX":{"dr":1,"vel":1.4},"SLP/ St. Louis Park, MN":{"dr":5,"vel":6.8},"South Tampa, FL":{"dr":-1,"vel":-1.4},"South Tempe, AZ":{"dr":2,"vel":2.7},"Southlake, TX":{"dr":3,"vel":4.1},"Spring Creek, OK":{"dr":1,"vel":1.4},"Stonebrook Circle, Frisco, TX":{"dr":-65,"vel":-88.6,"drat":-3.9},"Strongsville, OH":{"dr":1,"vel":1.4},"Sylvania, OH":{"lost_listing":true},"Tanque Verde, Tucson, AZ":{"dr":1,"vel":1.4},"Tega Cay, Fort Mill, SC":{"dr":1,"vel":1.4},"Twenty Mile Road, CO":{"dr":1,"vel":1.4},"Vista Village, CA":{"dr":-1,"vel":-1.4,"went_live":true},"West Arvada, CO":{"dr":7,"vel":9.5},"Westchase, Tampa, FL":{"lost_listing":true},"Westport, Norwalk, CT":{"dr":9,"vel":12.3},"Wildwood, MO":{"dr":1,"vel":1.4},"Woodinville, WA":{"dr":7,"vel":9.5,"went_live":true},"Alloy Eastside | Greenville, SC":{"dr":1,"vel":1.4}}};
+const DEMOG = {"source":"US Census ACS 5-year (via Census Reporter), ZCTA + CBSA level","zips":{"01906":{"inc":101539,"pop":28773},"06851":{"inc":111341,"pop":27865},"07039":{"inc":229806,"pop":31488},"07417":{"inc":236023,"pop":11112},"07458":{"inc":244022,"pop":11828},"07675":{"inc":183154,"pop":27349},"08816":{"inc":143586,"pop":49360},"11725":{"inc":168281,"pop":29073},"11787":{"inc":143101,"pop":34499},"13066":{"inc":122088,"pop":12504},"14618":{"inc":125098,"pop":25476},"15090":{"inc":160576,"pop":25763},"20147":{"inc":163904,"pop":67692},"20175":{"inc":174854,"pop":34733},"20194":{"inc":170988,"pop":12275},"20850":{"inc":125950,"pop":50353},"21037":{"inc":145787,"pop":20854},"21075":{"inc":135303,"pop":37363},"21093":{"inc":125528,"pop":39100},"22030":{"inc":139831,"pop":61332},"22042":{"inc":138255,"pop":35483},"22314":{"inc":148451,"pop":36612},"23451":{"inc":100697,"pop":44012},"27358":{"inc":138717,"pop":15685},"27407":{"inc":59427,"pop":51697},"27519":{"inc":165586,"pop":69836},"28031":{"inc":113368,"pop":31733},"28226":{"inc":118606,"pop":39381},"28277":{"inc":128627,"pop":73882},"28803":{"inc":76662,"pop":33718},"29205":{"inc":64231,"pop":22223},"29607":{"inc":74503,"pop":46209},"29615":{"inc":76117,"pop":38811},"29681":{"inc":114986,"pop":68650},"29708":{"inc":132018,"pop":43515},"30009":{"inc":126510,"pop":21095},"30019":{"inc":116583,"pop":51162},"30022":{"inc":153294,"pop":64546},"30041":{"inc":152564,"pop":77664},"30062":{"inc":132631,"pop":62284},"30075":{"inc":157335,"pop":56263},"30092":{"inc":79309,"pop":36992},"30097":{"inc":124890,"pop":46876},"30101":{"inc":110774,"pop":62593},"30115":{"inc":113089,"pop":53687},"30269":{"inc":113807,"pop":40534},"30305":{"inc":106907,"pop":28110},"30328":{"inc":112111,"pop":39508},"30338":{"inc":135148,"pop":39465},"30342":{"inc":124111,"pop":33349},"32259":{"inc":150736,"pop":75016},"32707":{"inc":69113,"pop":39493},"33156":{"inc":137076,"pop":33628},"33432":{"inc":107045,"pop":21834},"33458":{"inc":109729,"pop":55512},"33467":{"inc":95739,"pop":58411},"33635":{"inc":86894,"pop":19134},"34212":{"inc":125486,"pop":25536},"35243":{"inc":99645,"pop":18176},"37122":{"inc":112967,"pop":68492},"37203":{"inc":71281,"pop":21442},"37919":{"inc":72645,"pop":31754},"41017":{"inc":97274,"pop":40719},"44136":{"inc":94648,"pop":24946},"44333":{"inc":131821,"pop":19620},"45040":{"inc":133240,"pop":59518},"45069":{"inc":114631,"pop":56037},"46040":{"inc":147500,"pop":15943},"48009":{"inc":153401,"pop":21772},"48067":{"inc":112840,"pop":24868},"48168":{"inc":187589,"pop":25038},"48307":{"inc":106576,"pop":44714},"48375":{"inc":112545,"pop":24029},"50023":{"inc":117826,"pop":46306},"53562":{"inc":101381,"pop":29790},"53704":{"inc":74034,"pop":46730},"55426":{"inc":99347,"pop":25251},"55431":{"inc":101484,"pop":18664},"59106":{"inc":125833,"pop":21417},"60026":{"inc":137778,"pop":14069},"60069":{"inc":162826,"pop":8502},"60102":{"inc":132949,"pop":32286},"60134":{"inc":152727,"pop":29743},"60189":{"inc":128878,"pop":31042},"60194":{"inc":97994,"pop":19756},"60504":{"inc":98008,"pop":39358},"60563":{"inc":109783,"pop":39330},"60564":{"inc":181382,"pop":47016},"60610":{"inc":105226,"pop":44883},"63011":{"inc":124454,"pop":35920},"63040":{"inc":133220,"pop":8526},"63117":{"inc":90921,"pop":9261},"63119":{"inc":106183,"pop":34181},"63122":{"inc":136385,"pop":41634},"63131":{"inc":225493,"pop":17935},"63368":{"inc":124297,"pop":46966},"66209":{"inc":143393,"pop":20413},"66223":{"inc":114855,"pop":24747},"72758":{"inc":99147,"pop":48233},"73013":{"inc":113870,"pop":58023},"75019":{"inc":141923,"pop":44917},"75022":{"inc":177357,"pop":26090},"75034":{"inc":111122,"pop":53818},"75056":{"inc":119682,"pop":69628},"75070":{"inc":112352,"pop":64078},"75093":{"inc":124563,"pop":47954},"75094":{"inc":171476,"pop":24200},"76034":{"inc":217914,"pop":26103},"76063":{"inc":118946,"pop":82625},"76092":{"inc":250001,"pop":31520},"77018":{"inc":127017,"pop":31031},"77057":{"inc":66971,"pop":46569},"77070":{"inc":77397,"pop":58229},"77375":{"inc":102488,"pop":72311},"77386":{"inc":132469,"pop":69980},"77459":{"inc":129151,"pop":84221},"77494":{"inc":148720,"pop":140157},"77573":{"inc":122722,"pop":98109},"78209":{"inc":86514,"pop":43400},"78253":{"inc":106373,"pop":69282},"78613":{"inc":125487,"pop":89956},"78626":{"inc":100431,"pop":48072},"78717":{"inc":145325,"pop":37262},"78731":{"inc":105494,"pop":27507},"78735":{"inc":139191,"pop":20996},"80007":{"inc":176122,"pop":19078},"80016":{"inc":150492,"pop":68268},"80129":{"inc":141667,"pop":30223},"80134":{"inc":146778,"pop":80302},"80223":{"inc":79151,"pop":19246},"80525":{"inc":91636,"pop":54211},"80538":{"inc":86671,"pop":50110},"80920":{"inc":113036,"pop":36923},"84003":{"inc":120330,"pop":57430},"84009":{"inc":137922,"pop":44186},"84010":{"inc":102445,"pop":46871},"84037":{"inc":134375,"pop":39415},"84040":{"inc":128365,"pop":28509},"84117":{"inc":87813,"pop":24980},"85028":{"inc":125054,"pop":18752},"85048":{"inc":122833,"pop":34664},"85255":{"inc":140616,"pop":45346},"85284":{"inc":156146,"pop":19492},"85715":{"inc":85069,"pop":19198},"89128":{"inc":73010,"pop":40040},"89148":{"inc":96696,"pop":64426},"89178":{"inc":108806,"pop":44165},"90064":{"inc":135383,"pop":26642},"90274":{"inc":215925,"pop":25059},"91107":{"inc":126449,"pop":32316},"92024":{"inc":158507,"pop":50617},"92037":{"inc":147230,"pop":40717},"92083":{"inc":86974,"pop":38375},"92128":{"inc":131077,"pop":48992},"92506":{"inc":121459,"pop":45086},"92606":{"inc":135598,"pop":23990},"92647":{"inc":105110,"pop":59047},"92780":{"inc":101017,"pop":54374},"94116":{"inc":158921,"pop":43791},"94521":{"inc":125899,"pop":41909},"94563":{"inc":250001,"pop":19378},"94595":{"inc":100552,"pop":16988},"97005":{"inc":78239,"pop":28311},"98034":{"inc":135219,"pop":52531},"98072":{"inc":175805,"pop":24446},"98391":{"inc":135037,"pop":59240}},"metros":{"Sacramento":{"inc":97188,"pop":2426388,"cbsa":"Sacramento-Roseville-Folsom, CA Metro Area"},"Columbus":{"inc":81945,"pop":2175788,"cbsa":"Columbus, OH Metro Area"},"Providence":{"inc":87040,"pop":1684071,"cbsa":"Providence-Warwick, RI-MA Metro Area"},"Milwaukee":{"inc":78218,"pop":1568938,"cbsa":"Milwaukee-Waukesha, WI Metro Area"},"Louisville":{"inc":74305,"pop":1396762,"cbsa":"Louisville/Jefferson County, KY-IN Metro Area"},"Memphis":{"inc":68124,"pop":1337653,"cbsa":"Memphis, TN-MS-AR Metro Area"},"Richmond":{"inc":83460,"pop":1368219,"cbsa":"Richmond, VA Metro Area"},"New Orleans":{"inc":62655,"pop":981662,"cbsa":"New Orleans-Metairie, LA Metro Area"},"Buffalo":{"inc":72237,"pop":1161343,"cbsa":"Buffalo-Cheektowaga, NY Metro Area"},"Hartford":{"inc":95118,"pop":1153112,"cbsa":"Hartford-West Hartford-East Hartford, CT Metro Area"},"Tulsa":{"inc":69658,"pop":1060423,"cbsa":"Tulsa, OK Metro Area"},"Omaha":{"inc":84524,"pop":1001186,"cbsa":"Omaha, NE-IA Metro Area"},"Albuquerque":{"inc":76097,"pop":929919,"cbsa":"Albuquerque, NM Metro Area"},"Boise":{"inc":88695,"pop":844979,"cbsa":"Boise City, ID Metro Area"},"Little Rock":{"inc":68344,"pop":770959,"cbsa":"Little Rock-North Little Rock-Conway, AR Metro Area"},"Spokane":{"inc":77488,"pop":597123,"cbsa":"Spokane-Spokane Valley, WA Metro Area"}}};
+const COMPETITORS = {"source":"Google Places API (New) text search, location-bias circle","radius_mi":{"locations":5,"metros":15},"brands":["Orangetheory Fitness","F45 Training","StretchLab"],"locations":{"Acworth, GA":{"otf":1,"f45":0,"sl":2,"total":3},"Ahwatukee Foothills, Phoenix, AZ":{"otf":0,"f45":1,"sl":3,"total":4},"Alamo Heights, TX":{"otf":3,"f45":0,"sl":2,"total":5},"Alamo Ranch, TX":{"otf":3,"f45":1,"sl":2,"total":6},"Algonquin, IL":{"otf":2,"f45":0,"sl":1,"total":3},"Alpharetta, GA":{"otf":3,"f45":2,"sl":2,"total":7},"Ashburn, VA":{"otf":2,"f45":2,"sl":1,"total":5},"Ballwin, MO":{"otf":2,"f45":2,"sl":1,"total":5},"Bearden, TN":{"otf":1,"f45":0,"sl":1,"total":2},"Billings, MT":{"otf":1,"f45":0,"sl":1,"total":2},"Birmingham Colonnade, AL":{"otf":3,"f45":0,"sl":2,"total":5},"Birmingham, MI":{"otf":4,"f45":2,"sl":3,"total":9},"Bloomington, MN":{"otf":2,"f45":0,"sl":1,"total":3},"BluHawk, Overland Park, KS":{"otf":1,"f45":0,"sl":2,"total":3},"Bonney Lake, WA":{"otf":0,"f45":0,"sl":0,"total":0},"Bountiful, UT":{"otf":1,"f45":0,"sl":0,"total":1},"Broadway Park, CO":{"otf":7,"f45":10,"sl":4,"total":21},"Buckhead, Atlanta, GA":{"otf":7,"f45":5,"sl":5,"total":17},"Bull Creek Market, Austin, TX":{"otf":4,"f45":3,"sl":2,"total":9},"Canton, GA":{"otf":0,"f45":0,"sl":1,"total":1},"Capitol View, TN":{"otf":9,"f45":3,"sl":2,"total":14},"Cary, NC":{"otf":2,"f45":1,"sl":2,"total":5},"Castle Hills, TX":{"otf":2,"f45":2,"sl":1,"total":5},"Cedar Hills Crossing, Beaverton, OR":{"otf":4,"f45":1,"sl":3,"total":8},"Cedar Park, TX":{"otf":4,"f45":3,"sl":1,"total":8},"Centennial, CO":{"otf":2,"f45":2,"sl":0,"total":4},"Charlotte Blakeney, NC":{"otf":3,"f45":3,"sl":2,"total":8},"Chastain, GA":{"otf":4,"f45":4,"sl":5,"total":13},"Claymont, MO":{"otf":4,"f45":2,"sl":3,"total":9},"Clayton, MO":{"otf":5,"f45":2,"sl":2,"total":9},"Colleyville, TX":{"otf":2,"f45":2,"sl":4,"total":8},"Colony Place":{"otf":3,"f45":4,"sl":3,"total":10},"Colorado Springs, CO":{"otf":2,"f45":1,"sl":4,"total":7},"Commack, NY":{"otf":1,"f45":3,"sl":3,"total":7},"Concord, CA":{"otf":2,"f45":0,"sl":4,"total":6},"Coppell, TX":{"otf":2,"f45":0,"sl":2,"total":4},"Cornelius, NC":{"otf":1,"f45":4,"sl":2,"total":7},"Crescent Station, VA":{"otf":1,"f45":1,"sl":0,"total":2},"Cross Creek, TX":{"otf":1,"f45":4,"sl":2,"total":7},"Cross Timbers, Flower Mound, TX":{"otf":1,"f45":2,"sl":3,"total":6},"Daybreak, UT":{"otf":2,"f45":2,"sl":2,"total":6},"Des Peres, MO":{"otf":4,"f45":2,"sl":3,"total":9},"Dunwoody, GA":{"otf":3,"f45":2,"sl":3,"total":8},"East Boca, FL":{"otf":3,"f45":2,"sl":4,"total":9},"East Bradenton, FL":{"otf":1,"f45":3,"sl":2,"total":6},"East Brunswick, NJ":{"otf":1,"f45":1,"sl":1,"total":3},"East Pasadena, CA":{"otf":1,"f45":3,"sl":2,"total":6},"Elkridge, MD":{"otf":1,"f45":0,"sl":1,"total":2},"Encinitas, CA":{"otf":3,"f45":4,"sl":3,"total":10},"Fairfax City, VA":{"otf":5,"f45":5,"sl":1,"total":11},"Fairlawn, OH":{"otf":1,"f45":0,"sl":1,"total":2},"Falls Church, VA":{"otf":8,"f45":4,"sl":2,"total":14},"Fayetteville, NY":{"otf":1,"f45":0,"sl":0,"total":1},"Fishers Geist, IN":{"otf":1,"f45":3,"sl":2,"total":6},"Five Forks, Simpsonville, SC":{"otf":1,"f45":3,"sl":1,"total":5},"Fort Collins, CO":{"otf":2,"f45":1,"sl":1,"total":4},"Fort Mitchell, KY":{"otf":1,"f45":0,"sl":1,"total":2},"Fox Valley, Aurora, IL":{"otf":2,"f45":2,"sl":2,"total":6},"Franklin Lakes, NJ":{"otf":3,"f45":1,"sl":2,"total":6},"Geneva, IL":{"otf":1,"f45":1,"sl":1,"total":3},"Gleneagles, TX":{"otf":3,"f45":3,"sl":6,"total":12},"Glenview, IL":{"otf":3,"f45":0,"sl":2,"total":5},"Greensboro, NC":{"otf":0,"f45":0,"sl":1,"total":1},"Greenville, SC":{"otf":4,"f45":5,"sl":1,"total":10},"Hamilton Mill, Dacula, GA":{"otf":1,"f45":0,"sl":0,"total":1},"Haynes Bridge, Alpharetta, GA":{"otf":3,"f45":2,"sl":2,"total":7},"Highland, UT":{"otf":1,"f45":1,"sl":0,"total":2},"Highlands Ranch, CO":{"otf":2,"f45":1,"sl":2,"total":5},"Hilltop, Virginia Beach, VA":{"otf":1,"f45":1,"sl":2,"total":4},"Holladay, UT":{"otf":3,"f45":1,"sl":3,"total":7},"Huntington Beach, CA":{"otf":2,"f45":2,"sl":1,"total":5},"Irvine, CA":{"otf":3,"f45":2,"sl":3,"total":8},"Johns Creek, GA":{"otf":2,"f45":1,"sl":2,"total":5},"Juanita-Kirkland, WA":{"otf":4,"f45":6,"sl":3,"total":13},"Jupiter, FL":{"otf":2,"f45":1,"sl":3,"total":6},"Kaysville, UT":{"otf":1,"f45":2,"sl":1,"total":4},"King Farm, MD":{"otf":3,"f45":2,"sl":2,"total":7},"La Jolla, CA":{"otf":3,"f45":3,"sl":0,"total":6},"Lakeline, TX":{"otf":3,"f45":3,"sl":2,"total":8},"Layton, UT":{"otf":2,"f45":1,"sl":0,"total":3},"League City, TX":{"otf":1,"f45":0,"sl":1,"total":2},"Lincoln Park, IL":{"otf":14,"f45":6,"sl":5,"total":25},"Lincolnshire, IL":{"otf":3,"f45":0,"sl":1,"total":4},"Livingston, NJ":{"otf":1,"f45":3,"sl":2,"total":6},"Loveland, CO":{"otf":1,"f45":2,"sl":1,"total":4},"Madison East, WI":{"otf":1,"f45":1,"sl":0,"total":2},"Mason Deerfield, OH":{"otf":3,"f45":0,"sl":2,"total":5},"McKinney, TX":{"otf":2,"f45":2,"sl":1,"total":5},"Middleton, WI":{"otf":3,"f45":2,"sl":2,"total":7},"Moorestown, NJ":{"otf":2,"f45":3,"sl":2,"total":7},"Mt. Juliet, TN":{"otf":1,"f45":1,"sl":0,"total":2},"Murphy, TX":{"otf":1,"f45":1,"sl":1,"total":3},"Naperville, IL":{"otf":2,"f45":3,"sl":1,"total":6},"North Mansfield, TX":{"otf":1,"f45":1,"sl":1,"total":3},"NorthPointe, Ankeny, IA":{"otf":1,"f45":1,"sl":1,"total":3},"Northville, MI":{"otf":1,"f45":2,"sl":2,"total":5},"Novi, MI":{"otf":2,"f45":1,"sl":1,"total":4},"O\u2019Fallon, MO":{"otf":3,"f45":1,"sl":1,"total":5},"Oak Forest, Houston, TX":{"otf":3,"f45":5,"sl":3,"total":11},"Oak Hill, Austin, TX":{"otf":3,"f45":2,"sl":4,"total":9},"Old Tappan, NJ":{"otf":2,"f45":0,"sl":2,"total":4},"Old Town, Alexandria, VA":{"otf":6,"f45":5,"sl":2,"total":13},"Orinda, CA":{"otf":3,"f45":0,"sl":2,"total":5},"Overland Park, KS":{"otf":2,"f45":1,"sl":3,"total":6},"Palos Verdes, CA":{"otf":1,"f45":1,"sl":3,"total":5},"Paradise Valley, Phoenix, AZ":{"otf":1,"f45":1,"sl":6,"total":8},"Parkway Centre, NC":{"otf":1,"f45":1,"sl":1,"total":3},"Peachtree City, GA":{"otf":2,"f45":0,"sl":1,"total":3},"Peachtree Corners, GA":{"otf":2,"f45":2,"sl":2,"total":6},"Pine Township, Wexford, PA":{"otf":3,"f45":0,"sl":3,"total":6},"Pinecrest, FL":{"otf":3,"f45":3,"sl":4,"total":10},"Pinnacle Hills Rogers, AR":{"otf":3,"f45":14,"sl":1,"total":18},"Rancho Bernardo Heights, CA":{"otf":3,"f45":3,"sl":4,"total":10},"Reston, VA":{"otf":2,"f45":1,"sl":1,"total":4},"Riley Fuzzel, Spring, TX":{"otf":0,"f45":1,"sl":1,"total":2},"Riverside, CA":{"otf":0,"f45":0,"sl":1,"total":1},"Rochester, MI":{"otf":1,"f45":1,"sl":2,"total":4},"Rochester, NY":{"otf":2,"f45":0,"sl":2,"total":4},"Rock Hill, MO":{"otf":3,"f45":3,"sl":2,"total":8},"Rossmoor, CA":{"otf":3,"f45":1,"sl":3,"total":7},"Royal Oak, MI":{"otf":2,"f45":2,"sl":1,"total":5},"Saddle River, NJ":{"otf":3,"f45":0,"sl":4,"total":7},"Sandy Springs, GA":{"otf":4,"f45":3,"sl":4,"total":11},"Saugus, MA":{"otf":1,"f45":1,"sl":2,"total":4},"Schaumburg, IL":{"otf":2,"f45":1,"sl":0,"total":3},"Scottsdale Grayhawk, AZ":{"otf":2,"f45":3,"sl":5,"total":10},"Shallowford Falls, Marietta, GA":{"otf":3,"f45":1,"sl":1,"total":5},"Sienna, TX":{"otf":1,"f45":1,"sl":1,"total":3},"SLP/ St. Louis Park, MN":{"otf":2,"f45":2,"sl":4,"total":8},"Smithtown, NY":{"otf":2,"f45":1,"sl":3,"total":6},"South Las Vegas, NV":{"otf":5,"f45":2,"sl":3,"total":10},"South Naperville, IL":{"otf":2,"f45":2,"sl":2,"total":6},"South River MD":{"otf":1,"f45":1,"sl":2,"total":4},"South Tampa, FL":{"otf":5,"f45":5,"sl":4,"total":14},"South Tempe, AZ":{"otf":3,"f45":2,"sl":6,"total":11},"Southlake, TX":{"otf":2,"f45":2,"sl":5,"total":9},"Spring Creek, OK":{"otf":2,"f45":1,"sl":1,"total":4},"St Johns, FL":{"otf":2,"f45":1,"sl":1,"total":4},"Stonebrook Circle, Frisco, TX":{"otf":3,"f45":2,"sl":4,"total":9},"Strongsville, OH":{"otf":1,"f45":1,"sl":1,"total":3},"Summerfield, NC":{"otf":0,"f45":0,"sl":0,"total":0},"Summerlin, NV":{"otf":1,"f45":3,"sl":1,"total":5},"Sylvania, OH":{"otf":1,"f45":1,"sl":0,"total":2},"Tanque Verde, Tucson, AZ":{"otf":4,"f45":1,"sl":1,"total":6},"Taraval, San Francisco, CA":{"otf":3,"f45":4,"sl":3,"total":10},"Tega Cay, Fort Mill, SC":{"otf":2,"f45":1,"sl":2,"total":5},"Teravista Crossing, TX":{"otf":2,"f45":1,"sl":0,"total":3},"The Woodlands, TX":{"otf":2,"f45":4,"sl":4,"total":10},"Towson, MD":{"otf":0,"f45":3,"sl":3,"total":6},"Tustin, CA":{"otf":2,"f45":2,"sl":1,"total":5},"Twenty Mile Road, CO":{"otf":2,"f45":1,"sl":1,"total":4},"Vintage Park, TX":{"otf":1,"f45":1,"sl":1,"total":3},"Vista Village, CA":{"otf":0,"f45":0,"sl":0,"total":0},"Voss Rd, Houston, TX":{"otf":3,"f45":3,"sl":4,"total":10},"Wellington South, Lake Worth, FL":{"otf":1,"f45":3,"sl":1,"total":5},"West Arvada, CO":{"otf":3,"f45":2,"sl":1,"total":6},"West Chester, OH":{"otf":1,"f45":1,"sl":1,"total":3},"West Las Vegas, NV":{"otf":2,"f45":2,"sl":2,"total":6},"West Los Angeles, CA":{"otf":6,"f45":4,"sl":3,"total":13},"West Roswell, GA":{"otf":2,"f45":2,"sl":1,"total":5},"Westchase, Tampa, FL":{"otf":1,"f45":2,"sl":1,"total":4},"Westport, Norwalk, CT":{"otf":1,"f45":2,"sl":4,"total":7},"Wheaton, IL":{"otf":3,"f45":3,"sl":1,"total":7},"Wildwood, MO":{"otf":0,"f45":1,"sl":0,"total":1},"Windermere, GA":{"otf":2,"f45":2,"sl":2,"total":6},"Winter Park, Casselberry, FL":{"otf":3,"f45":5,"sl":3,"total":11},"Woodinville, WA":{"otf":3,"f45":9,"sl":2,"total":14},"Alloy Eastside | Greenville, SC":{"otf":2,"f45":2,"sl":1,"total":5},"Alloy Rosewood | Columbia, SC":{"otf":2,"f45":2,"sl":2,"total":6}},"metros":{"Sacramento":{"otf":7,"f45":6,"sl":3,"total":16},"Columbus":{"otf":19,"f45":2,"sl":7,"total":28},"Providence":{"otf":3,"f45":1,"sl":4,"total":8},"Milwaukee":{"otf":7,"f45":3,"sl":4,"total":14},"Louisville":{"otf":6,"f45":2,"sl":3,"total":11},"Memphis":{"otf":1,"f45":1,"sl":1,"total":3},"Richmond":{"otf":4,"f45":4,"sl":3,"total":11},"New Orleans":{"otf":4,"f45":3,"sl":1,"total":8},"Buffalo":{"otf":4,"f45":4,"sl":6,"total":14},"Hartford":{"otf":5,"f45":4,"sl":3,"total":12},"Tulsa":{"otf":3,"f45":1,"sl":4,"total":8},"Omaha":{"otf":6,"f45":2,"sl":2,"total":10},"Albuquerque":{"otf":3,"f45":1,"sl":3,"total":7},"Boise":{"otf":3,"f45":3,"sl":3,"total":9},"Little Rock":{"otf":4,"f45":0,"sl":1,"total":5},"Spokane":{"otf":5,"f45":0,"sl":3,"total":8}}};
 
 // ── State timezone map ──
 const STATE_TZ = {
@@ -835,13 +855,16 @@ SBA_LOANS.forEach(ln=>{ if(ln.loc){ const e=sbaByLoc[ln.loc]||(sbaByLoc[ln.loc]=
 const fmtUSD = n => n>=1e6 ? '$'+(n/1e6).toFixed(n>=1e7?1:2)+'M' : n>=1e3 ? '$'+Math.round(n/1e3)+'K' : '$'+n;
 
 // ── Estimated revenue (FDD Item 19 maturity-cohort average by opening year) ──
+// Cohort mapping is derived from the FDD's measurement year so it stays correct
+// when a new FDD auto-refreshes: age at period end = measurementYear − openYear.
+const ITEM19_YEAR = (()=>{ const m=(ITEM19.period||'').match(/20\d\d/); return m?+m[0]:null; })();
 function estRevenue(l){
-  const mat=ITEM19.revenue_by_maturity; if(!mat||l.coming_soon||!l.y) return null;
-  const y=+l.y;
-  if(y<=2022) return (mat['Open 36+ Months']||{}).avg;
-  if(y===2023) return (mat['Open 24-36 Months']||{}).avg;
-  if(y===2024) return (mat['Open 12-24 Months']||{}).avg;
-  return null;   // 2025+ still ramping (Item 19 cohorts begin at 12 months open)
+  const mat=ITEM19.revenue_by_maturity; if(!mat||!ITEM19_YEAR||l.coming_soon||!l.y) return null;
+  const age=ITEM19_YEAR-(+l.y);           // years open at end of the measurement period
+  if(age>=3)  return (mat['Open 36+ Months']||{}).avg;
+  if(age===2) return (mat['Open 24-36 Months']||{}).avg;
+  if(age===1) return (mat['Open 12-24 Months']||{}).avg;
+  return null;   // opened during/after the measurement year — still ramping
 }
 function estRevHtml(l,baseClass){
   const r=estRevenue(l); if(!r) return '';
@@ -867,6 +890,40 @@ function trendHtml(l,baseClass){
   if(t.lost_listing) bits.push('⚠️ Google listing lost');
   if(!bits.length) return '';
   return `<div class="${baseClass}" title="Change ${TRENDS.period.from} → ${TRENDS.period.to}">${bits.join(' · ')}</div>`;
+}
+
+// ── Market intelligence (Census demographics + competitor density) ──
+function zipOf(a){ const z=(a||'').match(/\b\d{5}\b/g); return z?z[z.length-1]:null; }
+function demogOf(l){ return (DEMOG.zips||{})[zipOf(l.a)]||null; }
+function compOf(l){ return (COMPETITORS.locations||{})[l.n]||null; }
+// Site quality (0-100): trade-area income 50% + population 25% + competitive openness 25%
+let _sqReady=false;
+function computeSiteQuality(){
+  if(_sqReady || !DEMOG.zips) return;
+  const rows=LOCATIONS.map(l=>({l,d:demogOf(l),c:compOf(l)}));
+  const incs=rows.filter(r=>r.d&&r.d.inc!=null).map(r=>r.d.inc);
+  const pops=rows.filter(r=>r.d&&r.d.pop!=null).map(r=>r.d.pop);
+  if(!incs.length) return;
+  const mnI=Math.min(...incs),mxI=Math.max(...incs),mnP=Math.min(...pops),mxP=Math.max(...pops);
+  rows.forEach(r=>{
+    if(!r.d || r.d.inc==null){ r.l._sq=null; return; }
+    const ni=mxI>mnI?(r.d.inc-mnI)/(mxI-mnI):.5;
+    const np=(r.d.pop!=null&&mxP>mnP)?(r.d.pop-mnP)/(mxP-mnP):.5;
+    const nc=r.c? 1-Math.min(r.c.total,6)/6 : .5;
+    r.l._sq=Math.round(100*(0.5*ni+0.25*np+0.25*nc));
+  });
+  _sqReady=true;
+}
+function sqTier(s){ return s==null?'na': s>=70?'high': s>=50?'mid': s>=35?'low':'poor'; }
+const SQ_COLOR={high:'#059669',mid:'#84cc16',low:'#d97706',poor:'#dc2626',na:'#e5e7eb'};
+function marketHtml(l,baseClass){
+  const d=demogOf(l), c=compOf(l);
+  if(!d&&!c) return '';
+  const bits=[];
+  if(d&&d.inc!=null) bits.push(`💰 ${fmtUSD(d.inc)} income`);
+  if(c) bits.push(`🥊 ${c.total} competitor${c.total!==1?'s':''} ≤5mi`);
+  const sq=l._sq!=null?` <span class="mi-sq sq-${sqTier(l._sq)}" title="Site quality (income × population × competitive openness)">${l._sq}</span>`:'';
+  return `<div class="${baseClass}" title="Trade area (zip): ${DEMOG.source||'Census ACS'} · competitors: ${(COMPETITORS.brands||[]).join(', ')} within 5 mi">${bits.join(' · ')}${sq}</div>`;
 }
 
 function sbaHtml(l,baseClass){
@@ -972,6 +1029,7 @@ LOCATIONS.forEach(l=>{
     sbaHtml(l,'pop-sba')+
     estRevHtml(l,'pop-er')+
     trendHtml(l,'pop-tr')+
+    marketHtml(l,'pop-mi')+
     `<div class="pop-tags">${tags}</div>`+
     hoursHtml+
     (l.p ? `<div style="font-size:12px;margin-bottom:6px">📞 <a href="tel:${l.p}" style="color:var(--red)">${l.p}</a></div>` : '')+
@@ -1001,7 +1059,7 @@ ratingBuckets.forEach(b=>{
 });
 
 // ── Filter state ──
-let filterStatus='all', filterOpenNow=false, activeCard=null, colorByRating=false, colorByOwner=false, colorByMomentum=false;
+let filterStatus='all', filterOpenNow=false, activeCard=null, colorByRating=false, colorByOwner=false, colorByMomentum=false, colorBySQ=false;
 
 const MOMENTUM_COLOR={hot:'#ea580c',warm:'#f59e0b','new':'#3b82f6',watch:'#dc2626',steady:'#cbd5e1'};
 function colorForMomentum(l){
@@ -1011,6 +1069,7 @@ function colorForMomentum(l){
 
 // Recolor markers: by momentum, operator, or rating tier when toggled on, else by status (soon/open/live)
 function iconFor(l){
+  if(colorBySQ) return makeColorIcon(SQ_COLOR[sqTier(l._sq)]);
   if(colorByMomentum) return makeColorIcon(colorForMomentum(l));
   if(colorByOwner)  return makeColorIcon(colorForOperator(l));
   if(colorByRating && !l.coming_soon) return makeRatingIcon(ratingTier(l.rating));
@@ -1086,6 +1145,7 @@ function renderList(items){
       sbaHtml(l,'card-sba')+
       estRevHtml(l,'card-er')+
       trendHtml(l,'card-tr')+
+      marketHtml(l,'card-mi')+
       `<div class="card-actions">`+
         (l.p ? `<a href="tel:${l.p}">${l.p}</a>` : '')+
         `<a href="${dirLink(l)}" target="_blank" rel="noopener">Directions</a>`+
@@ -1381,7 +1441,7 @@ function showWatchlist(){
 let _opMetricsReady=false;
 function computeOperatorMetrics(){
   if(_opMetricsReady) return;
-  const CUR_YEAR=2026;
+  const CUR_YEAR=new Date().getFullYear();
   operatorList.forEach(op=>{
     const rated=op.locs.filter(l=>l.rating!=null);
     op.avgRating=rated.length ? rated.reduce((s,l)=>s+l.rating,0)/rated.length : null;
@@ -1517,12 +1577,33 @@ document.getElementById('opSort').addEventListener('change',e=>{ opSortMode=e.ta
 
 // ── Whitespace ──
 function renderWhitespace(){
+  // Opportunity score: population 40% + median income 35% + competitive openness 25%
+  const md=DEMOG.metros||{}, mc=COMPETITORS.metros||{};
+  const rows=WHITESPACE.map(w=>{
+    const inc=(md[w.name]||{}).inc, comp=(mc[w.name]||{}).total;
+    return {w,inc,comp};
+  });
+  const incs=rows.filter(r=>r.inc!=null).map(r=>r.inc);
+  const pops=rows.map(r=>r.w.pop);
+  const scored=incs.length>0;
+  if(scored){
+    const mnI=Math.min(...incs),mxI=Math.max(...incs),mnP=Math.min(...pops),mxP=Math.max(...pops);
+    rows.forEach(r=>{
+      const ni=r.inc!=null&&mxI>mnI?(r.inc-mnI)/(mxI-mnI):.5;
+      const np=mxP>mnP?(r.w.pop-mnP)/(mxP-mnP):.5;
+      const nc=r.comp!=null?1-Math.min(r.comp,20)/20:.5;
+      r.score=Math.round(100*(0.4*np+0.35*ni+0.25*nc));
+    });
+    rows.sort((a,b)=>b.score-a.score);
+  }
   document.getElementById('ws-headline').textContent=`${WHITESPACE.length} major U.S. metros without an Alloy`;
-  document.getElementById('ws-list').innerHTML=WHITESPACE.map((w,i)=>`
-    <div class="ws-row" data-lat="${w.lat}" data-lng="${w.lng}">
+  document.getElementById('ws-list').innerHTML=rows.map((r,i)=>`
+    <div class="ws-row" data-lat="${r.w.lat}" data-lng="${r.w.lng}">
       <div class="ws-rank">${i+1}</div>
-      <div class="ws-info"><div class="ws-name">${w.name}</div><div class="ws-meta">${w.state} metro area</div></div>
-      <div class="ws-pop">${(w.pop/1e6).toFixed(1)}M</div>
+      <div class="ws-info"><div class="ws-name">${r.w.name}</div>
+        <div class="ws-meta">${(r.w.pop/1e6).toFixed(1)}M metro${r.inc!=null?` · 💰 ${fmtUSD(r.inc)}`:''}${r.comp!=null?` · 🥊 ${r.comp} ≤15mi`:''}</div>
+      </div>
+      ${scored?`<div class="op-score t-${scoreTier(r.score)}" title="Opportunity: population × income × competitive openness">${r.score}</div>`:`<div class="ws-pop">${(r.w.pop/1e6).toFixed(1)}M</div>`}
       <div class="ws-go">›</div>
     </div>`).join('');
   document.querySelectorAll('.ws-row').forEach(row=>{
@@ -1578,6 +1659,7 @@ const COLOR_MODES=[
   {key:'rating',   toggle:'toggleRating',   legend:'rating-legend',   set:v=>colorByRating=v},
   {key:'owner',    toggle:'toggleOwner',    legend:'owner-legend',    set:v=>colorByOwner=v},
   {key:'momentum', toggle:'toggleMomentum', legend:'momentum-legend', set:v=>colorByMomentum=v},
+  {key:'sq',       toggle:'toggleSQ',       legend:'sq-legend',       set:v=>colorBySQ=v},
 ];
 COLOR_MODES.forEach(mode=>{
   document.getElementById(mode.toggle).addEventListener('change',e=>{
@@ -1622,7 +1704,9 @@ function marketData(){
   LOCATIONS.forEach(l=>{ if(l.m){ (byMetro[l.m]=byMetro[l.m]||[]).push(l); } });
   const arr=Object.entries(byMetro).map(([name,locs])=>{
     const rated=locs.filter(l=>l.rating!=null), ops=new Set(locs.map(operatorOf).filter(Boolean));
+    const incs=locs.map(l=>(demogOf(l)||{}).inc).filter(v=>v!=null);
     return { name, locs, units:locs.length, operators:ops.size,
+      income: incs.length?Math.round(incs.reduce((s,v)=>s+v,0)/incs.length):null,
       avgRating: rated.length? rated.reduce((s,l)=>s+l.rating,0)/rated.length : null,
       estRevenue: locs.reduce((s,l)=>s+(estRevenue(l)||0),0),
       sba: locs.reduce((s,l)=>s+((sbaByLoc[l.n]||{}).total||0),0),
@@ -1701,7 +1785,7 @@ function renderMarkets(){
       <div class="mkt-rank">${i+1}</div>
       <div class="mkt-info">
         <div class="mkt-name">${m.name}</div>
-        <div class="mkt-meta"><span><b>${m.units}</b> units</span><span><b>${m.operators}</b> op${m.operators>1?'s':''}</span>${m.estRevenue?`<span>📈 ${fmtUSD(m.estRevenue)}</span>`:''}${m.avgRating!=null?`<span>★ ${m.avgRating.toFixed(1)}</span>`:''}</div>
+        <div class="mkt-meta"><span><b>${m.units}</b> units</span><span><b>${m.operators}</b> op${m.operators>1?'s':''}</span>${m.estRevenue?`<span>📈 ${fmtUSD(m.estRevenue)}</span>`:''}${m.income?`<span>💰 ${fmtUSD(m.income)}</span>`:''}${m.avgRating!=null?`<span>★ ${m.avgRating.toFixed(1)}</span>`:''}</div>
       </div>
       <div class="op-score t-${scoreTier(m.score)}">${m.score}</div>
     </div>`).join('');
@@ -1738,8 +1822,18 @@ function renderValuation(){
   const margin=(+document.getElementById('val-margin').value||20)/100;
   const mult=+document.getElementById('val-mult').value||5;
   const ops=[...basket].map(operatorByName).filter(Boolean);
-  const scope=ops.length?'basket':'network';
-  const rev=ops.length? ops.reduce((s,o)=>s+o.estRevenue,0) : LOCATIONS.reduce((s,l)=>s+(estRevenue(l)||0),0);
+  // scope label states actual coverage: est. revenue exists only for units old
+  // enough to have an Item 19 cohort (opened before the measurement year)
+  let rev, scope;
+  if(ops.length){
+    rev=ops.reduce((s,o)=>s+o.estRevenue,0);
+    const cov=ops.reduce((s,o)=>s+o.locs.filter(l=>estRevenue(l)).length,0);
+    scope=`basket (${cov} of ${ops.reduce((s,o)=>s+o.count,0)} units est.)`;
+  }else{
+    const est=LOCATIONS.filter(l=>estRevenue(l));
+    rev=est.reduce((s,l)=>s+estRevenue(l),0);
+    scope=`${est.length} established units (of ${LOCATIONS.length})`;
+  }
   const ebitda=rev*margin, ev=ebitda*mult;
   document.getElementById('ov-val-out').innerHTML=`<div class="basket-sum" style="grid-template-columns:1fr 1fr 1fr">
       <div class="ov-kpi"><div class="v">${fmtUSD(rev)}</div><div class="l">Est. revenue · ${scope}</div></div>
@@ -1751,6 +1845,7 @@ document.getElementById('mktSort').addEventListener('change',e=>{ mktSortMode=e.
 ['val-margin','val-mult'].forEach(id=>document.getElementById(id).addEventListener('input',renderValuation));
 
 // ── Init ──
+computeSiteQuality();
 renderList(LOCATIONS);
 renderAnalytics();
 renderSbaAnalytics();
