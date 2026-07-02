@@ -44,12 +44,15 @@ PLIST
 emit "com.alloymap.monthly" "locations" \
 '  <dict><key>Day</key><integer>1</integer><key>Hour</key><integer>6</integer><key>Minute</key><integer>0</integer></dict>'
 
+# SBA posts each quarter's FOIA file ~4 weeks after quarter-end (e.g. the
+# "as of Mar 31" file landed Apr 28), so run on Feb/May/Aug/Nov 1 to catch
+# each new file — Jan/Apr/Jul/Oct 1 would always be a quarter stale.
 emit "com.alloymap.quarterly" "sba" \
 '  <array>
-    <dict><key>Month</key><integer>1</integer><key>Day</key><integer>1</integer><key>Hour</key><integer>7</integer><key>Minute</key><integer>0</integer></dict>
-    <dict><key>Month</key><integer>4</integer><key>Day</key><integer>1</integer><key>Hour</key><integer>7</integer><key>Minute</key><integer>0</integer></dict>
-    <dict><key>Month</key><integer>7</integer><key>Day</key><integer>1</integer><key>Hour</key><integer>7</integer><key>Minute</key><integer>0</integer></dict>
-    <dict><key>Month</key><integer>10</integer><key>Day</key><integer>1</integer><key>Hour</key><integer>7</integer><key>Minute</key><integer>0</integer></dict>
+    <dict><key>Month</key><integer>2</integer><key>Day</key><integer>1</integer><key>Hour</key><integer>7</integer><key>Minute</key><integer>0</integer></dict>
+    <dict><key>Month</key><integer>5</integer><key>Day</key><integer>1</integer><key>Hour</key><integer>7</integer><key>Minute</key><integer>0</integer></dict>
+    <dict><key>Month</key><integer>8</integer><key>Day</key><integer>1</integer><key>Hour</key><integer>7</integer><key>Minute</key><integer>0</integer></dict>
+    <dict><key>Month</key><integer>11</integer><key>Day</key><integer>1</integer><key>Hour</key><integer>7</integer><key>Minute</key><integer>0</integer></dict>
   </array>'
 
 emit "com.alloymap.annual" "fdd" \
