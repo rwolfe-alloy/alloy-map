@@ -12,7 +12,7 @@ Legend — **Impact**: ⭐ high / ◐ medium / ○ nice-to-have · **Effort**: S
 
 - **Theme 1 — Synthesis & decision layer** ✅ *(Phase 10)* — Executive **Overview tab**: hero KPIs, auto-generated **deal memo**, **Top-Markets** rollup ranking, **acquisition basket** builder, **implied-valuation** lens.
 - **Theme 2 — Market intelligence** *(next)* — demographics (Census), competitor density (Places), site-quality / market-attractiveness score, drive-time trade areas.
-- **Theme 3 — Time & trajectory** — growth time-lapse, projected-openings pipeline map (FDD Item 20 Table 5), cohort/ramp analysis.
+- **Theme 3 — Time & trajectory** — growth time-lapse, projected-openings pipeline map (FDD Item 20 Table 5), cohort/ramp analysis. *Partially started (Phase 11): snapshot-based **Trending** — review-velocity leaderboard, momentum map layer, watch list.*
 - **Theme 4 — Context & credibility** — peer-franchise benchmarking, franchise economics (FDD Items 5–7), methodology/sources page.
 - **Theme 5 — Presentation** — one-click PDF report, dark mode, mobile polish.
 

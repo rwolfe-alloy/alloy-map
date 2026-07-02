@@ -55,11 +55,13 @@ esac
 
 # Snapshot + changelog of what changed (vs last committed version), before rebuild
 run $PY snapshot.py "$(date '+%Y-%m-%d')"
+# Distill snapshots into trend data (needs 2+ snapshots; harmless no-op before that)
+$PY build_trends.py >>"$LOG" 2>&1 || log "WARN: trend build failed (keeping previous)."
 
 run $PY rebuild_index.py
 
 # Commit + push only if tracked data actually changed
-git add alloy_enriched.json alloy_sba_loans.json alloy_item19.json alloy_churn.json index.html CHANGELOG.md snapshots 2>/dev/null
+git add alloy_enriched.json alloy_sba_loans.json alloy_item19.json alloy_churn.json alloy_trends.json index.html CHANGELOG.md snapshots 2>/dev/null
 if git diff --cached --quiet; then
   log "No data changes — nothing to commit."
 elif [ -n "$DRY_RUN" ]; then

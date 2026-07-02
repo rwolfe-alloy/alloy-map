@@ -34,6 +34,8 @@ A self-contained interactive map of all Alloy Personal Training franchise locati
 | `alloy_item19.json` | Parsed Item 19 figures — embedded into `index.html` as `ITEM19` |
 | `parse_churn.py` | Parses FDD **Item 20** outlet flow + **Exhibit E** (departed franchisees) → `alloy_churn.json` |
 | `alloy_churn.json` | Systemwide outlet open/close by year + departed-franchisee list — embedded as `CHURN` |
+| `build_trends.py` | Distills `snapshots/` into month-over-month trends (review velocity, rating moves, went-live, lost listings) → `alloy_trends.json` |
+| `alloy_trends.json` | Network series + latest-period per-location deltas — embedded as `TRENDS` |
 | `CHANGELOG.md` | Auto-generated history of data changes (new/dropped locations, rating/owner/status changes) |
 | `snapshots/` | Dated point-in-time copies of the dataset (the time-series record) |
 | `ROADMAP.md` | Prioritized next-phase backlog |
@@ -118,6 +120,7 @@ Each record has these fields:
 - **SBA 7(a) Financing section** *(Phase 6)*: stat cards (capital deployed, loans, avg loan, jobs supported) + "Loans Approved by Year" and "Top SBA Lenders" charts
 - **Unit Economics section (FDD Item 19)** *(Phase 8)*: System AUV, avg members/unit, revenue/member, monthly retention + "Avg Revenue by Maturity" and "by Quartile" charts
 - **Network Churn section (FDD Item 20 + Exhibit E)** *(Phase 9)*: outlet survival rate, closures, transfers, never-opened + year-end outlet chart + departed-franchisees modal (reason-coded). Snapshot diffs extend it over time.
+- **Trending section (snapshot deltas)** *(Phase 11)*: hottest location, opened-this-period, gainers, watch-list stat cards + "Fastest-Growing Locations" (review velocity /mo) and network-by-snapshot charts + watch-list modal (declines & lost Google listings). Deepens automatically as monthly snapshots accumulate.
 - Bar charts: Rating Distribution, Openings by Year, By Region, Top 12 States
 
 ### Sidebar — Ownership Tab *(Phase 5–7)*
@@ -137,7 +140,8 @@ Each record has these fields:
 - **Coverage radius** — 1 / 2 / 5 / 10 mile selectable circles; rebuilds on size change
 - **Whitespace metros** — gray pins for the 16 uncovered metros
 - **Color by rating** — recolors live pins green/amber/red by Google ★ tier
-- **Color by operator** — recolors pins by franchisee operator (multi-unit each a distinct color); mutually exclusive with Color by rating
+- **Color by operator** — recolors pins by franchisee operator (multi-unit each a distinct color)
+- **Color by momentum** *(Phase 11)* — recolors pins by review velocity (🔥 hot ≥15/mo, growing, opened-this-period, listing-lost, steady); the three color modes are mutually exclusive
 
 ### Popup / Cards (per location)
 - Name with green "open now" dot or amber "Coming Soon" badge
@@ -146,6 +150,7 @@ Each record has these fields:
 - Franchisee owner + entity with operator color dot + "N units" badge *(Phase 5)*
 - **SBA 7(a) funding badge** — total + loan count for funded locations *(Phase 6)*
 - **Estimated revenue** — FDD Item 19 maturity-cohort average by opening year (labeled estimate) *(Phase 8)*
+- **Momentum badge** — 🔥/▲ review velocity, rating moves, 🆕 opened-this-period, ⚠️ listing-lost *(Phase 11)*
 - Collapsible hours schedule (today's day highlighted in red)
 - Phone, Directions, Details links · IG / FB / email links
 
