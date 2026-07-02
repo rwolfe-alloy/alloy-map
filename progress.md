@@ -148,7 +148,7 @@ Each record has these fields:
 - **Color by rating** — recolors live pins green/amber/red by Google ★ tier
 - **Color by operator** — recolors pins by franchisee operator (multi-unit each a distinct color)
 - **Color by momentum** *(Phase 11)* — recolors pins by review velocity (🔥 hot ≥15/mo, growing, opened-this-period, listing-lost, steady)
-- **Color by site quality** *(Phase 12 / Theme 2)* — recolors pins by trade-area score (income 50% × population 25% × competitive openness 25%); all four color modes are mutually exclusive
+- **Color by site quality** *(Phase 12 / Theme 2)* — recolors pins by trade-area score: income **on the national scale** ($55K→0, $160K→1) 55% × population 20% × **competition fit** 25% (1–5 nearby studios validate a market; only saturation penalizes). All four color modes are mutually exclusive
 
 ### Popup / Cards (per location)
 - Name with green "open now" dot or amber "Coming Soon" badge

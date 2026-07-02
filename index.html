@@ -657,7 +657,7 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Ro
       <div class="legend-row"><div class="legend-swatch" style="background:#e5e7eb"></div> Coming soon / n·a</div>
     </div>
     <div id="sq-legend">
-      <h4>Site quality <span>· income × pop × openness</span></h4>
+      <h4>Site quality <span>· income (national scale) × pop × competition fit</span></h4>
       <div class="legend-row"><div class="legend-swatch" style="background:#059669"></div> Prime (70+)</div>
       <div class="legend-row"><div class="legend-swatch" style="background:#84cc16"></div> Strong (50–70)</div>
       <div class="legend-row"><div class="legend-swatch" style="background:#d97706"></div> Fair (35–50)</div>
@@ -896,21 +896,29 @@ function trendHtml(l,baseClass){
 function zipOf(a){ const z=(a||'').match(/\b\d{5}\b/g); return z?z[z.length-1]:null; }
 function demogOf(l){ return (DEMOG.zips||{})[zipOf(l.a)]||null; }
 function compOf(l){ return (COMPETITORS.locations||{})[l.n]||null; }
-// Site quality (0-100): trade-area income 50% + population 25% + competitive openness 25%
+// Site quality (0-100): income 55% + population 20% + competition fit 25%.
+// Income is anchored to the NATIONAL scale ($55K→0, $160K≈2× US median→1), not
+// min-maxed against Alloy's own (affluent) portfolio — otherwise a nationally
+// wealthy zip like Middleton WI ($101K) grades "weak" just because Orinda CA
+// ($250K) stretches the curve. Competition uses a sweet-spot curve: nearby
+// boutique studios VALIDATE a market (1-5 is ideal); only saturation penalizes.
+function sqCompetitionFit(c){
+  if(c==null) return .5;
+  if(c===0)  return .6;                        // unproven market
+  if(c<=5)   return 1.0-(c-1)*0.0375;          // 1→1.0 … 5→0.85 (validated)
+  if(c<=10)  return 0.85-(c-5)*0.06;           // 6→0.79 … 10→0.55 (crowded)
+  return Math.max(.25, 0.55-(c-10)*0.03);      // saturated
+}
 let _sqReady=false;
 function computeSiteQuality(){
   if(_sqReady || !DEMOG.zips) return;
-  const rows=LOCATIONS.map(l=>({l,d:demogOf(l),c:compOf(l)}));
-  const incs=rows.filter(r=>r.d&&r.d.inc!=null).map(r=>r.d.inc);
-  const pops=rows.filter(r=>r.d&&r.d.pop!=null).map(r=>r.d.pop);
-  if(!incs.length) return;
-  const mnI=Math.min(...incs),mxI=Math.max(...incs),mnP=Math.min(...pops),mxP=Math.max(...pops);
-  rows.forEach(r=>{
-    if(!r.d || r.d.inc==null){ r.l._sq=null; return; }
-    const ni=mxI>mnI?(r.d.inc-mnI)/(mxI-mnI):.5;
-    const np=(r.d.pop!=null&&mxP>mnP)?(r.d.pop-mnP)/(mxP-mnP):.5;
-    const nc=r.c? 1-Math.min(r.c.total,6)/6 : .5;
-    r.l._sq=Math.round(100*(0.5*ni+0.25*np+0.25*nc));
+  LOCATIONS.forEach(l=>{
+    const d=demogOf(l), c=compOf(l);
+    if(!d || d.inc==null){ l._sq=null; return; }
+    const ni=Math.max(0,Math.min(1,(d.inc-55000)/105000));
+    const np=d.pop!=null?Math.min(d.pop/35000,1):.5;
+    const nc=sqCompetitionFit(c?c.total:null);
+    l._sq=Math.round(100*(0.55*ni+0.20*np+0.25*nc));
   });
   _sqReady=true;
 }
@@ -922,7 +930,7 @@ function marketHtml(l,baseClass){
   const bits=[];
   if(d&&d.inc!=null) bits.push(`💰 ${fmtUSD(d.inc)} income`);
   if(c) bits.push(`🥊 ${c.total} competitor${c.total!==1?'s':''} ≤5mi`);
-  const sq=l._sq!=null?` <span class="mi-sq sq-${sqTier(l._sq)}" title="Site quality (income × population × competitive openness)">${l._sq}</span>`:'';
+  const sq=l._sq!=null?` <span class="mi-sq sq-${sqTier(l._sq)}" title="Site quality: trade-area income on the national scale (55%), population (20%), competition fit (25% — some competitors validate a market; saturation penalizes)">${l._sq}</span>`:'';
   return `<div class="${baseClass}" title="Trade area (zip): ${DEMOG.source||'Census ACS'} · competitors: ${(COMPETITORS.brands||[]).join(', ')} within 5 mi">${bits.join(' · ')}${sq}</div>`;
 }
 
