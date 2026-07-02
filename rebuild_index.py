@@ -21,6 +21,7 @@ churn = json.dumps(json.load(open("alloy_churn.json")), separators=(",", ":")) i
 trends = json.dumps(json.load(open("alloy_trends.json")), separators=(",", ":")) if os.path.exists("alloy_trends.json") else "{}"
 demog = json.dumps(json.load(open("alloy_demog.json")), separators=(",", ":")) if os.path.exists("alloy_demog.json") else "{}"
 comp = json.dumps(json.load(open("alloy_competitors.json")), separators=(",", ":")) if os.path.exists("alloy_competitors.json") else "{}"
+pipe = json.dumps(json.load(open("alloy_pipeline.json")), separators=(",", ":")) if os.path.exists("alloy_pipeline.json") else "{}"
 
 html = open("index.html").read()
 # lambda replacement avoids re interpreting backslash escapes (e.g. \u) in the JSON
@@ -32,9 +33,10 @@ html, n5 = re.subn(r"const CHURN = \{.*?\};",       lambda m: f"const CHURN = {c
 html, n6 = re.subn(r"const TRENDS = \{.*?\};",      lambda m: f"const TRENDS = {trends};",  html, count=1)
 html, n7 = re.subn(r"const DEMOG = \{.*?\};",       lambda m: f"const DEMOG = {demog};",    html, count=1)
 html, n8 = re.subn(r"const COMPETITORS = \{.*?\};", lambda m: f"const COMPETITORS = {comp};", html, count=1)
+html, n9 = re.subn(r"const PIPELINE = \{.*?\};",    lambda m: f"const PIPELINE = {pipe};",   html, count=1)
 
-if min(n1, n2, n3, n4, n5, n6, n7, n8) != 1:
-    raise SystemExit(f"!! Replacement failed (LOCATIONS={n1}, WHITESPACE={n2}, SBA_LOANS={n3}, ITEM19={n4}, CHURN={n5}, TRENDS={n6}, DEMOG={n7}, COMPETITORS={n8}). index.html not modified.")
+if min(n1, n2, n3, n4, n5, n6, n7, n8, n9) != 1:
+    raise SystemExit(f"!! Replacement failed (LOCATIONS={n1}, WHITESPACE={n2}, SBA_LOANS={n3}, ITEM19={n4}, CHURN={n5}, TRENDS={n6}, DEMOG={n7}, COMPETITORS={n8}, PIPELINE={n9}). index.html not modified.")
 
 open("index.html", "w").write(html)
 print(f"Rebuilt index.html — {len(json.loads(enr))} locations, {len(json.loads(ws))} whitespace metros, "

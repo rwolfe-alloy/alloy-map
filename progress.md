@@ -33,6 +33,7 @@ A self-contained interactive map of all Alloy Personal Training franchise locati
 | `parse_item19.py` | Parses FDD **Item 19** (financial performance) → `alloy_item19.json` (revenue by quartile/maturity, memberships, retention) |
 | `alloy_item19.json` | Parsed Item 19 figures — embedded into `index.html` as `ITEM19` |
 | `parse_churn.py` | Parses FDD **Item 20** outlet flow + **Exhibit E** (departed franchisees) → `alloy_churn.json` |
+| `parse_pipeline.py` | Parses FDD **Item 20 Table 5** (projected openings) → `alloy_pipeline.json` (signed/projected by state) — embedded as `PIPELINE` |
 | `alloy_churn.json` | Systemwide outlet open/close by year + departed-franchisee list — embedded as `CHURN` |
 | `build_trends.py` | Distills `snapshots/` into month-over-month trends (review velocity, rating moves, went-live, lost listings) → `alloy_trends.json` |
 | `validate.py` | **Data validation gate** — sanity bounds on every dataset; runs in `refresh.sh` before commit, a failure aborts the push |
@@ -99,6 +100,7 @@ Each record has these fields:
 
 ### Map
 - Leaflet + MarkerCluster (CARTO light basemap)
+- **▶ Growth time-lapse** *(Phase 13 / Theme 3)*: animates the network 2021→2026 with play/pause + year scrubber; new-year openings pop in amber
 - **Red pins** — live locations
 - **Green pins** — currently open (timezone-aware, refreshes every 60s)
 - **Dashed amber pins** — coming soon locations
@@ -125,6 +127,7 @@ Each record has these fields:
 - **SBA 7(a) Financing section** *(Phase 6)*: stat cards (capital deployed, loans, avg loan, jobs supported) + "Loans Approved by Year" and "Top SBA Lenders" charts
 - **Unit Economics section (FDD Item 19)** *(Phase 8)*: System AUV, avg members/unit, revenue/member, monthly retention + "Avg Revenue by Maturity" and "by Quartile" charts
 - **Network Churn section (FDD Item 20 + Exhibit E)** *(Phase 9)*: outlet survival rate, closures, transfers, never-opened + year-end outlet chart + departed-franchisees modal (reason-coded). Snapshot diffs extend it over time.
+- **Growth & Pipeline section** *(Phase 13 / Theme 3)*: signed-but-unopened agreements (61) + projected next-FY openings (48) stat cards, pipeline-by-state chart, cumulative-locations chart, and **cohort ramp/quality** charts (avg reviews & avg rating by opening-year cohort)
 - **Trending section (snapshot deltas)** *(Phase 11)*: hottest location, opened-this-period, gainers, watch-list stat cards + "Fastest-Growing Locations" (review velocity /mo) and network-by-snapshot charts + watch-list modal (declines & lost Google listings). Deepens automatically as monthly snapshots accumulate.
 - Bar charts: Rating Distribution, Openings by Year, By Region, Top 12 States
 

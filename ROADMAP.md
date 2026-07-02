@@ -12,7 +12,7 @@ Legend — **Impact**: ⭐ high / ◐ medium / ○ nice-to-have · **Effort**: S
 
 - **Theme 1 — Synthesis & decision layer** ✅ *(Phase 10)* — Executive **Overview tab**: hero KPIs, auto-generated **deal memo**, **Top-Markets** rollup ranking, **acquisition basket** builder, **implied-valuation** lens.
 - **Theme 2 — Market intelligence** ✅ *(Phase 12)* — Census ACS demographics (zip + CBSA), competitor density (OTF/F45/StretchLab via Places), **site-quality score** + map layer, **scored Whitespace ranking**, income in Top Markets. *(Drive-time trade areas deferred.)*
-- **Theme 3 — Time & trajectory** — growth time-lapse, projected-openings pipeline map (FDD Item 20 Table 5), cohort/ramp analysis. *Partially started (Phase 11): snapshot-based **Trending** — review-velocity leaderboard, momentum map layer, watch list.*
+- **Theme 3 — Time & trajectory** ✅ *(Phases 11+13)* — snapshot **Trending** (velocity, momentum layer, watch list), map **growth time-lapse**, FDD Table 5 **pipeline** (61 signed / 48 projected, by state), **cohort ramp/quality** charts.
 - **Theme 4 — Context & credibility** — peer-franchise benchmarking, franchise economics (FDD Items 5–7), methodology/sources page.
 - **Theme 5 — Presentation** — one-click PDF report, dark mode, mobile polish.
 
@@ -48,8 +48,8 @@ The next leap is to **synthesize it into a single ranked view of rollup targets*
 
 | # | Item | Why it matters | Impact | Effort |
 |---|---|---|---|---|
-| 10 | **Network growth time-lapse** — animate openings by year on the map | Tells the growth story at a glance | ◐ | S |
-| 11 | **Cohort analysis** — rating & review volume vs. unit age | Do older units rate higher? Where's the ramp? | ◐ | M |
+| 10 | **Network growth time-lapse** ✅ *(done, Phase 13)* — play/scrub animation 2021→2026 | Tells the growth story at a glance | ◐ | — |
+| 11 | **Cohort analysis** ✅ *(done, Phase 13)* — avg reviews + avg rating by opening-year cohort | Ratings hold ~4.95★ across all cohorts while reviews ramp 6→82 | ◐ | — |
 | 12 | **Whitespace *scoring*** ✅ *(done, Phase 12)* — metros ranked by pop × income × competitive openness | Makes the Whitespace tab actionable | ◐ | — |
 | 13 | **Cross-source reconciliation** — FDD outlet count vs. website vs. SBA loan count | A trust/QA dashboard; surfaces data gaps | ○ | S |
 

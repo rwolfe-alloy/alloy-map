@@ -50,6 +50,7 @@ case "$MODE" in
     run $PY match_owners.py
     $PY parse_item19.py alloy_fdd_latest.pdf >>"$LOG" 2>&1 || log "WARN: Item 19 parse failed (keeping previous)."
     $PY parse_churn.py   alloy_fdd_latest.pdf >>"$LOG" 2>&1 || log "WARN: churn parse failed (keeping previous)."
+    $PY parse_pipeline.py alloy_fdd_latest.pdf >>"$LOG" 2>&1 || log "WARN: pipeline parse failed (keeping previous)."
     ;;
   market)
     run $PY fetch_demographics.py
@@ -69,7 +70,7 @@ run $PY validate.py
 run $PY rebuild_index.py
 
 # Commit + push only if tracked data actually changed
-git add alloy_enriched.json alloy_sba_loans.json alloy_item19.json alloy_churn.json alloy_trends.json alloy_demog.json alloy_competitors.json index.html CHANGELOG.md snapshots 2>/dev/null
+git add alloy_enriched.json alloy_sba_loans.json alloy_item19.json alloy_churn.json alloy_trends.json alloy_demog.json alloy_competitors.json alloy_pipeline.json index.html CHANGELOG.md snapshots 2>/dev/null
 if git diff --cached --quiet; then
   log "No data changes — nothing to commit."
 elif [ -n "$DRY_RUN" ]; then
