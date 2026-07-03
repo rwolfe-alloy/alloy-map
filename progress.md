@@ -105,6 +105,7 @@ Each record has these fields:
 - **Green pins** — currently open (timezone-aware, refreshes every 60s)
 - **Dashed amber pins** — coming soon locations
 - **Gray pins** — whitespace metros (toggleable layer)
+- **Competitor studios overlay** *(Phase 14)* — ~1,000 brand-verified competitor studios as colored squares (🟧 Orangetheory · 🟦 F45 · 🟩 StretchLab) with hover tooltips; brand-name-filtered to drop Google's fuzzy matches
 
 ### Sidebar — Overview Tab *(Phase 10 / Theme 1 — default landing)*
 - **Hero KPI board** — 9 headline metrics (locations, states, live/soon, avg ★, system AUV, survival, SBA capital, operators, multi-unit)
