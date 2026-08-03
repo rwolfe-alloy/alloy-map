@@ -35,27 +35,57 @@ def extract(key, name, path):
     out = {"name": name, "pages": len(pages)}
 
     # ── Item 20 Table 1: Systemwide Outlet Summary ──
-    i = text.find("Systemwide Outlet Summary")
-    seg = text[i:i+2500] if i >= 0 else ""
-    rows = re.findall(r"(Franchised|Total Outlets)\s+(20\d\d)\s+([\d,]+)\s+([\d,]+)\s+([+-]?[\d,]+)", seg)
-    fr = {int(y): num(end) for kind, y, start, end, net in rows if kind == "Franchised"}
+    # Heading wording varies ("Systemwide"/"SYSTEM-WIDE"/none at all for OTF),
+    # and the "Franchised" label may sit before, inside, or after its year rows.
+    # Strategy: anchor at the summary heading (or the Item 20 heading), then
+    # collect year-rows in order until a year repeats — the repeat marks the
+    # start of the Company/Affiliate-Owned block.
+    seg = None
+    for a in [r"system[-\s]?wide outlet summary", r"OUTLETS AND FRANCHISEE INFORMATION"]:
+        for m in re.finditer(a, text, re.I):
+            cand = text[m.start():m.start()+3500]
+            if "...." in cand[:300]: continue      # table-of-contents hit
+            if re.search(r"20\d\d\s+[\d,]+\s+[\d,]+\s+[+-]?[\d,]+", cand):
+                seg = cand; break
+        if seg: break
+    fr = {}
+    if seg:
+        for y, start, end, net in re.findall(r"(20\d\d)\s+([\d,]+)\s+([\d,]+)\s+([+-][\d,]+|0)\b", seg):
+            y = int(y)
+            if y in fr: break
+            fr[y] = (num(start), num(end))
     if fr:
         out["franchised_by_year"] = fr
         yrs = sorted(fr)
-        out["units"] = fr[yrs[-1]]
-        out["units_3yr_ago"] = fr[yrs[0]]
-        out["growth_3yr_pct"] = round((fr[yrs[-1]] / max(fr[yrs[0]], 1) - 1) * 100, 1)
+        out["franchised_by_year"] = {y: fr[y][1] for y in yrs}
+        out["units"] = fr[yrs[-1]][1]
+        out["units_3yr_ago"] = fr[yrs[0]][1]
+        out["growth_3yr_pct"] = round((out["units"] / max(out["units_3yr_ago"], 1) - 1) * 100, 1)
+        out["_start_first"] = fr[yrs[0]][0]
 
-    # ── Item 20 Table 3 totals: opened/terminations/... per year ──
-    m = re.search(r"Total[s\*]*\s+(20\d\d(?:\s+[\d,]+){7}(?:\s+20\d\d(?:\s+[\d,]+){7}){0,2})", text)
-    if m:
-        opened = closed = 0
-        for r in re.finditer(r"(20\d\d)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)", m.group(1)):
-            y, start, op, term, nonren, ceased, reacq, end = r.groups()
-            opened += num(op); closed += num(term) + num(nonren) + num(ceased)
-        out["opened_3yr"] = opened
-        out["closed_3yr"] = closed
-        out["survival_3yr_pct"] = round((opened - closed) / opened * 100, 1) if opened else None
+    # ── Item 20 Table 3: closures via the FTC table identity ──
+    # Column order varies by brand (SL swaps Reacquired/Ceased), so instead of
+    # positional mapping: closed = start_first + opened_sum − end_last.
+    # Opened (col 2) is order-stable. Total row when present; else sum state rows.
+    m3 = re.search(r"status of franchised (outlets|studios)", text, re.I)
+    if m3:
+        seg3 = text[m3.start():m3.start()+40000]
+        stop = re.search(r"TABLE\s*(?:No\.?\s*)?4|status of company|company-owned outlets", seg3[200:], re.I)
+        if stop: seg3 = seg3[:200+stop.start()]
+        mtot = re.search(r"Total[s\*]*\s+(20\d\d(?:\s+[\d,]+){7}(?:\s+20\d\d(?:\s+[\d,]+){7}){0,2})", seg3)
+        rows_src = mtot.group(1) if mtot else seg3
+        opened = 0
+        for r in re.finditer(r"(20\d\d)\s+([\d,]+)\s+([\d,]+)(?:\s+[\d,]+){5}", rows_src):
+            opened += num(r.group(3))
+        start_first = out.get("_start_first")
+        end_last = out.get("units")
+        if opened and start_first is not None and end_last is not None:
+            at_risk = start_first + opened
+            closed = at_risk - end_last
+            out["opened_3yr"] = opened
+            out["closed_3yr"] = closed
+            out["survival_3yr_pct"] = round(end_last / at_risk * 100, 1) if at_risk else None
+    out.pop("_start_first", None)
 
     # ── Item 5: initial franchise fee ──
     m = re.search(r"[Ii]nitial [Ff]ranchise [Ff]ee[^.$]{0,120}?\$([\d,]{4,8})", text)

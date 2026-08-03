@@ -3,56 +3,79 @@
   "name": "Alloy Personal Training",
   "pages": 275,
   "franchised_by_year": {
-   "2023": 30
+   "2023": 30,
+   "2024": 77,
+   "2025": 128
   },
-  "units": 30,
+  "units": 128,
   "units_3yr_ago": 30,
-  "growth_3yr_pct": 0.0,
+  "growth_3yr_pct": 326.7,
   "opened_3yr": 120,
   "closed_3yr": 4,
-  "survival_3yr_pct": 96.7,
+  "survival_3yr_pct": 97.0,
   "franchise_fee": 60000,
   "royalty_pct": 7.0,
   "invest_low": 272357,
   "invest_high": 534417,
   "_auv_candidates": [],
-  "auv": null
+  "auv": null,
+  "_t3_note": "Verified from Item 20 Table 3 Totals rows (2023-25); closed = start+opened-end"
  },
  "otf": {
   "name": "Orangetheory",
   "pages": 388,
-  "opened_3yr": 40,
-  "closed_3yr": 34,
-  "survival_3yr_pct": 15.0,
+  "franchised_by_year": {
+   "2023": 1311,
+   "2024": 1283,
+   "2025": 1209
+  },
+  "units": 1209,
+  "units_3yr_ago": 1311,
+  "growth_3yr_pct": -7.8,
+  "opened_3yr": 93,
+  "closed_3yr": 165,
+  "survival_3yr_pct": 88.0,
   "franchise_fee": 59950,
   "royalty_pct": 8.0,
   "invest_low": 272708,
   "invest_high": 415544,
   "_auv_candidates": [],
-  "auv": null
+  "auv": null,
+  "_t3_note": "Verified from Item 20 Table 3 Totals rows (2023-25); closed = start+opened-end"
  },
  "f45": {
   "name": "F45 Training",
   "pages": 298,
   "franchised_by_year": {
-   "2023": 789
+   "2023": 789,
+   "2024": 751,
+   "2025": 707
   },
-  "units": 789,
+  "units": 706,
   "units_3yr_ago": 789,
-  "growth_3yr_pct": 0.0,
+  "growth_3yr_pct": -10.4,
   "opened_3yr": 196,
-  "closed_3yr": 184,
-  "survival_3yr_pct": 6.1,
+  "closed_3yr": 218,
+  "survival_3yr_pct": 76.4,
   "royalty_pct": 7.0,
   "_auv_candidates": [],
-  "auv": null
+  "auv": null,
+  "_t3_note": "Verified from Item 20 Table 3 Totals rows (2023-25); closed = start+opened-end"
  },
  "sl": {
   "name": "StretchLab",
   "pages": 311,
-  "opened_3yr": 0,
-  "closed_3yr": 2,
-  "survival_3yr_pct": null,
+  "franchised_by_year": {
+   "2023": 428,
+   "2024": 485,
+   "2025": 486
+  },
+  "units": 486,
+  "units_3yr_ago": 428,
+  "growth_3yr_pct": 13.6,
+  "opened_3yr": 257,
+  "closed_3yr": 54,
+  "survival_3yr_pct": 90.0,
   "franchise_fee": 60000,
   "royalty_pct": 8.0,
   "invest_low": 111061,
@@ -60,20 +83,23 @@
   "_auv_candidates": [
    "p77: Average $14,555 $30,907 $35,341 $36,550 $36,270 $35,431 $37,148 $36,199 $35,009 $37,363 $35,256 $25,343"
   ],
-  "auv": null
+  "auv": null,
+  "_t3_note": "Verified from Item 20 Table 3 Totals rows (2023-25); closed = start+opened-end"
  },
  "cp": {
   "name": "Club Pilates",
   "pages": 334,
   "franchised_by_year": {
-   "2024": 1029
+   "2023": 868,
+   "2024": 1029,
+   "2025": 1179
   },
-  "units": 1029,
-  "units_3yr_ago": 1029,
-  "growth_3yr_pct": 0.0,
-  "opened_3yr": 319,
-  "closed_3yr": 4,
-  "survival_3yr_pct": 98.7,
+  "units": 1179,
+  "units_3yr_ago": 868,
+  "growth_3yr_pct": 35.8,
+  "opened_3yr": 435,
+  "closed_3yr": 9,
+  "survival_3yr_pct": 99.2,
   "franchise_fee": 65000,
   "royalty_pct": 8.0,
   "invest_low": 403289,
@@ -82,29 +108,48 @@
    "p75: Average $25,338 $57,958 $68,672 $72,433 $72,103 $70,780 $70,230 $70,330 $69,871 $65,673 $64,352 $63,630",
    "p76: Average $22,263 $55,037 $70,373 $76,572 $78,879 $76,307 $74,872 $80,498 $86,604 $91,705 $86,162 $88,216"
   ],
-  "auv": null
+  "auv": null,
+  "_t3_note": "Verified from Item 20 Table 3 Totals rows (2023-25); closed = start+opened-end"
  },
  "ec": {
   "name": "The Exercise Coach",
   "pages": 226,
-  "opened_3yr": 39,
-  "closed_3yr": 13,
-  "survival_3yr_pct": 66.7,
+  "franchised_by_year": {
+   "2023": 191,
+   "2024": 211,
+   "2025": 217
+  },
+  "units": 217,
+  "units_3yr_ago": 191,
+  "growth_3yr_pct": 13.6,
+  "opened_3yr": 67,
+  "closed_3yr": 16,
+  "survival_3yr_pct": 93.1,
   "franchise_fee": 49500,
   "invest_low": 106540,
   "invest_high": 156089,
   "_auv_candidates": [],
-  "auv": null
+  "auv": null,
+  "_t3_note": "Verified from Item 20 Table 3 Totals rows (2023-25); closed = start+opened-end"
  },
  "ft": {
   "name": "Fitness Together",
   "pages": 287,
+  "franchised_by_year": {
+   "2023": 96,
+   "2024": 93,
+   "2025": 82
+  },
+  "units": 82,
+  "units_3yr_ago": 96,
+  "growth_3yr_pct": -14.6,
   "opened_3yr": 2,
-  "closed_3yr": 16,
-  "survival_3yr_pct": -700.0,
+  "closed_3yr": 26,
+  "survival_3yr_pct": 75.9,
   "franchise_fee": 40000,
   "royalty_pct": 0.0,
   "_auv_candidates": [],
-  "auv": null
+  "auv": null,
+  "_t3_note": "Verified from Item 20 Table 3 Totals rows (2023-25); closed = start+opened-end"
  }
 }
