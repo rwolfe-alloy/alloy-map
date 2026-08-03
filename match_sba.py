@@ -15,9 +15,19 @@ FIELDS = ["borrname","borrcity","borrstate","borrzip","bankname","grossapproval"
 
 loans = []
 with open("_sba_7a.csv", newline="") as f:
-    for row in csv.DictReader(f):
+    for raw in csv.DictReader(f):
+        # SBA's 2026 portal migration switched headers to CamelCase — normalize
+        row = {(k or "").strip().lower(): v for k, v in raw.items()}
         if "alloy personal" in (row.get("franchisename") or "").lower():
-            loans.append({k: (row.get(k) or "").strip() for k in FIELDS})
+            ln = {k: (row.get(k) or "").strip() for k in FIELDS}
+            # new-format numerics arrive as "30000.0" / "2023.0" — normalize
+            for k in ("approvalfy", "terminmonths", "jobssupported"):
+                if ln[k].endswith(".0"): ln[k] = ln[k][:-2]
+            loans.append(ln)
+
+if not loans:
+    import sys
+    sys.exit("!! 0 Alloy loans parsed — header/format change? Aborting without writing.")
 
 locs = json.load(open("alloy_enriched.json"))
 def norm(s): return re.sub(r"[^a-z0-9]", "", (s or "").lower())
@@ -45,7 +55,7 @@ def match_loan(ln):
     return None
 
 for ln in loans:
-    ln["amount"] = int(ln["grossapproval"] or 0)
+    ln["amount"] = int(float(ln["grossapproval"] or 0))
     ln["loc"] = match_loan(ln)
 
 json.dump(loans, open("alloy_sba_loans.json", "w"), separators=(",", ":"))

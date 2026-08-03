@@ -34,12 +34,22 @@ case "$MODE" in
     run $PY fetch_ratings.py            # needs .apikey
     ;;
   sba)
-    # Resolve the current FY2020-present CSV url (filename carries an "as-of" date
-    # that changes each quarter; the resource id is stable).
-    RID="d67d3ccb-2002-4134-a288-481b51cd3479"
-    SBA_URL=$(curl -s --connect-timeout 20 --max-time 30 "https://data.sba.gov/api/3/action/resource_show?id=$RID" \
-              | $PY -c "import sys,json;print(json.load(sys.stdin)['result']['url'])" 2>>"$LOG")
-    [ -z "$SBA_URL" ] && { log "Could not resolve SBA CSV url from CKAN API."; exit 1; }
+    # Resolve the current FY2020-present CSV url from the DKAN metastore (SBA
+    # replatformed data.sba.gov from CKAN to Drupal/DKAN in mid-2026; the old
+    # /api/3 CKAN endpoints now 404). Dataset id is stable; the file name
+    # carries an "as-of" date that changes each quarter.
+    DSID="SBA-OHA-2016-08-001"
+    SBA_URL=$(curl -s --connect-timeout 20 --max-time 30 "https://data.sba.gov/api/1/metastore/schemas/dataset/items/$DSID" \
+              | $PY -c "
+import sys,json
+d=json.load(sys.stdin)
+for dist in d.get('distribution',[]):
+    dd=dist.get('data',dist) if isinstance(dist,dict) else {}
+    t=dd.get('title','')
+    if '7(a)' in t and 'FY2020' in t:
+        print(dd.get('downloadURL','')); break
+" 2>>"$LOG")
+    [ -z "$SBA_URL" ] && { log "Could not resolve SBA CSV url from DKAN metastore."; exit 1; }
     log "SBA CSV: $SBA_URL"
     run curl -s -L --connect-timeout 20 --max-time 900 "$SBA_URL" -o _sba_7a.csv
     run $PY match_sba.py
