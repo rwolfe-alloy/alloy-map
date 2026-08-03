@@ -45,6 +45,28 @@ def decode_cfemail(h):
     r = bytes.fromhex(h); k = r[0]
     return "".join(chr(b ^ k) for b in r[1:])
 
+STATE_ABBR = {"alabama":"AL","alaska":"AK","arizona":"AZ","arkansas":"AR","california":"CA",
+ "colorado":"CO","connecticut":"CT","delaware":"DE","florida":"FL","georgia":"GA","hawaii":"HI",
+ "idaho":"ID","illinois":"IL","indiana":"IN","iowa":"IA","kansas":"KS","kentucky":"KY",
+ "louisiana":"LA","maine":"ME","maryland":"MD","massachusetts":"MA","michigan":"MI",
+ "minnesota":"MN","mississippi":"MS","missouri":"MO","montana":"MT","nebraska":"NE","nevada":"NV",
+ "new hampshire":"NH","new jersey":"NJ","new mexico":"NM","new york":"NY","north carolina":"NC",
+ "north dakota":"ND","ohio":"OH","oklahoma":"OK","oregon":"OR","pennsylvania":"PA",
+ "rhode island":"RI","south carolina":"SC","south dakota":"SD","tennessee":"TN","texas":"TX",
+ "utah":"UT","vermont":"VT","virginia":"VA","washington":"WA","west virginia":"WV",
+ "wisconsin":"WI","wyoming":"WY"}
+
+def extract_state(addr, name):
+    # 1) "..., TX 75094"   2) full state name in the address ("Minnesota 55435")
+    # 3) location-name suffix ("Edina Southdale, MN")
+    m = re.search(r",\s*([A-Z]{2})\.?\s+\d{5}", addr or "")
+    if m: return m.group(1)
+    low = (addr or "").lower()
+    for full, ab in STATE_ABBR.items():
+        if re.search(r"\b" + full + r"\b", low): return ab
+    m = re.search(r",\s*([A-Z]{2})\s*$", (name or "").strip())
+    return m.group(1) if m else None
+
 def haversine(a, b, c, d):
     p = radians; dlon = p(d-b); dlat = p(c-a)
     h = sin(dlat/2)**2 + cos(p(a))*cos(p(c))*sin(dlon/2)**2
@@ -151,7 +173,7 @@ def main():
         rec = dict(prev)  # start from existing → preserves owner/franchisee/rating/review_count/place_id
         rec["n"] = l["n"]
         rec["a"] = l["a"] or prev.get("a")
-        rec["s"] = (re.search(r",\s*([A-Z]{2})\s+\d{5}", l["a"] or "") or [None, prev.get("s")])[1] if l["a"] else prev.get("s")
+        rec["s"] = extract_state(l["a"], l["n"]) or prev.get("s")
         rec["r"] = region_map.get(rec.get("s")) or REGION.get(rec.get("s")) or prev.get("r")
         rec["lat"] = l["lat"] if l["lat"] is not None else prev.get("lat")
         rec["lng"] = l["lng"] if l["lng"] is not None else prev.get("lng")
