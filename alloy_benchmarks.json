@@ -1,0 +1,110 @@
+{
+ "alloy": {
+  "name": "Alloy Personal Training",
+  "pages": 275,
+  "franchised_by_year": {
+   "2023": 30
+  },
+  "units": 30,
+  "units_3yr_ago": 30,
+  "growth_3yr_pct": 0.0,
+  "opened_3yr": 120,
+  "closed_3yr": 4,
+  "survival_3yr_pct": 96.7,
+  "franchise_fee": 60000,
+  "royalty_pct": 7.0,
+  "invest_low": 272357,
+  "invest_high": 534417,
+  "_auv_candidates": [],
+  "auv": null
+ },
+ "otf": {
+  "name": "Orangetheory",
+  "pages": 388,
+  "opened_3yr": 40,
+  "closed_3yr": 34,
+  "survival_3yr_pct": 15.0,
+  "franchise_fee": 59950,
+  "royalty_pct": 8.0,
+  "invest_low": 272708,
+  "invest_high": 415544,
+  "_auv_candidates": [],
+  "auv": null
+ },
+ "f45": {
+  "name": "F45 Training",
+  "pages": 298,
+  "franchised_by_year": {
+   "2023": 789
+  },
+  "units": 789,
+  "units_3yr_ago": 789,
+  "growth_3yr_pct": 0.0,
+  "opened_3yr": 196,
+  "closed_3yr": 184,
+  "survival_3yr_pct": 6.1,
+  "royalty_pct": 7.0,
+  "_auv_candidates": [],
+  "auv": null
+ },
+ "sl": {
+  "name": "StretchLab",
+  "pages": 311,
+  "opened_3yr": 0,
+  "closed_3yr": 2,
+  "survival_3yr_pct": null,
+  "franchise_fee": 60000,
+  "royalty_pct": 8.0,
+  "invest_low": 111061,
+  "invest_high": 165501,
+  "_auv_candidates": [
+   "p77: Average $14,555 $30,907 $35,341 $36,550 $36,270 $35,431 $37,148 $36,199 $35,009 $37,363 $35,256 $25,343"
+  ],
+  "auv": null
+ },
+ "cp": {
+  "name": "Club Pilates",
+  "pages": 334,
+  "franchised_by_year": {
+   "2024": 1029
+  },
+  "units": 1029,
+  "units_3yr_ago": 1029,
+  "growth_3yr_pct": 0.0,
+  "opened_3yr": 319,
+  "closed_3yr": 4,
+  "survival_3yr_pct": 98.7,
+  "franchise_fee": 65000,
+  "royalty_pct": 8.0,
+  "invest_low": 403289,
+  "invest_high": 1029811,
+  "_auv_candidates": [
+   "p75: Average $25,338 $57,958 $68,672 $72,433 $72,103 $70,780 $70,230 $70,330 $69,871 $65,673 $64,352 $63,630",
+   "p76: Average $22,263 $55,037 $70,373 $76,572 $78,879 $76,307 $74,872 $80,498 $86,604 $91,705 $86,162 $88,216"
+  ],
+  "auv": null
+ },
+ "ec": {
+  "name": "The Exercise Coach",
+  "pages": 226,
+  "opened_3yr": 39,
+  "closed_3yr": 13,
+  "survival_3yr_pct": 66.7,
+  "franchise_fee": 49500,
+  "invest_low": 106540,
+  "invest_high": 156089,
+  "_auv_candidates": [],
+  "auv": null
+ },
+ "ft": {
+  "name": "Fitness Together",
+  "pages": 287,
+  "opened_3yr": 2,
+  "closed_3yr": 16,
+  "survival_3yr_pct": -700.0,
+  "franchise_fee": 40000,
+  "royalty_pct": 0.0,
+  "_auv_candidates": [],
+  "auv": null
+ }
+}

@@ -10,7 +10,7 @@ Output: alloy_competitors.json
     "metros":    {"Sacramento": {...}},
     "places":    [{"b":"otf","n":"Orangetheory ...","lat":..,"lng":..}] }  # deduped, for the map overlay
 
-Needs .apikey (same key as fetch_ratings). ~555 API calls.
+Needs .apikey (same key as fetch_ratings). ~1,300 API calls (7 brands × 185 circles).
 Usage: python3 fetch_competitors.py
 """
 import json, os, subprocess, sys, time
@@ -21,13 +21,20 @@ if not KEY:
     sys.exit("No API key (.apikey or $GOOGLE_PLACES_API_KEY)")
 
 URL = "https://places.googleapis.com/v1/places:searchText"
-BRANDS = [("otf", "Orangetheory Fitness"), ("f45", "F45 Training"), ("sl", "StretchLab")]
+BRANDS = [("otf", "Orangetheory Fitness"), ("f45", "F45 Training"), ("sl", "StretchLab"),
+          ("cp", "Club Pilates"), ("dfy", "Dragonfly Yoga"),
+          ("ec", "The Exercise Coach"), ("ft", "Fitness Together")]
 # Text search fuzzy-matches other gyms when exact brand hits are scarce (e.g. a
 # "24 Hour Fitness" returned for the F45 query) — require the brand in the name.
+# (Dragonfly is a Madison-area regional chain, included per user request.)
 import re
 BRAND_RE = {"otf": re.compile(r"orange\s*theory", re.I),
             "f45": re.compile(r"f45", re.I),
-            "sl":  re.compile(r"stretch\s*lab", re.I)}
+            "sl":  re.compile(r"stretch\s*lab", re.I),
+            "cp":  re.compile(r"club\s*pilates", re.I),
+            "dfy": re.compile(r"dragon\s*fly.*?(yoga|hot)", re.I),
+            "ec":  re.compile(r"exercise\s*coach", re.I),
+            "ft":  re.compile(r"fitness\s*together", re.I)}
 
 def hav(a, b, c, e):
     p = radians; dl = p(e - b); dt = p(c - a)
