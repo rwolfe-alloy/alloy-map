@@ -17,9 +17,11 @@
   "royalty_pct": 7.0,
   "invest_low": 272357,
   "invest_high": 534417,
-  "_auv_candidates": [],
-  "auv": null,
-  "_t3_note": "Verified from Item 20 Table 3 Totals rows (2023-25); closed = start+opened-end"
+  "auv": 394981,
+  "_t3_note": "Verified from Item 20 Table 3 Totals rows (2023-25); closed = start+opened-end",
+  "auv_median": null,
+  "auv_note": "Weighted avg of Item 19 revenue quartiles, 73 units open full 2025",
+  "filing": "#641123"
  },
  "otf": {
   "name": "Orangetheory",
@@ -39,9 +41,11 @@
   "royalty_pct": 8.0,
   "invest_low": 272708,
   "invest_high": 415544,
-  "_auv_candidates": [],
-  "auv": null,
-  "_t3_note": "Verified from Item 20 Table 3 Totals rows (2023-25); closed = start+opened-end"
+  "auv": 802145,
+  "_t3_note": "Verified from Item 20 Table 3 Totals rows (2023-25); closed = start+opened-end",
+  "auv_median": 750643,
+  "auv_note": "Avg Total Gross Sales, all eligible studios, 2025 (Item 19)",
+  "filing": "#640671"
  },
  "f45": {
   "name": "F45 Training",
@@ -58,9 +62,12 @@
   "closed_3yr": 218,
   "survival_3yr_pct": 76.4,
   "royalty_pct": 7.0,
-  "_auv_candidates": [],
   "auv": null,
-  "_t3_note": "Verified from Item 20 Table 3 Totals rows (2023-25); closed = start+opened-end"
+  "_t3_note": "Verified from Item 20 Table 3 Totals rows (2023-25); closed = start+opened-end",
+  "auv_note": "No Item 19 financial performance representation in 2026 FDD",
+  "invest_low": 362300,
+  "invest_high": 857700,
+  "filing": "#640736"
  },
  "sl": {
   "name": "StretchLab",
@@ -80,11 +87,11 @@
   "royalty_pct": 8.0,
   "invest_low": 111061,
   "invest_high": 165501,
-  "_auv_candidates": [
-   "p77: Average $14,555 $30,907 $35,341 $36,550 $36,270 $35,431 $37,148 $36,199 $35,009 $37,363 $35,256 $25,343"
-  ],
-  "auv": null,
-  "_t3_note": "Verified from Item 20 Table 3 Totals rows (2023-25); closed = start+opened-end"
+  "auv": 511300,
+  "_t3_note": "Verified from Item 20 Table 3 Totals rows (2023-25); closed = start+opened-end",
+  "auv_median": 487000,
+  "auv_note": "Avg Gross Revenue, 448 qualified studios, 2025 (Item 19 Part A-1)",
+  "filing": "#641080"
  },
  "cp": {
   "name": "Club Pilates",
@@ -104,12 +111,11 @@
   "royalty_pct": 8.0,
   "invest_low": 403289,
   "invest_high": 1029811,
-  "_auv_candidates": [
-   "p75: Average $25,338 $57,958 $68,672 $72,433 $72,103 $70,780 $70,230 $70,330 $69,871 $65,673 $64,352 $63,630",
-   "p76: Average $22,263 $55,037 $70,373 $76,572 $78,879 $76,307 $74,872 $80,498 $86,604 $91,705 $86,162 $88,216"
-  ],
-  "auv": null,
-  "_t3_note": "Verified from Item 20 Table 3 Totals rows (2023-25); closed = start+opened-end"
+  "auv": 987800,
+  "_t3_note": "Verified from Item 20 Table 3 Totals rows (2023-25); closed = start+opened-end",
+  "auv_median": 978300,
+  "auv_note": "Avg Gross Revenue, 1,005 qualified studios, 2025 (Item 19 Part A-1)",
+  "filing": "#641077"
  },
  "ec": {
   "name": "The Exercise Coach",
@@ -128,9 +134,11 @@
   "franchise_fee": 49500,
   "invest_low": 106540,
   "invest_high": 156089,
-  "_auv_candidates": [],
   "auv": null,
-  "_t3_note": "Verified from Item 20 Table 3 Totals rows (2023-25); closed = start+opened-end"
+  "_t3_note": "Verified from Item 20 Table 3 Totals rows (2023-25); closed = start+opened-end",
+  "auv_note": "No machine-readable Item 19 revenue disclosure in 2026 FDD",
+  "royalty_pct": 6.0,
+  "filing": "#641382"
  },
  "ft": {
   "name": "Fitness Together",
@@ -147,9 +155,17 @@
   "closed_3yr": 26,
   "survival_3yr_pct": 75.9,
   "franchise_fee": 40000,
-  "royalty_pct": 0.0,
-  "_auv_candidates": [],
-  "auv": null,
-  "_t3_note": "Verified from Item 20 Table 3 Totals rows (2023-25); closed = start+opened-end"
+  "royalty_pct": null,
+  "auv": 539237,
+  "_t3_note": "Verified from Item 20 Table 3 Totals rows (2023-25); closed = start+opened-end",
+  "auv_median": 486614,
+  "auv_note": "2025 Avg Gross Revenue, all reporting studios (Item 19)",
+  "royalty_note": "Only 0%-incentive terms machine-readable",
+  "filing": "#640778"
+ },
+ "_meta": {
+  "source": "2026 FDDs registered with Wisconsin DFI (filing numbers per brand)",
+  "period": "Outlet data 2023\u201325; AUV measurement periods per brand's Item 19 (2025)",
+  "note": "AUV definitions differ by brand \u2014 see each FDD's Item 19. F45 and The Exercise Coach make no usable Item 19 revenue disclosure."
  }
 }

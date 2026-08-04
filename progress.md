@@ -40,6 +40,9 @@ A self-contained interactive map of all Alloy Personal Training franchise locati
 | `fetch_demographics.py` | Theme 2 — Census ACS income+population per location zip (ZCTA) + whitespace metro (CBSA), via keyless Census Reporter API → `alloy_demog.json` |
 | `fetch_competitors.py` | Theme 2 — Orangetheory/F45/StretchLab counts within 5mi of each location, 15mi of each whitespace metro (Places API) → `alloy_competitors.json` |
 | `alloy_demog.json` / `alloy_competitors.json` | Market-intelligence data — embedded as `DEMOG` / `COMPETITORS` |
+| `fetch_peer_fdds.py` | Theme 4 — downloads the 6 peer franchises' current registered FDDs from WI DFI |
+| `parse_benchmarks.py` | Theme 4 — extracts Item 20 outlet math (FTC-identity closures), Items 5–7 economics + Item 19 AUV candidates from all 7 FDDs |
+| `alloy_benchmarks.json` | Curated peer benchmark (verified outlet totals, AUVs with per-brand notes) — embedded as `BENCHMARKS` |
 | `alloy_trends.json` | Network series + latest-period per-location deltas — embedded as `TRENDS` |
 | `CHANGELOG.md` | Auto-generated history of data changes (new/dropped locations, rating/owner/status changes) |
 | `snapshots/` | Dated point-in-time copies of the dataset (the time-series record) |
@@ -92,6 +95,7 @@ Each record has these fields:
 - **SBA 7(a) financing:** **$26.4M** across 106 loans (FY2022–26), 95 matched to 55 locations; avg $249K, median $317K, 581 jobs supported. **Huntington National Bank = 85 of 106 loans** (dominant Alloy SBA lender). Top-funded: Falls Church VA $812K (4 loans)
 - **Unit economics (2026 FDD Item 19, 2025 period):** **system AUV ~$395K**; quartile avgs $555K → $253K; by maturity $371K (12–24mo) → $445K (36+mo); ~93 members/unit, ~$348 rev/member/mo, 90.3% monthly retention
 - **Network churn (2026 FDD Item 20 + Exhibit E):** **96.7% outlet survival** — only 4 closures of 120 opened (2023–25); franchised outlets 12→30→77→128; 13 ownership transfers, 7 signed-but-never-opened
+- **Peer benchmark (2026 FDDs via WI DFI, Phase 15):** Alloy **+327% 3-yr growth / 97.0% survival** vs Club Pilates +36%/99.2%, StretchLab +14%/90.0%, Exercise Coach +14%/93.1%, OTF **−7.8%**/88.0%, F45 **−10.4%**/76.4%, Fitness Together **−15%**/75.9%. AUVs: CP $988K, OTF $802K, FT $539K, SL $511K, Alloy $395K (youngest system; bases differ per Item 19)
 - **Market intelligence (Census ACS + Places, Phase 12):** median Alloy trade-area (zip) income **$125K** (range $59K–$250K) — validates the affluent-suburb strategy; median 6 boutique competitors within 5mi (3 competitor-free sites; most contested: Lincoln Park IL, 25). Top whitespace opportunity: **Sacramento (score 80)**
 
 ---
@@ -109,6 +113,7 @@ Each record has these fields:
 
 ### Sidebar — Overview Tab *(Phase 10 / Theme 1 — default landing)*
 - **Hero KPI board** — 9 headline metrics (locations, states, live/soon, avg ★, system AUV, survival, SBA capital, operators, multi-unit)
+- **"How Alloy Stacks Up" peer benchmark** *(Phase 15 / Theme 4)*: 7-brand FDD comparison table (units, 3-yr growth, survival, AUV, fee, royalty, investment) — Alloy row highlighted; AUV cells carry each brand's measurement basis on hover; F45/Exercise Coach honestly shown n/d (no Item 19 disclosure)
 - **Auto-generated Deal Memo** — narrative synthesis of the whole dataset (regenerates with each refresh)
 - **Top Markets** — every metro ranked by a rollup-opportunity score (units × est. revenue × rating); sortable; click to fly the map
 - **Acquisition Basket** — add operators (from their profile) to model a roll-up; live tally of units / states / est. revenue / SBA debt (persists via localStorage)

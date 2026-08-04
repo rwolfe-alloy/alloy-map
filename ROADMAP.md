@@ -13,7 +13,7 @@ Legend — **Impact**: ⭐ high / ◐ medium / ○ nice-to-have · **Effort**: S
 - **Theme 1 — Synthesis & decision layer** ✅ *(Phase 10)* — Executive **Overview tab**: hero KPIs, auto-generated **deal memo**, **Top-Markets** rollup ranking, **acquisition basket** builder, **implied-valuation** lens.
 - **Theme 2 — Market intelligence** ✅ *(Phase 12)* — Census ACS demographics (zip + CBSA), competitor density (OTF/F45/StretchLab via Places), **site-quality score** + map layer, **scored Whitespace ranking**, income in Top Markets. *(Drive-time trade areas deferred.)*
 - **Theme 3 — Time & trajectory** ✅ *(Phases 11+13)* — snapshot **Trending** (velocity, momentum layer, watch list), map **growth time-lapse**, FDD Table 5 **pipeline** (61 signed / 48 projected, by state), **cohort ramp/quality** charts.
-- **Theme 4 — Context & credibility** — peer-franchise benchmarking, franchise economics (FDD Items 5–7), methodology/sources page.
+- **Theme 4 — Context & credibility** — ✅ *item 1 (Phase 15)*: peer-FDD benchmarking — 6 peer FDDs auto-downloaded from WI DFI, outlet math verified, AUVs curated, "How Alloy Stacks Up" panel on Overview. *Remaining: franchise economics deep-dive (Items 5–7 payback model), methodology/sources page.*
 - **Theme 5 — Presentation** — one-click PDF report, dark mode, mobile polish.
 
 ---

@@ -17,3 +17,11 @@ _*.csv
 # Refresh job logs
 logs/
 __pycache__/
+
+# Unrelated working files kept out of this repo
+.DS_Store
+00-project-status.md
+tech-eject*/
+tech-eject*.md
+electrum-*.md
+techeject-*
