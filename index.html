@@ -856,9 +856,12 @@ function fmtHours(loc){
 
 // ── Map setup ──
 const map = L.map('map',{scrollWheelZoom:true}).setView([39.5,-98.35],4);
-L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{
-  attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
-  maxZoom:19,subdomains:'abcd'
+// Esri Light Gray Canvas — keyless; replaced CARTO after their free basemap
+// began watermarking tiles "API KEY REQUIRED" (Aug 2026). Note Esri tile URLs
+// are {z}/{y}/{x}. Native tiles end at z16; Leaflet upscales 17-19.
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}',{
+  attribution:'Tiles &copy; <a href="https://www.esri.com/">Esri</a> &mdash; Esri, HERE, Garmin &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  maxNativeZoom:16,maxZoom:19
 }).addTo(map);
 
 function ratingTier(r){
