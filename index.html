@@ -290,6 +290,24 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Ro
 .op-score.t-hi{color:#065f46;background:#d1fae5}
 .op-score.t-mid{color:#92400e;background:#fef3c7}
 .op-score.t-lo{color:#6b7280;background:#f3f4f6}
+/* owner directory table */
+#dirSearch{border:1px solid var(--line);border-radius:8px;padding:4px 8px;font-size:12px;background:var(--white);color:var(--ink);outline:none;width:150px}
+#dirSearch:focus{border-color:var(--red)}
+.dir-wrap{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--white)}
+.dir-table{width:100%;border-collapse:collapse;font-size:12px}
+.dir-table th{text-align:left;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);background:#f9fafb;padding:7px 10px;border-bottom:1px solid var(--line);position:sticky;top:0}
+.dir-table td{padding:8px 10px;border-bottom:1px solid #f1f2f4;vertical-align:top}
+.dir-table tr:last-child td{border-bottom:none}
+.dir-owner{font-weight:600;color:var(--ink)}
+.dir-entity{font-size:11px;color:var(--muted);margin-top:2px}
+.dir-units{font-weight:700;color:var(--ink);text-align:center;white-space:nowrap}
+.dir-loc{margin-bottom:6px}
+.dir-loc:last-child{margin-bottom:0}
+.dir-loc-name{font-weight:600;color:#374151}
+.dir-contact{font-size:11.5px;color:var(--muted);display:flex;flex-wrap:wrap;gap:2px 10px;overflow-wrap:anywhere;min-width:0}
+.dir-contact a{color:#2563eb;text-decoration:none}
+.dir-contact a:hover{text-decoration:underline}
+.dir-corp td{background:#fafafa}
 /* operator profile modal */
 .opm-score{display:flex;align-items:center;gap:6px}
 .opm-score-l{font-size:9px;line-height:1.05;color:var(--muted);text-transform:uppercase;font-weight:700}
@@ -652,6 +670,17 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Ro
         </div>
       </div>
       <div id="own-list"></div>
+      <div class="own-list-head" style="margin-top:20px">
+        <span class="own-section-label" style="margin:0">Owner directory</span>
+        <div style="display:flex;gap:6px;align-items:center">
+          <input id="dirSearch" type="text" placeholder="Filter owners…"/>
+          <button id="exportDir" class="export-btn" title="Export owner directory to CSV (one row per location)">⬇ CSV</button>
+        </div>
+      </div>
+      <div class="dir-wrap"><table class="dir-table">
+        <thead><tr><th>Owner</th><th style="text-align:center">Units</th><th>Locations &amp; contact</th></tr></thead>
+        <tbody id="dir-body"></tbody>
+      </table></div>
     </div>
 
     <!-- WHITESPACE TAB -->
@@ -1693,6 +1722,60 @@ function renderOwnership(){
     +(byUnits.length>8?`<div class="legend-row" style="color:var(--muted)">+${byUnits.length-8} more multi-unit</div>`:'')
     +'<div class="legend-row"><div class="legend-swatch" style="background:#cbd5e1"></div> Single-unit</div>'
     +'<div class="legend-row"><div class="legend-swatch" style="background:#e5e7eb"></div> Not in 2026 FDD</div>';
+
+  renderOwnerDirectory();
+}
+
+// ── Owner directory (contact table + CSV) ──
+function escH(s){ return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function directoryGroups(){
+  // one group per operator (alphabetical), plus locations not matched to any owner
+  const groups=operatorList.slice().sort((a,b)=>a.name.localeCompare(b.name))
+    .map(o=>({name:o.name, locs:o.locs, corp:false}));
+  const orphans=LOCATIONS.filter(l=>!operatorOf(l));
+  if(orphans.length) groups.push({name:'Not in 2026 FDD (company-owned or opened since)', locs:orphans, corp:true});
+  return groups;
+}
+function dirMatches(g,q){
+  if(!q) return true;
+  if(g.name.toLowerCase().includes(q)) return true;
+  return g.locs.some(l=>l.n.toLowerCase().includes(q) || (l.franchisee||'').toLowerCase().includes(q)
+    || l.s.toLowerCase()===q || (l.email||'').toLowerCase().includes(q));
+}
+function renderOwnerDirectory(){
+  const q=(document.getElementById('dirSearch').value||'').trim().toLowerCase();
+  const groups=directoryGroups().filter(g=>dirMatches(g,q));
+  const locLine=l=>`
+    <div class="dir-loc">
+      <div class="dir-loc-name">${escH(l.n)}${l.coming_soon?' <span style="color:#d97706">(coming soon)</span>':''}</div>
+      <div class="dir-contact">
+        ${l.p?`<span>📞 <a href="tel:${escH(l.p.replace(/[^\d+]/g,''))}">${escH(l.p)}</a></span>`:''}
+        ${l.email?`<span><a href="mailto:${escH(l.email)}">${escH(l.email)}</a></span>`:''}
+        ${l.instagram?`<span><a href="https://instagram.com/${escH(l.instagram)}" target="_blank" rel="noopener">@${escH(l.instagram)}</a></span>`:''}
+      </div>
+    </div>`;
+  const row=g=>{
+    const entities=[...new Set(g.locs.map(l=>l.franchisee).filter(Boolean))];
+    return `<tr${g.corp?' class="dir-corp"':''}>
+      <td><div class="dir-owner">${escH(g.name)}</div>${entities.length?`<div class="dir-entity">${entities.map(escH).join('<br>')}</div>`:''}</td>
+      <td class="dir-units">${g.locs.length}</td>
+      <td>${g.locs.map(locLine).join('')}</td>
+    </tr>`;
+  };
+  document.getElementById('dir-body').innerHTML = groups.length ? groups.map(row).join('')
+    : '<tr><td colspan="3" style="color:var(--muted)">No owners match.</td></tr>';
+}
+function exportDirectory(){
+  // one row per owner-location pair — spreadsheet/CRM friendly
+  const rows=[['Owner','Entity','Location','Address','State','Metro','Status','Phone','Email','Instagram','Facebook','Website']];
+  directoryGroups().forEach(g=>{
+    g.locs.slice().sort((a,b)=>a.n.localeCompare(b.n)).forEach(l=>{
+      rows.push([g.corp?'':g.name, l.franchisee||'', l.n, l.a||'', l.s||'', l.m||'',
+        l.coming_soon?'Coming soon':'Live', l.p||'', l.email||'',
+        l.instagram?'@'+l.instagram:'', l.facebook||'', l.u||'']);
+    });
+  });
+  downloadCSV('alloy-owner-directory.csv', rows);
 }
 
 // Operator profile modal
@@ -1885,6 +1968,8 @@ document.querySelectorAll('.tab-btn').forEach(btn=>{
 // Export buttons
 document.getElementById('exportLocs').addEventListener('click',exportLocations);
 document.getElementById('exportOps').addEventListener('click',exportOperators);
+document.getElementById('exportDir').addEventListener('click',exportDirectory);
+document.getElementById('dirSearch').addEventListener('input',renderOwnerDirectory);
 
 // ── Overview / decision layer (Theme 1) ──
 let basket = new Set((()=>{ try{ return JSON.parse(localStorage.getItem('alloyBasket')||'[]'); }catch(e){ return []; } })());
