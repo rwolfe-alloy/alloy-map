@@ -13,6 +13,7 @@ scans the final page and aborts without writing if any of it appears.
 
 Owners who ask not to be named: list their studio names (e.g. "Middleton, WI")
 or owner/entity names in _owner_optout.json (gitignored, local only).
+Owner-confirmed corrections to names/entities: owner_corrections.json.
 
 Usage: python3 build_owner.py [owner_repo_dir]
 """
@@ -27,9 +28,11 @@ load = lambda f, d=None: json.load(open(f)) if os.path.exists(f) else d
 KEEP = ["n", "a", "s", "r", "lat", "lng", "p", "u", "y", "m", "coming_soon", "email", "hours",
         "instagram", "facebook", "place_id", "rating", "review_count", "owner", "franchisee"]
 optout = {s.strip().lower() for s in (load("_owner_optout.json", []) or []) if s.strip()}
+fixes = {k: v for k, v in (load("owner_corrections.json", {}) or {}).items() if not k.startswith("_")}
 locs = []
 for l in load("alloy_enriched.json"):
     rec = {k: l.get(k) for k in KEEP}
+    rec.update({k: v for k, v in fixes.get(rec["n"], {}).items() if k in ("owner", "franchisee")})
     names = {(rec["n"] or "").lower(), (rec["owner"] or "").lower(), (rec["franchisee"] or "").lower()}
     if optout & names:
         rec["owner"] = rec["franchisee"] = None

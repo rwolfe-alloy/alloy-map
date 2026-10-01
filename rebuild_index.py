@@ -13,7 +13,12 @@ Usage: python3 rebuild_index.py
 """
 import json, re, os
 
-enr = json.dumps(json.load(open("alloy_enriched.json")),  separators=(",", ":"))
+_locs = json.load(open("alloy_enriched.json"))
+# Owner-confirmed corrections layered over the FDD-derived owner fields
+_fixes = json.load(open("owner_corrections.json")) if os.path.exists("owner_corrections.json") else {}
+for _l in _locs:
+    _l.update({k: v for k, v in _fixes.get(_l["n"], {}).items() if k in ("owner", "franchisee")})
+enr = json.dumps(_locs, separators=(",", ":"))
 ws  = json.dumps(json.load(open("alloy_whitespace.json")), separators=(",", ":"))
 sba = json.dumps(json.load(open("alloy_sba_loans.json")), separators=(",", ":")) if os.path.exists("alloy_sba_loans.json") else "[]"
 item19 = json.dumps(json.load(open("alloy_item19.json")), separators=(",", ":")) if os.path.exists("alloy_item19.json") else "{}"

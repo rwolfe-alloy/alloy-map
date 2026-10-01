@@ -1,0 +1,4 @@
+{
+  "_note": "Owner-confirmed corrections applied over the FDD-derived owner data in both builds (rebuild_index.py, build_owner.py). Keyed by studio name exactly as listed; only 'owner' and 'franchisee' may be set.",
+  "Madison East, WI": {"owner": "Rob Wolfe", "franchisee": "Electrum Madison East Corporation"}
+}
