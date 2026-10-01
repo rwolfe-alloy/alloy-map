@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<meta name="theme-color" content="#ffffff"/>
 <title>Alloy Personal Training — US Locations</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
 <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css"/>
@@ -58,6 +59,8 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Ro
 .bench-table th:first-child{text-align:left}
 .bench-table td{padding:6px 9px;border-bottom:1px solid var(--line);text-align:right;color:var(--ink)}
 .bench-table td:first-child{text-align:left;font-weight:700}
+.bench-table th:first-child,.bench-table td:first-child{position:sticky;left:0;z-index:1;box-shadow:1px 0 0 var(--line)}
+.bench-table td:first-child{background:var(--white)}
 .bench-table tr:last-child td{border-bottom:none}
 .bench-table tr.me td{background:var(--red-bg)}
 .bench-table tr.me td:first-child{color:var(--red)}
@@ -334,7 +337,19 @@ tr.dir-last td{border-bottom:1px solid var(--line)}
 
 /* Layer panel */
 #layer-panel{position:absolute;top:10px;right:10px;z-index:900;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:10px 14px;box-shadow:0 2px 12px rgba(0,0,0,.1);min-width:168px}
-#layer-panel h4{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:8px}
+#layer-panel h4{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:8px;cursor:pointer;user-select:none;display:flex;align-items:center;justify-content:space-between;gap:10px}
+#layer-panel h4 .lp-caret{font-size:10px;transition:transform .15s}
+#layer-panel.collapsed{min-width:0;padding:8px 12px}
+#layer-panel.collapsed > :not(h4){display:none !important}
+#layer-panel.collapsed h4{margin-bottom:0;color:var(--ink)}
+#layer-panel.collapsed h4 .lp-caret{transform:rotate(-90deg)}
+
+/* Phone view switch (List / Split / Map) — shown only at phone widths */
+#viewToggle{display:none}
+#moreFilters{display:none}
+#mfCount{background:var(--red);color:#fff;border-radius:9px;font-size:10.5px;font-weight:800;padding:0 6px;margin-left:5px}
+#mfCount:empty{display:none}
+.filter-row select{min-width:0}
 .layer-row{display:flex;align-items:center;gap:8px;margin-bottom:6px;cursor:pointer;font-size:13px;color:var(--ink)}
 .layer-row:last-child{margin-bottom:0}
 .layer-row input[type=checkbox]{accent-color:var(--red);width:14px;height:14px;cursor:pointer}
@@ -406,9 +421,64 @@ tr.dir-last td{border-bottom:1px solid var(--line)}
 .card-google:hover,.pop-google:hover{border-color:#1a73e8 !important;color:#1a73e8 !important}
 
 @media(max-width:760px){
-  #app{flex-direction:column}
-  #sidebar{width:100%;min-width:0;height:50%;border-right:none;border-bottom:1px solid var(--line)}
-  #map-container{height:50%}
+  #app{flex-direction:column;height:100vh;height:100dvh}
+  #sidebar{width:100%;min-width:0;height:50%;flex:none;border-right:none;border-bottom:1px solid var(--line)}
+  #map-container{height:50%;flex:none}
+  #app.view-list #sidebar{height:100%;border-bottom:none}
+  #app.view-list #map-container{display:none}
+  #app.view-map #sidebar{display:none}
+  #app.view-map #map-container{height:100%}
+
+  #viewToggle{display:flex;position:fixed;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom));z-index:1500;background:var(--ink);border-radius:24px;padding:4px;gap:2px;box-shadow:0 6px 20px rgba(0,0,0,.28)}
+  #viewToggle button{border:none;background:none;color:#d1d5db;font-size:13px;font-weight:700;padding:8px 14px;border-radius:20px;cursor:pointer;white-space:nowrap}
+  #viewToggle button.active{background:var(--white);color:var(--ink)}
+  /* keep the last rows of each panel clear of the floating switch */
+  #tab-overview,#tab-analytics,#tab-ownership,#tab-whitespace{padding-bottom:84px}
+  #list{padding-bottom:84px}
+
+  /* compact header: one row of chips, roomier tab targets */
+  .brand{padding:10px 14px 8px}
+  .brand h1{font-size:16px}
+  .brand-chips{margin-top:6px;flex-wrap:nowrap}
+  .chip{font-size:11px;padding:2px 8px}
+  .brand-chips .chip:nth-child(4){display:none}
+  .tabs{padding:0 4px}
+  .tab-btn{font-size:12px;padding:12px 2px}
+
+  /* secondary filters fold behind a button so the results list keeps its room */
+  #moreFilters{display:flex}
+  .filters:not(.expanded) .filter-row,.filters:not(.expanded) .rating-filter{display:none}
+  #moreFilters[aria-expanded=true]{border-color:var(--red);color:var(--red)}
+
+  /* iOS Safari zooms the page when a focused field is under 16px */
+  input[type=text],input[type=number],select{font-size:16px !important}
+
+  /* map chrome: clear the floating switch, drop redundant/oversized bits */
+  #brand-legend{display:none}
+  .leaflet-control-attribution{font-size:9px}
+  #rating-legend,#owner-legend,#momentum-legend,#sq-legend,#choro-legend{bottom:76px;max-height:34vh;overflow-y:auto}
+  #timelapse-box{bottom:76px;width:calc(100% - 24px);gap:8px;padding:8px 12px}
+  #timelapse-box input[type=range]{flex:1;min-width:0}
+  .leaflet-popup-content{max-height:46vh;overflow-y:auto}
+
+  /* modals: near full-width, header controls wrap */
+  .loan-card{width:94vw;max-height:88dvh}
+  .dir-card{width:96vw;max-height:90dvh}
+  .loan-head{padding:14px 16px;flex-wrap:wrap;gap:8px}
+  #dir-modal .loan-head > div{flex:1 1 100%}
+  #dirSearch{width:auto;flex:1;min-width:0}
+  .dir-sub{padding:10px 16px 8px}
+  /* directory table → stacked cards: owner, then each location with its contacts */
+  .dir-table,.dir-table tbody{display:block}
+  .dir-table thead{display:none}
+  .dir-table tr{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 12px;padding:3px 16px}
+  .dir-table td,.dir-table td.dir-group{display:block;padding:0;border:none;background:none}
+  .dir-table td.dir-group:first-child{flex:1 1 100%;padding-top:8px;margin-bottom:2px}
+  .dir-table td.dir-units{display:none}
+  .dir-table td:nth-last-child(4){flex:1 1 100%}
+  .dir-table tr.dir-last{border-bottom:1px solid var(--line);padding-bottom:10px}
+  .dir-table tr.dir-last td{border:none}
+  .dir-table tr.dir-corp{background:#fafafa}
 }
 </style>
 </head>
@@ -497,6 +567,7 @@ tr.dir-last td{border-bottom:1px solid var(--line)}
           <button id="openNowBtn" class="open-now-btn">
             <span class="open-dot"></span>Open Now
           </button>
+          <button id="moreFilters" class="open-now-btn" aria-expanded="false">Filters<span id="mfCount"></span></button>
         </div>
         <div class="filter-row">
           <select id="regionSel"><option value="">All regions</option></select>
@@ -692,7 +763,7 @@ tr.dir-last td{border-bottom:1px solid var(--line)}
   <div id="map-container">
     <div id="map"></div>
     <div id="layer-panel">
-      <h4>Map Layers</h4>
+      <h4 id="layerHead" role="button" tabindex="0" aria-expanded="true">Map Layers <span class="lp-caret">▾</span></h4>
       <label class="layer-row">
         <input type="checkbox" id="toggleChoropleth"/>State density
       </label>
@@ -772,6 +843,12 @@ tr.dir-last td{border-bottom:1px solid var(--line)}
     </div>
   </div>
 </div>
+
+<nav id="viewToggle" aria-label="View">
+  <button data-view="list">☰ List</button>
+  <button data-view="split">◫ Split</button>
+  <button data-view="map">🗺 Map</button>
+</nav>
 
 <!-- SBA loan detail modal -->
 <div id="loan-modal" onclick="if(event.target===this)hideLoans()">
@@ -908,6 +985,43 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_L
   attribution:'Tiles &copy; <a href="https://www.esri.com/">Esri</a> &mdash; Esri, HERE, Garmin &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   maxNativeZoom:16,maxZoom:19
 }).addTo(map);
+
+// ── Phone layout: List / Split / Map ──
+const PHONE = window.matchMedia('(max-width:760px)');
+let viewMode = (()=>{ try{ return localStorage.getItem('alloyView')||'list'; }catch(e){ return 'list'; } })();
+let pendingFit=null;   // filter-driven fit requested while the map was hidden
+function mapHidden(){ return PHONE.matches && viewMode==='list'; }
+function fitMap(bounds,opts){
+  if(mapHidden()){ pendingFit=[bounds,opts]; return; }
+  try{ map.fitBounds(bounds,opts); }catch(e){}
+}
+function setViewMode(mode){
+  if(!['list','split','map'].includes(mode)) mode='list';
+  viewMode=mode;
+  const app=document.getElementById('app');
+  app.classList.remove('view-list','view-split','view-map');
+  app.classList.add('view-'+mode);
+  document.querySelectorAll('#viewToggle button').forEach(b=>b.classList.toggle('active',b.dataset.view===mode));
+  try{ localStorage.setItem('alloyView',mode); }catch(e){}
+  map.invalidateSize({animate:false});
+  if(pendingFit && !mapHidden()){ const [b,o]=pendingFit; pendingFit=null; try{ map.fitBounds(b,o); }catch(e){} }
+}
+// Call before any programmatic pan/zoom: Leaflet sizes setView/fitBounds against
+// the container, which is 0×0 while the map is hidden.
+function revealMap(){ pendingFit=null; if(mapHidden()) setViewMode('split'); }
+document.querySelectorAll('#viewToggle button').forEach(b=>b.addEventListener('click',()=>setViewMode(b.dataset.view)));
+
+function setLayerPanel(open){
+  document.getElementById('layer-panel').classList.toggle('collapsed',!open);
+  document.getElementById('layerHead').setAttribute('aria-expanded',open);
+}
+const layerHead=document.getElementById('layerHead');
+layerHead.addEventListener('click',()=>setLayerPanel(document.getElementById('layer-panel').classList.contains('collapsed')));
+layerHead.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); layerHead.click(); } });
+
+setViewMode(viewMode);
+setLayerPanel(!PHONE.matches);
+PHONE.addEventListener('change',()=>{ setLayerPanel(!PHONE.matches); map.invalidateSize({animate:false}); });
 
 function ratingTier(r){
   if(r==null) return 'none';
@@ -1284,6 +1398,7 @@ function renderList(items){
 
     c.addEventListener('click',e=>{
       if(e.target.closest('a')) return;   // clicks on links (incl. their child spans) shouldn't fly the map
+      revealMap();
       map.setView([l.lat,l.lng],13,{animate:true});
       cluster.zoomToShowLayer(l._marker,()=>l._marker.openPopup());
       if(activeCard) activeCard.classList.remove('active');
@@ -1294,11 +1409,21 @@ function renderList(items){
 
   if(items.length < LOCATIONS.length && items.length>0){
     const g=L.featureGroup(items.map(l=>l._marker));
-    try{ map.fitBounds(g.getBounds().pad(.2)); }catch(e){}
-  }
+    fitMap(g.getBounds().pad(.2),{maxZoom:13});
+  } else pendingFit=null;
 }
 
-function apply(){ renderList(filteredLocations()); serializeState(); }
+function apply(){ renderList(filteredLocations()); serializeState(); updateFilterBadge(); }
+function updateFilterBadge(){
+  const n=['regionSel','stateSel','yearSel','densitySel'].filter(id=>document.getElementById(id).value).length
+    + document.querySelectorAll('#ratingChecks input:checked').length;
+  document.getElementById('mfCount').textContent = n ? n : '';
+}
+document.getElementById('moreFilters').addEventListener('click',()=>{
+  const f=document.querySelector('#tab-locations .filters'), open=!f.classList.contains('expanded');
+  f.classList.toggle('expanded',open);
+  document.getElementById('moreFilters').setAttribute('aria-expanded',open);
+});
 
 // ── CSV export ──
 function downloadCSV(filename, rows){
@@ -1796,6 +1921,7 @@ function exportDirectory(){
 function operatorMapFocus(op){
   hideOperator();
   document.querySelector('.tab-btn[data-tab=locations]')?.click?.();
+  revealMap();
   if(op.locs.length===1){ const l=op.locs[0]; map.setView([l.lat,l.lng],13,{animate:true}); cluster.zoomToShowLayer(l._marker,()=>l._marker.openPopup()); return; }
   try{ map.fitBounds(L.featureGroup(op.locs.map(l=>l._marker)).getBounds().pad(.3),{maxZoom:11}); }catch(e){}
 }
@@ -1868,7 +1994,7 @@ function renderWhitespace(){
       <div class="ws-go">›</div>
     </div>`).join('');
   document.querySelectorAll('.ws-row').forEach(row=>{
-    row.addEventListener('click',()=>map.setView([+row.dataset.lat,+row.dataset.lng],10,{animate:true}));
+    row.addEventListener('click',()=>{ revealMap(); map.setView([+row.dataset.lat,+row.dataset.lng],10,{animate:true}); });
   });
 }
 
@@ -2084,6 +2210,7 @@ function renderMarkets(){
     </div>`).join('');
   document.querySelectorAll('#ov-markets .mkt-row').forEach(r=>r.addEventListener('click',()=>{
     const m=marketData().find(x=>x.name===decodeURIComponent(r.dataset.mkt)); if(!m) return;
+    revealMap();
     try{ map.fitBounds(L.featureGroup(m.locs.map(l=>l._marker)).getBounds().pad(.3),{maxZoom:10}); }catch(e){}
   }));
 }

@@ -62,7 +62,7 @@ The next leap is to **synthesize it into a single ranked view of rollup targets*
 | 14 | **Export** ✅ *(done)* — CSV of the current filtered locations (Locations tab) and the ranked operator table (Ownership tab) | People want the data *out* for spreadsheets/decks | ⭐ | — |
 | 15 | **Shareable deep links** ✅ *(done)* — active filters/search/tab encoded in the URL, restored on load | Send a colleague "the 4.5★ TX multi-unit view" | ◐ | — |
 | 16 | **Address search / "nearest Alloy"** — geocode an address, fly + list nearest | Common first thing a user tries | ◐ | S |
-| 17 | **Mobile polish + dark mode** | Currently desktop-first | ○ | M |
+| 17 | **Mobile polish + dark mode** | Mobile ✓ (Oct 2026): List/Split/Map switch, collapsible layers + filters, compact header, iOS no-zoom inputs, stacked directory cards. Dark mode still open | ◐ | M |
 
 ---
 
