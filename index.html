@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
 <meta name="theme-color" content="#111827" id="metaTheme"/>
 <meta name="description" content="Franchise roll-up analytics for Alloy Personal Training: locations, ownership, unit economics and market intelligence from public data."/>
+<meta name="format-detection" content="telephone=no, date=no, address=no, email=no"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-title" content="Alloy Map"/>
@@ -59,6 +60,7 @@
   --overlay:rgba(0,0,0,.6);--shadow:rgba(0,0,0,.4);
 }
 *{box-sizing:border-box;margin:0;padding:0}
+a[x-apple-data-detectors]{color:inherit !important;text-decoration:none !important;pointer-events:none}
 html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);font-size:14px;background:var(--white)}
 /* Leaflet + plugin chrome in dark mode */
 [data-theme="dark"] .leaflet-container{background:#1b1f27}
@@ -75,7 +77,7 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Ro
 #app{display:flex;height:100vh;overflow:hidden}
 
 /* ── Sidebar ── */
-#sidebar{width:400px;min-width:400px;display:flex;flex-direction:column;height:100%;background:var(--white);border-right:1px solid var(--line)}
+#sidebar{width:var(--sbw,400px);min-width:var(--sbw,400px);display:flex;flex-direction:column;height:100%;background:var(--white);border-right:1px solid var(--line)}
 .brand{padding:14px 20px 10px;border-bottom:1px solid var(--line);position:relative}
 .theme-btn{position:absolute;top:12px;right:14px;width:30px;height:30px;border:1px solid var(--line);border-radius:50%;background:var(--white);color:var(--ink);font-size:15px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}
 .theme-btn:hover{border-color:var(--red);color:var(--red)}
@@ -432,6 +434,16 @@ tr.dir-last td{border-bottom:1px solid var(--line)}
 #splitHandle{display:none;flex:none;height:24px;align-items:center;justify-content:center;background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line);touch-action:none;cursor:row-resize;outline:none}
 #splitHandle span{width:44px;height:5px;border-radius:3px;background:var(--faint);transition:background .15s,width .15s}
 #splitHandle:focus-visible span,#app.resizing #splitHandle span{background:var(--red);width:56px}
+/* Desktop: the same handle becomes a vertical bar that sets the sidebar width (--sbw) */
+@media(min-width:761px){
+  #splitHandle{display:flex;width:10px;height:auto;align-self:stretch;cursor:col-resize;border-top:none;border-bottom:none;border-left:1px solid var(--line);border-right:1px solid var(--line);background:var(--bg)}
+  #splitHandle span{width:4px;height:40px}
+  #splitHandle:hover span,#splitHandle:focus-visible span,#app.resizing #splitHandle span{background:var(--red);width:4px;height:56px}
+  #app.sidebar-hidden #splitHandle{display:none}
+  #sidebar{border-right:none}
+  #app.resizing{user-select:none;-webkit-user-select:none;cursor:col-resize}
+  #app.resizing #map-container{pointer-events:none}
+}
 
 /* Phone view switch (List / Split / Map) — shown only at phone widths */
 #viewToggle{display:none}
@@ -866,7 +878,7 @@ tr.dir-last td{border-bottom:1px solid var(--line)}
     </div>
   </aside>
 
-  <div id="splitHandle" role="separator" aria-orientation="horizontal" aria-label="Resize map — drag up or down" tabindex="0" title="Drag to resize · double-tap to reset"><span></span></div>
+  <div id="splitHandle" role="separator" aria-orientation="vertical" aria-label="Resize the list and map" tabindex="0" title="Drag to resize · double-click to reset"><span></span></div>
 
   <!-- MAP -->
   <div id="map-container">
@@ -1165,50 +1177,83 @@ setViewMode(viewMode);
 setLayerPanel(!PHONE.matches);
 PHONE.addEventListener('change',()=>{ setLayerPanel(!PHONE.matches); closeSheet(); map.invalidateSize({animate:false}); });
 
-// ── Phone split divider: drag to resize; drag to an edge to go full map / full list ──
+// ── Divider between list and map: drag to resize ──
+// Phone (Split view): horizontal bar sets the list/map height ratio; drag to an edge for full map / full list.
+// Desktop: vertical bar sets the sidebar width; drag far left to hide the sidebar.
 (()=>{
   const app=document.getElementById('app'), handle=document.getElementById('splitHandle');
-  const MIN=.12, MAX=.88, SNAP_MAP=.08, SNAP_LIST=.90;   // ratios of screen height given to the list
-  let ratio=(()=>{ try{ const v=parseFloat(localStorage.getItem('alloySplit')); return v>=MIN&&v<=MAX?v:.5; }catch(e){ return .5; } })();
-  const apply=r=>{ app.style.setProperty('--split',(r*100).toFixed(2)+'%'); };
-  const save=()=>{ try{ localStorage.setItem('alloySplit',ratio.toFixed(3)); }catch(e){} };
+  const MIN=.12, MAX=.88, SNAP_MAP=.08, SNAP_LIST=.90;      // phone: share of screen height given to the list
+  const W_DEF=400, W_MIN=320, W_SNAP=200;                  // desktop: sidebar width in px
+  const wMax=()=>Math.max(W_MIN,Math.min(900,window.innerWidth*.6));
+  const read=(k,ok,d)=>{ try{ const v=parseFloat(localStorage.getItem(k)); return ok(v)?v:d; }catch(e){ return d; } };
+  const store=(k,v)=>{ try{ localStorage.setItem(k,String(v)); }catch(e){} };
+  let ratio=read('alloySplit',v=>v>=MIN&&v<=MAX,.5);
+  let width=read('alloySidebarW',v=>v>=W_MIN&&v<=2000,W_DEF);
+  const applyRatio=r=>app.style.setProperty('--split',(r*100).toFixed(2)+'%');
+  const applyWidth=w=>app.style.setProperty('--sbw',Math.round(Math.min(wMax(),Math.max(W_MIN,w)))+'px');
   let raf=0; const refit=()=>{ if(raf) return; raf=requestAnimationFrame(()=>{ raf=0; map.invalidateSize({animate:false}); }); };
-  apply(ratio);
+  const orient=()=>handle.setAttribute('aria-orientation',PHONE.matches?'horizontal':'vertical');
+  applyRatio(ratio); applyWidth(width); orient();
+  PHONE.addEventListener('change',orient);
+  window.addEventListener('resize',()=>applyWidth(width));
 
-  let dragging=false, live=ratio, y0=0, lastTap=0;
+  let dragging=false, live=0, x0=0, y0=0, lastTap=0;
   handle.addEventListener('pointerdown',e=>{
-    dragging=true; live=ratio; y0=e.clientY;
+    dragging=true; x0=e.clientX; y0=e.clientY; live=PHONE.matches?ratio:width;
     try{ handle.setPointerCapture(e.pointerId); }catch(err){}
     app.classList.add('resizing'); e.preventDefault();
   });
   handle.addEventListener('pointermove',e=>{
     if(!dragging) return;
     const box=app.getBoundingClientRect();
-    live=Math.min(.97,Math.max(.03,(e.clientY-box.top)/box.height));
-    apply(Math.min(MAX,Math.max(MIN,live)));
+    if(PHONE.matches){
+      live=Math.min(.97,Math.max(.03,(e.clientY-box.top)/box.height));
+      applyRatio(Math.min(MAX,Math.max(MIN,live)));
+    }else{
+      live=e.clientX-box.left;
+      applyWidth(live);
+    }
     refit();
   });
-  const reset=()=>{ ratio=.5; apply(ratio); save(); map.invalidateSize({animate:false}); };
+  const reset=()=>{
+    if(PHONE.matches){ ratio=.5; applyRatio(ratio); store('alloySplit',ratio); }
+    else{ width=W_DEF; applyWidth(width); store('alloySidebarW',width); }
+    map.invalidateSize({animate:false});
+  };
   const end=e=>{
     if(!dragging) return; dragging=false; app.classList.remove('resizing');
-    if(Math.abs((e.clientY??y0)-y0)<6){            // a tap, not a drag
+    const moved=PHONE.matches ? Math.abs((e.clientY??y0)-y0) : Math.abs((e.clientX??x0)-x0);
+    if(moved<6){                                       // a tap/click, not a drag
       const now=Date.now();
-      if(now-lastTap<350){ lastTap=0; reset(); } else { lastTap=now; apply(ratio); }
+      if(now-lastTap<350){ lastTap=0; reset(); }
+      else{ lastTap=now; PHONE.matches?applyRatio(ratio):applyWidth(width); }
       return;
     }
     lastTap=0;
-    if(live<=SNAP_MAP){ apply(ratio); setViewMode('map'); return; }     // pushed all the way up
-    if(live>=SNAP_LIST){ apply(ratio); setViewMode('list'); return; }   // pulled all the way down
-    ratio=Math.min(MAX,Math.max(MIN,live)); apply(ratio); save();
+    if(PHONE.matches){
+      if(live<=SNAP_MAP){ applyRatio(ratio); setViewMode('map'); return; }     // pushed all the way up
+      if(live>=SNAP_LIST){ applyRatio(ratio); setViewMode('list'); return; }   // pulled all the way down
+      ratio=Math.min(MAX,Math.max(MIN,live)); applyRatio(ratio); store('alloySplit',ratio.toFixed(3));
+    }else{
+      if(live<=W_SNAP){ applyWidth(width); setSidebarHidden(true); return; }   // dragged all the way left
+      width=Math.min(wMax(),Math.max(W_MIN,live)); applyWidth(width); store('alloySidebarW',Math.round(width));
+    }
     map.invalidateSize({animate:false});
   };
   handle.addEventListener('pointerup',end);
   handle.addEventListener('pointercancel',end);
   handle.addEventListener('keydown',e=>{
-    if(e.key!=='ArrowUp'&&e.key!=='ArrowDown') return;
-    e.preventDefault();
-    ratio=Math.min(MAX,Math.max(MIN,ratio+(e.key==='ArrowDown'?.05:-.05)));
-    apply(ratio); save(); map.invalidateSize({animate:false});
+    const k=e.key;
+    if(PHONE.matches){
+      if(k!=='ArrowUp'&&k!=='ArrowDown') return;
+      e.preventDefault(); ratio=Math.min(MAX,Math.max(MIN,ratio+(k==='ArrowDown'?.05:-.05)));
+      applyRatio(ratio); store('alloySplit',ratio.toFixed(3));
+    }else{
+      if(k!=='ArrowLeft'&&k!=='ArrowRight') return;
+      e.preventDefault(); width=Math.min(wMax(),Math.max(W_MIN,width+(k==='ArrowRight'?40:-40)));
+      applyWidth(width); store('alloySidebarW',Math.round(width));
+    }
+    map.invalidateSize({animate:false});
   });
 })();
 
