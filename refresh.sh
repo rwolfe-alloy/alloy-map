@@ -96,4 +96,31 @@ else
     log "Commit made but PUSH FAILED — will retry next run."; notify "refresh $MODE: push failed" "committed locally; will retry"
   fi
 fi
+
+# Owner Edition: separate public repo, sanitized build. build_owner.py refuses to
+# write if anything sensitive would reach the page, leaving the public map as-is.
+OWNER_DIR="$HOME/Claude/Code/Alloy Owner Map"
+if [ -d "$OWNER_DIR/.git" ] && git -C "$OWNER_DIR" remote get-url origin >/dev/null 2>&1; then
+  if $PY build_owner.py "$OWNER_DIR" >>"$LOG" 2>&1; then
+    if ! git -C "$OWNER_DIR" diff --quiet -- index.html; then
+      if [ -n "$DRY_RUN" ]; then
+        log "DRY_RUN: Owner Edition changed — would commit + push."
+      else
+        git -C "$OWNER_DIR" add index.html
+        git -C "$OWNER_DIR" commit -q -m "Monthly update: $(date '+%Y-%m-%d')" >>"$LOG" 2>&1
+      fi
+    else
+      log "Owner Edition: no changes."
+    fi
+    if [ -z "$DRY_RUN" ] && [ -n "$(git -C "$OWNER_DIR" log origin/main..main --oneline 2>/dev/null)" ]; then
+      if git -C "$OWNER_DIR" push -q origin main >>"$LOG" 2>&1; then
+        log "Owner Edition: pushed."
+      else
+        log "Owner Edition: PUSH FAILED — will retry next run."; notify "owner edition: push failed" "committed locally; will retry"
+      fi
+    fi
+  else
+    log "Owner Edition build FAILED (guard or data) — public owner map left unchanged."; notify "owner edition build failed" "see $LOG"
+  fi
+fi
 log "=== refresh '$MODE' done ==="

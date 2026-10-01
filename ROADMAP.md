@@ -88,3 +88,7 @@ The next leap is to **synthesize it into a single ranked view of rollup targets*
 6. Layer in the rest (demographics #7, competitors #8, SBA 504 #6, trade-area overlap #3) as appetite allows.
 
 **Note:** the public-data + estimates build is now a fairly complete POC. The next big unlock is the **proprietary per-location KPIs** — to be wired into a **local-only private build** (gitignored, never pushed) when provided.
+
+## Owner Edition (Oct 2026)
+
+Separate public build for circulation to Alloy owners and hosting on electrumignite.com. Lives in its own repo (`../Alloy Owner Map`, separate GitHub account) with its own history. `build_owner.py` embeds only owner-safe data (studios, public contacts, ratings, FDD owner names, network totals, positive review movers, peer size/growth/survival) and refuses to write if any financing, revenue, Item 19, departed-franchisee, decline, demographic, whitespace or pipeline data would reach the page. Opt-outs: `_owner_optout.json` (local, gitignored). `refresh.sh` rebuilds and pushes it monthly once its remote exists. Page copy + Lovable prompt: `electrum-owner-map-page.md` (local).
