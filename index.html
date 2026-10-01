@@ -3,8 +3,24 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
-<meta name="theme-color" content="#ffffff"/>
+<meta name="theme-color" content="#ffffff" id="metaTheme"/>
+<meta name="description" content="Franchise roll-up analytics for Alloy Personal Training: locations, ownership, unit economics and market intelligence from public data."/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-title" content="Alloy Map"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+<link rel="manifest" href="manifest.webmanifest"/>
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png"/>
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png"/>
 <title>Alloy Personal Training — US Locations</title>
+<script>
+// Resolve the theme before first paint so dark-mode viewers never see a white flash.
+(function(){
+  var pref='auto'; try{ pref=localStorage.getItem('alloyTheme')||'auto'; }catch(e){}
+  var dark = pref==='dark' || (pref==='auto' && window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches);
+  document.documentElement.setAttribute('data-theme', dark?'dark':'light');
+})();
+</script>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
 <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css"/>
 <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"/>
@@ -15,15 +31,54 @@
   --green:#059669;--green-bg:#ecfdf5;--green-line:#a7f3d0;
   --ink:#111827;--muted:#6b7280;--light:#9ca3af;
   --line:#e5e7eb;--bg:#f9fafb;--white:#fff;
+  --track:#f3f4f6;--line-soft:#f1f2f4;--faint:#d1d5db;--ink2:#374151;--ink3:#4b5563;--slate:#475569;
+  --red-chip:#fee2e2;--red-line:#fca5a5;--red-tx:#b91c1c;
+  --amber-chip:#fef3c7;--amber-dk:#92400e;--amber-tx:#b45309;
+  --green-chip:#d1fae5;--green-dk:#065f46;--green-tx:#047857;
+  --violet-bg:#f5f3ff;--violet-line:#ddd6fe;--violet-tx:#6d28d9;
+  --blue-bg:#eff6ff;--blue-line:#bfdbfe;--blue-tx:#1e40af;--blue-md:#1d4ed8;--indigo:#4338ca;
+  --lime-bg:#ecfccb;--lime-tx:#3f6212;--orange-tx:#c2410c;--orange-line:#fed7aa;--indigo-line:#c7d2fe;--link:#2563eb;
+  --overlay:rgba(17,24,39,.5);--shadow:rgba(0,0,0,.1);
   --radius:10px;
 }
+/* data-theme is resolved in <head> from the saved choice or the OS setting */
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --red:#f0443a;--red-dk:#fca5a5;--red-bg:#2b1517;
+  --amber:#f59e0b;--amber-bg:#2a2010;--amber-line:#78530f;
+  --green:#10b981;--green-bg:#0d2a21;--green-line:#14532d;
+  --ink:#e5e7eb;--muted:#9ca3af;--light:#6b7280;
+  --line:#2f3a4a;--bg:#182130;--white:#111827;
+  --track:#243041;--line-soft:#222c3b;--faint:#4b5563;--ink2:#e5e7eb;--ink3:#cbd5e1;--slate:#cbd5e1;
+  --red-chip:#3f1d1d;--red-line:#7f1d1d;--red-tx:#f87171;
+  --amber-chip:#3a2a0c;--amber-dk:#fcd34d;--amber-tx:#fbbf24;
+  --green-chip:#0f3b2c;--green-dk:#6ee7b7;--green-tx:#34d399;
+  --violet-bg:#1f1a33;--violet-line:#4c3a8a;--violet-tx:#c4b5fd;
+  --blue-bg:#152039;--blue-line:#1e3a8a;--blue-tx:#93c5fd;--blue-md:#60a5fa;--indigo:#a5b4fc;
+  --lime-bg:#1c2a0e;--lime-tx:#bef264;--orange-tx:#fb923c;--orange-line:#7c2d12;--indigo-line:#3730a3;--link:#60a5fa;
+  --overlay:rgba(0,0,0,.6);--shadow:rgba(0,0,0,.4);
+}
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);font-size:14px}
+html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);font-size:14px;background:var(--white)}
+/* Leaflet + plugin chrome in dark mode */
+[data-theme="dark"] .leaflet-container{background:#1b1f27}
+[data-theme="dark"] .leaflet-popup-content-wrapper,[data-theme="dark"] .leaflet-popup-tip{background:var(--white);color:var(--ink);box-shadow:0 3px 14px rgba(0,0,0,.6)}
+[data-theme="dark"] .leaflet-container a.leaflet-popup-close-button{color:var(--muted)}
+[data-theme="dark"] .leaflet-bar a,[data-theme="dark"] .leaflet-bar a:hover{background:var(--white);color:var(--ink);border-bottom-color:var(--line)}
+[data-theme="dark"] .leaflet-bar a.leaflet-disabled{background:#1f2937;color:#4b5563}
+[data-theme="dark"] .leaflet-control-attribution{background:rgba(17,24,39,.8) !important;color:var(--muted)}
+[data-theme="dark"] .leaflet-control-attribution a{color:#93c5fd}
+[data-theme="dark"] .leaflet-tooltip{background:var(--white);color:var(--ink);border-color:var(--line)}
+[data-theme="dark"] .leaflet-tooltip-top:before{border-top-color:var(--white)}
+[data-theme="dark"] .alloy-dot,[data-theme="dark"] .ws-dot{border-color:#e5e7eb}
+[data-theme="dark"] input,[data-theme="dark"] select{background-color:var(--white);color:var(--ink)}
 #app{display:flex;height:100vh;overflow:hidden}
 
 /* ── Sidebar ── */
 #sidebar{width:400px;min-width:400px;display:flex;flex-direction:column;height:100%;background:var(--white);border-right:1px solid var(--line)}
-.brand{padding:14px 20px 10px;border-bottom:1px solid var(--line)}
+.brand{padding:14px 20px 10px;border-bottom:1px solid var(--line);position:relative}
+.theme-btn{position:absolute;top:12px;right:14px;width:30px;height:30px;border:1px solid var(--line);border-radius:50%;background:var(--white);color:var(--ink);font-size:15px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.theme-btn:hover{border-color:var(--red);color:var(--red)}
 .brand h1{font-size:18px;font-weight:800;letter-spacing:-.3px}
 .brand h1 b{color:var(--red)}
 .brand-chips{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
@@ -40,14 +95,14 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Ro
 /* ── Locations tab ── */
 #tab-locations{display:none;flex-direction:column;flex:1;overflow:hidden}
 #tab-overview{display:block;flex:1;overflow-y:auto;padding:16px}
-.ov-hero{background:linear-gradient(135deg,#fff5f4,#fff);border:1px solid #fca5a5;border-radius:12px;padding:14px 16px;margin-bottom:14px}
+.ov-hero{background:linear-gradient(135deg,var(--red-bg),var(--white));border:1px solid var(--red-line);border-radius:12px;padding:14px 16px;margin-bottom:14px}
 .ov-hero h2{font-size:18px;font-weight:800;color:var(--ink)}
 #ov-tagline{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.4}
 .ov-kpis{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:20px}
 .ov-kpi{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:9px 6px;text-align:center}
 .ov-kpi .v{font-size:18px;font-weight:800;color:var(--ink);line-height:1.05}
 .ov-kpi .l{font-size:10px;color:var(--muted);margin-top:3px}
-.ov-kpi.red .v{color:var(--red)}.ov-kpi.green .v{color:#059669}.ov-kpi.blue .v{color:#1d4ed8}.ov-kpi.amber .v{color:var(--amber)}
+.ov-kpi.red .v{color:var(--red)}.ov-kpi.green .v{color:#059669}.ov-kpi.blue .v{color:var(--blue-md)}.ov-kpi.amber .v{color:var(--amber)}
 .ov-section{margin-bottom:22px}
 .ov-section h3{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:10px}
 .ov-auto{font-weight:500;color:var(--light);text-transform:none;letter-spacing:0;font-size:11px}
@@ -70,7 +125,7 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Ro
 .ov-sub{font-size:11.5px;color:var(--muted)}
 .mkt-row{display:flex;align-items:center;gap:10px;padding:9px 11px;border:1px solid var(--line);border-radius:10px;margin-bottom:6px;cursor:pointer;transition:.12s}
 .mkt-row:hover{border-color:var(--red);background:var(--red-bg)}
-.mkt-rank{font-size:12px;font-weight:800;color:#d1d5db;width:20px;text-align:center;flex:none}
+.mkt-rank{font-size:12px;font-weight:800;color:var(--faint);width:20px;text-align:center;flex:none}
 .mkt-info{flex:1;min-width:0}
 .mkt-name{font-weight:700;font-size:13.5px}
 .mkt-meta{font-size:11.5px;color:var(--muted);margin-top:2px;display:flex;gap:10px;flex-wrap:wrap}
@@ -115,7 +170,7 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Ro
 .rating-checks label{display:inline-flex;align-items:center;gap:4px;font-size:12px;color:var(--ink);border:1px solid var(--line);border-radius:14px;padding:3px 8px;cursor:pointer;background:var(--white);transition:.1s;user-select:none}
 .rating-checks label:hover{border-color:#f59e0b}
 .rating-checks input{accent-color:#f59e0b;width:13px;height:13px;cursor:pointer;margin:0}
-.rating-checks label.on{border-color:#f59e0b;background:#fffbeb;color:#b45309;font-weight:600}
+.rating-checks label.on{border-color:#f59e0b;background:var(--amber-bg);color:var(--amber-tx);font-weight:600}
 
 .result-bar{padding:6px 18px 2px;font-size:12px;color:var(--muted);display:flex;align-items:center;justify-content:space-between;gap:8px}
 .export-btn{border:1px solid var(--line);border-radius:7px;background:var(--white);color:var(--muted);font-size:11px;font-weight:700;padding:3px 9px;cursor:pointer;transition:.1s;white-space:nowrap}
@@ -141,9 +196,9 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Ro
 
 .card-tags{display:flex;gap:4px;margin-top:5px;flex-wrap:wrap}
 .tag{background:var(--bg);border:1px solid var(--line);border-radius:20px;padding:2px 8px;font-size:11px;color:var(--muted);font-weight:500}
-.tag-region{color:var(--red);border-color:#fca5a5;background:#fff5f4}
-.tag-year{color:#1d4ed8;border-color:#bfdbfe;background:#eff6ff}
-.tag-metro{color:#065f46;border-color:#a7f3d0;background:#ecfdf5}
+.tag-region{color:var(--red);border-color:var(--red-line);background:var(--red-bg)}
+.tag-year{color:var(--blue-md);border-color:var(--blue-line);background:var(--blue-bg)}
+.tag-metro{color:var(--green-dk);border-color:var(--green-line);background:var(--green-bg)}
 .tag-soon{color:var(--amber);border-color:var(--amber-line);background:var(--amber-bg)}
 .tag-open{color:var(--green);border-color:var(--green-line);background:var(--green-bg)}
 
@@ -156,41 +211,41 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Ro
 .card-email{font-size:11.5px;color:var(--muted);margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .card-email a{color:var(--muted);text-decoration:none}
 .card-email a:hover{color:var(--red)}
-.card-owner{font-size:11.5px;color:#4b5563;margin-top:5px;display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+.card-owner{font-size:11.5px;color:var(--ink3);margin-top:5px;display:flex;align-items:center;gap:5px;flex-wrap:wrap}
 .card-owner .owndot{width:9px;height:9px;border-radius:50%;flex:none;border:1px solid rgba(0,0,0,.15)}
 .card-owner b{color:var(--ink);font-weight:600}
 .ownent{color:var(--muted)}
-.ownmulti{font-size:10px;font-weight:700;color:#6d28d9;background:#f5f3ff;border:1px solid #ddd6fe;border-radius:10px;padding:0 6px}
-.pop-owner{font-size:12px;color:#4b5563;margin-bottom:5px;display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+.ownmulti{font-size:10px;font-weight:700;color:var(--violet-tx);background:var(--violet-bg);border:1px solid var(--violet-line);border-radius:10px;padding:0 6px}
+.pop-owner{font-size:12px;color:var(--ink3);margin-bottom:5px;display:flex;align-items:center;gap:5px;flex-wrap:wrap}
 .pop-owner .owndot{width:9px;height:9px;border-radius:50%;flex:none;border:1px solid rgba(0,0,0,.15)}
 .pop-owner b{color:var(--ink);font-weight:600}
-.card-sba,.pop-sba{font-size:11.5px;color:#065f46;margin-top:5px;display:inline-flex;align-items:center;gap:4px;flex-wrap:wrap;text-decoration:none;cursor:pointer}
+.card-sba,.pop-sba{font-size:11.5px;color:var(--green-dk);margin-top:5px;display:inline-flex;align-items:center;gap:4px;flex-wrap:wrap;text-decoration:none;cursor:pointer}
 .card-sba:hover,.pop-sba:hover{text-decoration:underline}
 .pop-sba{font-size:12px;margin-top:0;margin-bottom:5px}
-.card-sba b,.pop-sba b{color:#047857;font-weight:700}
+.card-sba b,.pop-sba b{color:var(--green-tx);font-weight:700}
 .card-sba .sba-meta,.pop-sba .sba-meta{color:var(--muted)}
 .card-sba .sba-ico,.pop-sba .sba-ico{font-size:11px}
-.card-er,.pop-er{font-size:11.5px;color:#1e40af;margin-top:5px;display:flex;align-items:center;gap:4px;cursor:help}
-.card-tr,.pop-tr{font-size:11.5px;font-weight:600;color:#c2410c;margin-top:5px;display:flex;align-items:center;gap:4px;flex-wrap:wrap;cursor:help}
-.card-mi,.pop-mi{font-size:11.5px;color:#475569;margin-top:5px;display:flex;align-items:center;gap:4px;flex-wrap:wrap;cursor:help}
+.card-er,.pop-er{font-size:11.5px;color:var(--blue-tx);margin-top:5px;display:flex;align-items:center;gap:4px;cursor:help}
+.card-tr,.pop-tr{font-size:11.5px;font-weight:600;color:var(--orange-tx);margin-top:5px;display:flex;align-items:center;gap:4px;flex-wrap:wrap;cursor:help}
+.card-mi,.pop-mi{font-size:11.5px;color:var(--slate);margin-top:5px;display:flex;align-items:center;gap:4px;flex-wrap:wrap;cursor:help}
 .pop-mi{font-size:12px;margin-top:0;margin-bottom:5px}
 .mi-sq{font-size:10px;font-weight:800;border-radius:9px;padding:1px 6px;margin-left:2px}
-.mi-sq.sq-high{color:#065f46;background:#d1fae5}
-.mi-sq.sq-mid{color:#3f6212;background:#ecfccb}
-.mi-sq.sq-low{color:#92400e;background:#fef3c7}
-.mi-sq.sq-poor{color:#991b1b;background:#fee2e2}
+.mi-sq.sq-high{color:var(--green-dk);background:var(--green-chip)}
+.mi-sq.sq-mid{color:var(--lime-tx);background:var(--lime-bg)}
+.mi-sq.sq-low{color:var(--amber-dk);background:var(--amber-chip)}
+.mi-sq.sq-poor{color:var(--red-dk);background:var(--red-chip)}
 .pop-tr{font-size:12px;margin-top:0;margin-bottom:5px}
 .pop-er{font-size:12px;margin-top:0;margin-bottom:5px}
 .card-er b,.pop-er b{font-weight:700}
 .card-er .er-ico,.pop-er .er-ico{font-size:11px}
 .ie-note{font-size:10.5px;color:var(--light);line-height:1.4;margin-top:2px}
-.churn-link{display:inline-block;font-size:12px;font-weight:700;color:#b91c1c;text-decoration:none;margin:4px 0 8px;cursor:pointer}
+.churn-link{display:inline-block;font-size:12px;font-weight:700;color:var(--red-tx);text-decoration:none;margin:4px 0 8px;cursor:pointer}
 /* Competitor overlay */
 .comp-dot{width:9px;height:9px;border-radius:2px;border:1.5px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.35)}
 .comp-mini-legend{display:flex;flex-wrap:wrap;gap:4px 10px;font-size:10.5px;color:var(--muted);margin:2px 0 6px 22px}
 .comp-mini-legend i{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:4px}
 /* Growth time-lapse */
-.tl-launch{width:100%;margin-top:8px;border:1px solid #4338ca;background:#eef2ff;color:#4338ca;font-weight:700;font-size:12px;border-radius:8px;padding:6px;cursor:pointer}
+.tl-launch{width:100%;margin-top:8px;border:1px solid var(--indigo);background:var(--blue-bg);color:var(--indigo);font-weight:700;font-size:12px;border-radius:8px;padding:6px;cursor:pointer}
 .tl-launch:hover{background:#4338ca;color:#fff}
 #timelapse-box{position:absolute;bottom:64px;left:50%;transform:translateX(-50%);z-index:950;background:var(--white);border:1px solid var(--line);border-radius:14px;padding:10px 16px;box-shadow:0 4px 20px rgba(0,0,0,.18);display:none;align-items:center;gap:12px}
 #timelapse-box.show{display:flex}
@@ -206,10 +261,10 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Ro
 .dep-item{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--line);font-size:12.5px}
 .dep-fac{color:var(--ink);font-weight:600}
 .dep-reason{font-size:10.5px;font-weight:700;border-radius:10px;padding:1px 8px;flex:none}
-.rs-transfer{color:#1d4ed8;background:#eff6ff;border:1px solid #bfdbfe}
-.rs-closed{color:#b91c1c;background:#fef2f2;border:1px solid #fecaca}
-.rs-term,.rs-never{color:#92400e;background:#fffbeb;border:1px solid #fde68a}
-.opm-est{background:#eff6ff;border:1px solid #bfdbfe;border-radius:9px;padding:8px 11px;font-size:12.5px;color:#1e40af;margin-bottom:10px}
+.rs-transfer{color:var(--blue-md);background:var(--blue-bg);border:1px solid var(--blue-line)}
+.rs-closed{color:var(--red-tx);background:var(--red-bg);border:1px solid var(--red-line)}
+.rs-term,.rs-never{color:var(--amber-dk);background:var(--amber-bg);border:1px solid var(--amber-line)}
+.opm-est{background:var(--blue-bg);border:1px solid var(--blue-line);border-radius:9px;padding:8px 11px;font-size:12.5px;color:var(--blue-tx);margin-bottom:10px}
 .opm-est b{font-weight:800}
 .opm-est span{color:#60a5fa;font-size:11px}
 
@@ -222,7 +277,7 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Ro
 .loan-close{border:none;background:none;font-size:22px;line-height:1;color:var(--muted);cursor:pointer;padding:0 2px}
 .loan-close:hover{color:var(--ink)}
 #loan-modal-body,#op-modal-body{padding:16px 22px 20px;overflow-y:auto}
-.loan-modal-sub{font-size:12px;font-weight:700;color:#047857;margin-bottom:10px}
+.loan-modal-sub{font-size:12px;font-weight:700;color:var(--green-tx);margin-bottom:10px}
 .loan-item{border:1px solid var(--line);border-left:3px solid #10b981;border-radius:8px;padding:9px 11px;margin-bottom:8px}
 .loan-amt{font-size:16px;font-weight:800;color:var(--ink);display:flex;align-items:baseline;gap:7px}
 .loan-fy{font-size:11px;font-weight:700;color:var(--muted)}
@@ -239,15 +294,15 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Ro
 .stat-card .sv{font-size:28px;font-weight:800;color:var(--red);line-height:1}
 .stat-card .sv.amber{color:var(--amber)}
 .stat-card .sv.green{color:#059669}
-.sba-block{margin:6px 0 22px;padding-top:14px;border-top:2px solid #d1fae5}
-.sba-title{font-size:13px;font-weight:800;color:#047857;text-transform:uppercase;letter-spacing:.04em;margin-bottom:12px}
+.sba-block{margin:6px 0 22px;padding-top:14px;border-top:2px solid var(--green-chip)}
+.sba-title{font-size:13px;font-weight:800;color:var(--green-tx);text-transform:uppercase;letter-spacing:.04em;margin-bottom:12px}
 .sba-title span{font-weight:500;color:var(--light);text-transform:none;letter-spacing:0;font-size:11px}
 .stat-card .sl{font-size:11.5px;color:var(--muted);margin-top:4px;font-weight:500}
 .chart-section{margin-bottom:22px}
 .chart-section h3{font-size:13px;font-weight:700;margin-bottom:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
 .bar-row{display:flex;align-items:center;gap:8px;margin-bottom:5px}
 .bar-lbl{width:90px;font-size:12px;color:var(--ink);text-align:right;flex:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.bar-track{flex:1;background:#f3f4f6;border-radius:4px;height:18px;position:relative;overflow:hidden}
+.bar-track{flex:1;background:var(--track);border-radius:4px;height:18px;position:relative;overflow:hidden}
 .bar-fill{height:100%;background:var(--red);border-radius:4px;transition:width .4s}
 .bar-fill.blue{background:#3b82f6}
 .bar-fill.amber{background:var(--amber)}
@@ -257,12 +312,12 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Ro
 
 /* ── Whitespace tab ── */
 #tab-whitespace{display:none;overflow-y:auto;padding:16px}
-.ws-header{background:var(--red-bg);border:1px solid #fca5a5;border-radius:var(--radius);padding:12px 14px;margin-bottom:14px}
+.ws-header{background:var(--red-bg);border:1px solid var(--red-line);border-radius:var(--radius);padding:12px 14px;margin-bottom:14px}
 .ws-header p{font-size:13px;color:var(--red);font-weight:700;margin-bottom:3px}
 .ws-header span{font-size:12px;color:var(--muted)}
 .ws-row{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--line);border-radius:var(--radius);margin-bottom:6px;cursor:pointer;transition:.12s}
 .ws-row:hover{border-color:var(--red);background:var(--red-bg)}
-.ws-rank{font-size:18px;font-weight:800;color:#d1d5db;width:28px;text-align:center;flex:none}
+.ws-rank{font-size:18px;font-weight:800;color:var(--faint);width:28px;text-align:center;flex:none}
 .ws-info{flex:1}.ws-name{font-weight:700;font-size:13.5px}
 .ws-meta{font-size:12px;color:var(--muted);margin-top:2px}
 .ws-pop{font-size:12px;font-weight:700;color:var(--muted);text-align:right}
@@ -270,17 +325,17 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Ro
 
 /* ── Ownership tab ── */
 #tab-ownership{display:none;overflow-y:auto;padding:16px}
-.own-header{background:#f5f3ff;border:1px solid #ddd6fe;border-radius:var(--radius);padding:12px 14px;margin-bottom:14px}
-.own-header p{font-size:13px;color:#6d28d9;font-weight:700;margin-bottom:3px}
+.own-header{background:var(--violet-bg);border:1px solid var(--violet-line);border-radius:var(--radius);padding:12px 14px;margin-bottom:14px}
+.own-header p{font-size:13px;color:var(--violet-tx);font-weight:700;margin-bottom:3px}
 .own-header span{font-size:12px;color:var(--muted)}
 .op-row{display:flex;align-items:center;gap:10px;padding:9px 12px;border:1px solid var(--line);border-radius:var(--radius);margin-bottom:6px;cursor:pointer;transition:.12s}
-.op-row:hover{border-color:#8b5cf6;background:#faf5ff}
+.op-row:hover{border-color:#8b5cf6;background:var(--violet-bg)}
 .op-dot{width:12px;height:12px;border-radius:50%;flex:none;border:1.5px solid var(--white);box-shadow:0 0 0 1px rgba(0,0,0,.12)}
 .op-info{flex:1;min-width:0}
 .op-name{font-weight:700;font-size:13.5px}
 .op-locs{font-size:11.5px;color:var(--muted);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.op-sba{font-size:11px;color:#047857;font-weight:600;margin-top:2px}
-.op-count{font-size:12px;font-weight:800;color:#6d28d9;background:#f5f3ff;border:1px solid #ddd6fe;border-radius:12px;padding:2px 9px;flex:none}
+.op-sba{font-size:11px;color:var(--green-tx);font-weight:600;margin-top:2px}
+.op-count{font-size:12px;font-weight:800;color:var(--violet-tx);background:var(--violet-bg);border:1px solid var(--violet-line);border-radius:12px;padding:2px 9px;flex:none}
 .op-count.single{color:var(--muted);background:var(--bg);border-color:var(--line)}
 .own-section-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin:14px 0 8px}
 /* rollup-scored operator list */
@@ -290,9 +345,9 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Ro
 .op-metrics{display:flex;flex-wrap:wrap;gap:4px 10px;font-size:11.5px;color:var(--muted);margin-top:3px}
 .op-metrics b{color:var(--ink)}
 .op-score{font-size:14px;font-weight:800;border-radius:10px;padding:3px 9px;flex:none;min-width:34px;text-align:center}
-.op-score.t-hi{color:#065f46;background:#d1fae5}
-.op-score.t-mid{color:#92400e;background:#fef3c7}
-.op-score.t-lo{color:#6b7280;background:#f3f4f6}
+.op-score.t-hi{color:var(--green-dk);background:var(--green-chip)}
+.op-score.t-mid{color:var(--amber-dk);background:var(--amber-chip)}
+.op-score.t-lo{color:var(--muted);background:var(--track)}
 /* owner directory modal */
 #dir-modal{position:fixed;inset:0;z-index:2000;display:none;align-items:center;justify-content:center;background:rgba(17,24,39,.5)}
 #dir-modal.show{display:flex}
@@ -302,17 +357,17 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Ro
 #dir-modal-body{overflow-y:auto;padding:0 0 6px}
 .dir-sub{font-size:12px;color:var(--muted);padding:10px 22px 8px}
 .dir-table{width:100%;border-collapse:collapse;font-size:12.5px}
-.dir-table th{text-align:left;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);background:#f9fafb;padding:7px 12px;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:1}
-.dir-table td{padding:7px 12px;border-bottom:1px solid #f1f2f4;vertical-align:top}
+.dir-table th{text-align:left;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);background:var(--bg);padding:7px 12px;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:1}
+.dir-table td{padding:7px 12px;border-bottom:1px solid var(--line-soft);vertical-align:top}
 .dir-table td.dir-group{border-bottom:1px solid var(--line)}
 .dir-owner{font-weight:600;color:var(--ink)}
 .dir-entity{font-size:11px;color:var(--muted);margin-top:2px}
 .dir-units{font-weight:700;color:var(--ink);text-align:center;white-space:nowrap}
-.dir-loc-name{font-weight:600;color:#374151;white-space:nowrap}
-.dir-table a{color:#2563eb;text-decoration:none}
+.dir-loc-name{font-weight:600;color:var(--ink2);white-space:nowrap}
+.dir-table a{color:var(--link);text-decoration:none}
 .dir-table a:hover{text-decoration:underline}
 .dir-table td.dir-wrapcell{overflow-wrap:anywhere}
-.dir-corp td{background:#fafafa}
+.dir-corp td{background:var(--bg)}
 tr.dir-last td{border-bottom:1px solid var(--line)}
 .dir-launch{border:1px solid var(--line);border-radius:8px;background:var(--white);color:var(--ink);font-size:12px;font-weight:700;padding:5px 11px;cursor:pointer;transition:.1s;white-space:nowrap}
 .dir-launch:hover{border-color:var(--red);color:var(--red)}
@@ -344,8 +399,40 @@ tr.dir-last td{border-bottom:1px solid var(--line)}
 #layer-panel.collapsed h4{margin-bottom:0;color:var(--ink)}
 #layer-panel.collapsed h4 .lp-caret{transform:rotate(-90deg)}
 
+/* Desktop: collapse the sidebar for a full-width map */
+.sidebar-toggle{position:absolute;left:0;top:50%;transform:translateY(-50%);z-index:950;width:22px;height:56px;border:1px solid var(--line);border-left:none;border-radius:0 10px 10px 0;background:var(--white);color:var(--muted);font-size:16px;font-weight:700;cursor:pointer;box-shadow:2px 0 8px var(--shadow);padding:0}
+.sidebar-toggle:hover{color:var(--red)}
+@media(min-width:761px){ #app.sidebar-hidden #sidebar{display:none} }
+
+/* Info panel: location details on phones, "Near me" results everywhere */
+.sheet{position:absolute;z-index:1600;top:10px;left:56px;width:330px;max-height:calc(100% - 90px);background:var(--white);color:var(--ink);border:1px solid var(--line);border-radius:14px;box-shadow:0 8px 28px var(--shadow);display:none;flex-direction:column}
+.sheet.show{display:flex}
+.sheet-head{display:none}
+.sheet-close{position:absolute;top:6px;right:8px;border:none;background:none;font-size:22px;line-height:1;color:var(--muted);cursor:pointer;padding:2px 6px;z-index:1}
+.sheet-close:hover{color:var(--ink)}
+#sheet-body{overflow-y:auto;padding:14px 16px 16px;font-size:13px;line-height:1.45}
+#sheet-body .pop-name{padding-right:24px}
+.sheet-back{border:none;background:none;color:var(--red);font-weight:700;font-size:12.5px;cursor:pointer;padding:0;margin-bottom:8px}
+.near-h{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin:0 0 8px;padding-right:24px}
+.near-comp{font-size:12px;color:var(--ink3);background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:8px 10px;margin-bottom:8px;line-height:1.5}
+.near-comp i{display:inline-block;width:8px;height:8px;border-radius:2px;margin:0 3px 0 6px}
+.near-row{display:flex;align-items:center;gap:10px;padding:8px 2px;border-bottom:1px solid var(--line);cursor:pointer}
+.near-row:last-child{border-bottom:none}
+.near-row:hover .near-n{color:var(--red)}
+.near-d{font-weight:800;color:var(--red);min-width:50px;text-align:right;font-size:12.5px;flex:none}
+.near-info{flex:1;min-width:0}
+.near-n{font-weight:700}
+.near-m{font-size:11.5px;color:var(--muted)}
+.near-msg{color:var(--ink3);font-size:13px;padding-right:24px}
+.near-ctl a{font-size:17px;font-weight:700;color:var(--ink)}
+.near-ctl a.busy{color:var(--red)}
+.me-dot{width:16px;height:16px;border-radius:50%;background:#2563eb;border:3px solid #fff;box-shadow:0 0 0 6px rgba(37,99,235,.25)}
+
 /* Phone view switch (List / Split / Map) — shown only at phone widths */
 #viewToggle{display:none}
+[data-theme="dark"] #viewToggle{background:#0b1120;border:1px solid var(--line)}
+[data-theme="dark"] #viewToggle button{color:#9ca3af}
+[data-theme="dark"] #viewToggle button.active{background:#e5e7eb;color:#111827}
 #moreFilters{display:none}
 #mfCount{background:var(--red);color:#fff;border-radius:9px;font-size:10.5px;font-weight:800;padding:0 6px;margin-left:5px}
 #mfCount:empty{display:none}
@@ -406,13 +493,13 @@ tr.dir-last td{border-bottom:1px solid var(--line)}
 .alloy-dot.rt-none{background:#9ca3af}
 
 /* Star ratings */
-.card-rating{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:700;color:#b45309;margin-top:5px;text-decoration:none;cursor:pointer}
+.card-rating{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:700;color:var(--amber-tx);margin-top:5px;text-decoration:none;cursor:pointer}
 .card-rating:hover{text-decoration:underline}
 .card-rating .stars{color:#f59e0b;letter-spacing:-1px}
 .card-rating .rcount{color:var(--muted);font-weight:500}
-.card-rating.rt-high{color:#047857}
-.card-rating.rt-low{color:#b91c1c}
-.pop-rating{font-size:12px;font-weight:700;color:#b45309;margin-bottom:5px;display:inline-flex;align-items:center;gap:4px;text-decoration:none;cursor:pointer}
+.card-rating.rt-high{color:var(--green-tx)}
+.card-rating.rt-low{color:var(--red-tx)}
+.pop-rating{font-size:12px;font-weight:700;color:var(--amber-tx);margin-bottom:5px;display:inline-flex;align-items:center;gap:4px;text-decoration:none;cursor:pointer}
 .pop-rating:hover{text-decoration:underline}
 .pop-rating .stars{color:#f59e0b;letter-spacing:-1px}
 .pop-rating .rcount{color:var(--muted);font-weight:500}
@@ -430,7 +517,7 @@ tr.dir-last td{border-bottom:1px solid var(--line)}
   #app.view-map #map-container{height:100%}
 
   #viewToggle{display:flex;position:fixed;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom));z-index:1500;background:var(--ink);border-radius:24px;padding:4px;gap:2px;box-shadow:0 6px 20px rgba(0,0,0,.28)}
-  #viewToggle button{border:none;background:none;color:#d1d5db;font-size:13px;font-weight:700;padding:8px 14px;border-radius:20px;cursor:pointer;white-space:nowrap}
+  #viewToggle button{border:none;background:none;color:var(--faint);font-size:13px;font-weight:700;padding:8px 14px;border-radius:20px;cursor:pointer;white-space:nowrap}
   #viewToggle button.active{background:var(--white);color:var(--ink)}
   /* keep the last rows of each panel clear of the floating switch */
   #tab-overview,#tab-analytics,#tab-ownership,#tab-whitespace{padding-bottom:84px}
@@ -461,6 +548,13 @@ tr.dir-last td{border-bottom:1px solid var(--line)}
   #timelapse-box input[type=range]{flex:1;min-width:0}
   .leaflet-popup-content{max-height:46vh;overflow-y:auto}
 
+  /* info panel becomes a bottom sheet */
+  .sidebar-toggle{display:none}
+  .sheet{top:auto;left:0;right:0;bottom:0;width:auto;max-height:62%;border:none;border-top:1px solid var(--line);border-radius:16px 16px 0 0;box-shadow:0 -8px 28px var(--shadow);padding-bottom:env(safe-area-inset-bottom)}
+  .sheet-head{display:block;padding:8px 0 2px;touch-action:none;cursor:grab}
+  .sheet-grab{width:40px;height:4px;border-radius:2px;background:var(--faint);margin:0 auto}
+  #sheet-body{padding:6px 18px 18px;font-size:13.5px}
+
   /* modals: near full-width, header controls wrap */
   .loan-card{width:94vw;max-height:88dvh}
   .dir-card{width:96vw;max-height:90dvh}
@@ -478,7 +572,7 @@ tr.dir-last td{border-bottom:1px solid var(--line)}
   .dir-table td:nth-last-child(4){flex:1 1 100%}
   .dir-table tr.dir-last{border-bottom:1px solid var(--line);padding-bottom:10px}
   .dir-table tr.dir-last td{border:none}
-  .dir-table tr.dir-corp{background:#fafafa}
+  .dir-table tr.dir-corp{background:var(--bg)}
 }
 </style>
 </head>
@@ -488,6 +582,7 @@ tr.dir-last td{border-bottom:1px solid var(--line)}
   <!-- SIDEBAR -->
   <aside id="sidebar">
     <div class="brand">
+      <button id="themeBtn" class="theme-btn" type="button">◐</button>
       <h1><b>Alloy</b> Personal Training</h1>
       <div class="brand-chips">
         <div class="chip"><b id="chip-total">0</b> total</div>
@@ -606,10 +701,10 @@ tr.dir-last td{border-bottom:1px solid var(--line)}
         <div id="chart-rating"></div>
       </div>
 
-      <div class="sba-block" id="trend-block" style="border-top-color:#fed7aa">
-        <h3 class="sba-title" style="color:#c2410c">Trending <span id="trend-period">· snapshot deltas</span></h3>
+      <div class="sba-block" id="trend-block" style="border-top-color:var(--orange-line)">
+        <h3 class="sba-title" style="color:var(--orange-tx)">Trending <span id="trend-period">· snapshot deltas</span></h3>
         <div class="stat-grid">
-          <div class="stat-card"><div class="sv" style="color:#c2410c" id="tr-hottest">—</div><div class="sl" id="tr-hottest-l">Hottest location</div></div>
+          <div class="stat-card"><div class="sv" style="color:var(--orange-tx)" id="tr-hottest">—</div><div class="sl" id="tr-hottest-l">Hottest location</div></div>
           <div class="stat-card"><div class="sv green" id="tr-newlive">0</div><div class="sl">Opened this period</div></div>
           <div class="stat-card"><div class="sv" id="tr-gainers">0</div><div class="sl">Locations gaining reviews</div></div>
           <div class="stat-card"><div class="sv amber" id="tr-watch">0</div><div class="sl">Watch list (declines / lost listings)</div></div>
@@ -644,10 +739,10 @@ tr.dir-last td{border-bottom:1px solid var(--line)}
         </div>
       </div>
 
-      <div class="sba-block" id="item19-block" style="border-top-color:#bfdbfe">
-        <h3 class="sba-title" style="color:#1d4ed8">Unit Economics <span id="item19-period">· FDD Item 19</span></h3>
+      <div class="sba-block" id="item19-block" style="border-top-color:var(--blue-line)">
+        <h3 class="sba-title" style="color:var(--blue-md)">Unit Economics <span id="item19-period">· FDD Item 19</span></h3>
         <div class="stat-grid">
-          <div class="stat-card"><div class="sv" style="color:#1d4ed8" id="ie-auv">—</div><div class="sl">System AUV (avg revenue)</div></div>
+          <div class="stat-card"><div class="sv" style="color:var(--blue-md)" id="ie-auv">—</div><div class="sl">System AUV (avg revenue)</div></div>
           <div class="stat-card"><div class="sv" id="ie-members">—</div><div class="sl">Avg members / unit</div></div>
           <div class="stat-card"><div class="sv" id="ie-rpm">—</div><div class="sl">Revenue / member / mo</div></div>
           <div class="stat-card"><div class="sv green" id="ie-retention">—</div><div class="sl">Monthly retention</div></div>
@@ -663,8 +758,8 @@ tr.dir-last td{border-bottom:1px solid var(--line)}
         <div class="ie-note" id="item19-note"></div>
       </div>
 
-      <div class="sba-block" id="churn-block" style="border-top-color:#fecaca">
-        <h3 class="sba-title" style="color:#b91c1c">Network Churn <span>· FDD Item 20 + Exhibit E, 2023–2025</span></h3>
+      <div class="sba-block" id="churn-block" style="border-top-color:var(--red-line)">
+        <h3 class="sba-title" style="color:var(--red-tx)">Network Churn <span>· FDD Item 20 + Exhibit E, 2023–2025</span></h3>
         <div class="stat-grid">
           <div class="stat-card"><div class="sv green" id="ch-survival">—</div><div class="sl">Outlet survival rate</div></div>
           <div class="stat-card"><div class="sv" id="ch-closed">—</div><div class="sl">Closures (of <span id="ch-opened">0</span> opened)</div></div>
@@ -679,10 +774,10 @@ tr.dir-last td{border-bottom:1px solid var(--line)}
         <div class="ie-note" id="churn-note"></div>
       </div>
 
-      <div class="sba-block" id="growth-block" style="border-top-color:#c7d2fe">
-        <h3 class="sba-title" style="color:#4338ca">Growth & Pipeline <span id="growth-asof">· FDD Table 5</span></h3>
+      <div class="sba-block" id="growth-block" style="border-top-color:var(--indigo-line)">
+        <h3 class="sba-title" style="color:var(--indigo)">Growth & Pipeline <span id="growth-asof">· FDD Table 5</span></h3>
         <div class="stat-grid">
-          <div class="stat-card"><div class="sv" style="color:#4338ca" id="gr-signed">—</div><div class="sl">Signed, not yet open</div></div>
+          <div class="stat-card"><div class="sv" style="color:var(--indigo)" id="gr-signed">—</div><div class="sl">Signed, not yet open</div></div>
           <div class="stat-card"><div class="sv green" id="gr-projected">—</div><div class="sl">Projected openings next FY</div></div>
         </div>
         <div class="chart-section">
@@ -762,6 +857,12 @@ tr.dir-last td{border-bottom:1px solid var(--line)}
   <!-- MAP -->
   <div id="map-container">
     <div id="map"></div>
+    <button id="sidebarToggle" class="sidebar-toggle" type="button" title="Hide panel — full-screen map" aria-label="Hide panel">‹</button>
+    <div id="sheet" class="sheet" aria-hidden="true" role="dialog">
+      <div class="sheet-head"><div class="sheet-grab"></div></div>
+      <button class="sheet-close" type="button" aria-label="Close">×</button>
+      <div id="sheet-body"></div>
+    </div>
     <div id="layer-panel">
       <h4 id="layerHead" role="button" tabindex="0" aria-expanded="true">Map Layers <span class="lp-caret">▾</span></h4>
       <label class="layer-row">
@@ -831,7 +932,7 @@ tr.dir-last td{border-bottom:1px solid var(--line)}
       <div class="legend-row"><div class="legend-swatch" style="background:#ef4444"></div> 11–15</div>
       <div class="legend-row"><div class="legend-swatch" style="background:#dc2626"></div> 16–20</div>
       <div class="legend-row"><div class="legend-swatch" style="background:#991b1b"></div> 21+</div>
-      <div class="legend-row"><div class="legend-swatch" style="background:#f3f4f6"></div> 0</div>
+      <div class="legend-row"><div class="legend-swatch" style="background:var(--track)"></div> 0</div>
     </div>
     <div id="brand-legend"><b>●</b> Alloy Personal Training &nbsp;·&nbsp; <span id="legend-count">0</span> locations in 34 states</div>
     <div id="timelapse-box">
@@ -978,13 +1079,39 @@ function fmtHours(loc){
 
 // ── Map setup ──
 const map = L.map('map',{scrollWheelZoom:true}).setView([39.5,-98.35],4);
-// Esri Light Gray Canvas — keyless; replaced CARTO after their free basemap
+// Esri Light/Dark Gray Canvas — keyless; replaced CARTO after their free basemap
 // began watermarking tiles "API KEY REQUIRED" (Aug 2026). Note Esri tile URLs
 // are {z}/{y}/{x}. Native tiles end at z16; Leaflet upscales 17-19.
-L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}',{
+const TILE_URL={
+  light:'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}',
+  dark: 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}',
+};
+function isDarkTheme(){ return document.documentElement.getAttribute('data-theme')==='dark'; }
+const baseLayer=L.tileLayer(TILE_URL[isDarkTheme()?'dark':'light'],{
   attribution:'Tiles &copy; <a href="https://www.esri.com/">Esri</a> &mdash; Esri, HERE, Garmin &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   maxNativeZoom:16,maxZoom:19
 }).addTo(map);
+
+// ── Theme: auto (follows OS) → light → dark ──
+const DARK_MQ=window.matchMedia('(prefers-color-scheme: dark)');
+const THEME_LABEL={auto:['◐','Theme: auto (follows your device)'],light:['☀','Theme: light'],dark:['☾','Theme: dark']};
+let themePref=(()=>{ try{ return localStorage.getItem('alloyTheme')||'auto'; }catch(e){ return 'auto'; } })();
+function applyTheme(initial){
+  const dark = themePref==='dark' || (themePref==='auto' && DARK_MQ.matches);
+  document.documentElement.setAttribute('data-theme', dark?'dark':'light');
+  document.getElementById('metaTheme').setAttribute('content', dark?'#111827':'#ffffff');
+  baseLayer.setUrl(TILE_URL[dark?'dark':'light']);
+  if(!initial) restyleChoropleth();
+  const b=document.getElementById('themeBtn'), [ico,title]=THEME_LABEL[themePref];
+  b.textContent=ico; b.title=title+' — click to change'; b.setAttribute('aria-label',title);
+}
+document.getElementById('themeBtn').addEventListener('click',()=>{
+  themePref={auto:'light',light:'dark',dark:'auto'}[themePref]||'auto';
+  try{ localStorage.setItem('alloyTheme',themePref); }catch(e){}
+  applyTheme();
+});
+DARK_MQ.addEventListener('change',()=>{ if(themePref==='auto') applyTheme(); });
+applyTheme(true);
 
 // ── Phone layout: List / Split / Map ──
 const PHONE = window.matchMedia('(max-width:760px)');
@@ -1003,6 +1130,7 @@ function setViewMode(mode){
   app.classList.add('view-'+mode);
   document.querySelectorAll('#viewToggle button').forEach(b=>b.classList.toggle('active',b.dataset.view===mode));
   try{ localStorage.setItem('alloyView',mode); }catch(e){}
+  if(mode==='list') document.getElementById('sheet').classList.remove('show');
   map.invalidateSize({animate:false});
   if(pendingFit && !mapHidden()){ const [b,o]=pendingFit; pendingFit=null; try{ map.fitBounds(b,o); }catch(e){} }
 }
@@ -1021,7 +1149,137 @@ layerHead.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.pr
 
 setViewMode(viewMode);
 setLayerPanel(!PHONE.matches);
-PHONE.addEventListener('change',()=>{ setLayerPanel(!PHONE.matches); map.invalidateSize({animate:false}); });
+PHONE.addEventListener('change',()=>{ setLayerPanel(!PHONE.matches); closeSheet(); map.invalidateSize({animate:false}); });
+
+// ── Desktop: hide/show the sidebar ──
+function setSidebarHidden(hidden){
+  document.getElementById('app').classList.toggle('sidebar-hidden',hidden);
+  const b=document.getElementById('sidebarToggle');
+  b.textContent=hidden?'›':'‹';
+  b.title=hidden?'Show panel':'Hide panel — full-screen map';
+  b.setAttribute('aria-label',hidden?'Show panel':'Hide panel');
+  try{ localStorage.setItem('alloySidebar',hidden?'hidden':'shown'); }catch(e){}
+  map.invalidateSize({animate:false});
+}
+document.getElementById('sidebarToggle').addEventListener('click',()=>
+  setSidebarHidden(!document.getElementById('app').classList.contains('sidebar-hidden')));
+setSidebarHidden((()=>{ try{ return localStorage.getItem('alloySidebar')==='hidden'; }catch(e){ return false; } })());
+
+// ── Info panel (bottom sheet on phones) ──
+const sheet=document.getElementById('sheet'), sheetBody=document.getElementById('sheet-body');
+let sheetBack=null;     // set just before opening a location from the Near-me list
+function openSheet(html,latlng){
+  const back=sheetBack; sheetBack=null;
+  sheetBody.innerHTML=(back?'<button class="sheet-back" type="button">‹ Nearby studios</button>':'')+html;
+  if(back) sheetBody.querySelector('.sheet-back').addEventListener('click',back);
+  sheet.classList.add('show'); sheet.setAttribute('aria-hidden','false'); sheetBody.scrollTop=0;
+  sheet.style.transform='';
+  if(PHONE.matches && latlng) keepAboveSheet(latlng);
+}
+function closeSheet(){ sheet.classList.remove('show'); sheet.setAttribute('aria-hidden','true'); }
+// Pan so the selected pin sits in the strip of map still visible above the sheet.
+function keepAboveSheet(latlng){
+  const go=()=>{
+    if(!sheet.classList.contains('show') || map._animatingZoom) return;
+    const top=sheet.offsetTop, w=map.getSize().x, pt=map.latLngToContainerPoint(latlng);
+    const dy=(pt.y>top-28 || pt.y<28) ? pt.y-Math.max(40,top/2) : 0;
+    const dx=(pt.x<40 || pt.x>w-40) ? pt.x-w/2 : 0;
+    if(dx||dy) map.panBy([dx,dy],{animate:true});
+  };
+  if(map._animatingZoom) map.once('zoomend',()=>setTimeout(go,0)); else go();
+  // a zoom animation still in flight overrides the pan — check again once it settles
+  const again=()=>setTimeout(go,0);
+  map.once('moveend',again);
+  setTimeout(()=>map.off('moveend',again),900);
+}
+sheet.querySelector('.sheet-close').addEventListener('click',closeSheet);
+map.on('click',closeSheet);
+// swipe the grab bar down to dismiss
+(()=>{ const head=sheet.querySelector('.sheet-head'); let y0=null;
+  head.addEventListener('touchstart',e=>{ y0=e.touches[0].clientY; },{passive:true});
+  head.addEventListener('touchmove',e=>{ if(y0==null) return; const dy=Math.max(0,e.touches[0].clientY-y0); sheet.style.transform=`translateY(${dy}px)`; },{passive:true});
+  head.addEventListener('touchend',e=>{ if(y0==null) return; const dy=e.changedTouches[0].clientY-y0; y0=null; sheet.style.transform=''; if(dy>60) closeSheet(); });
+})();
+// On phones, marker popups render in the sheet instead of a bubble over the map.
+const _adjustPan=L.Popup.prototype._adjustPan;
+L.Popup.prototype._adjustPan=function(){ if(PHONE.matches) return; return _adjustPan.apply(this,arguments); };
+map.on('popupopen',e=>{
+  if(!PHONE.matches) return;
+  const c=e.popup.getContent();
+  const html=typeof c==='function' ? c(e.popup._source) : (c instanceof HTMLElement ? c.outerHTML : c);
+  const ll=e.popup.getLatLng();
+  map.closePopup(e.popup);
+  openSheet(html,ll);
+});
+
+function focusLocation(l){
+  revealMap();
+  map.setView([l.lat,l.lng],13,{animate:true});
+  cluster.zoomToShowLayer(l._marker,()=>l._marker.openPopup());
+}
+
+// ── Near me ──
+const miles=(a,b)=>L.latLng(a).distanceTo(b)/1609.344;
+let meLayer=null, nearState=null;
+const NearControl=L.Control.extend({ options:{position:'topleft'}, onAdd(){
+  const d=L.DomUtil.create('div','leaflet-bar near-ctl');
+  d.innerHTML='<a href="#" role="button" title="Near me — closest Alloy studios" aria-label="Near me">◎</a>';
+  L.DomEvent.disableClickPropagation(d);
+  d.firstChild.addEventListener('click',e=>{ e.preventDefault(); nearMe(); });
+  return d;
+}});
+map.addControl(new NearControl());
+function nearMe(){
+  const btn=document.querySelector('.near-ctl a');
+  if(!navigator.geolocation){ openSheet('<div class="near-msg">This browser can’t share its location.</div>'); return; }
+  btn.classList.add('busy');
+  openSheet('<div class="near-h">Near me</div><div class="near-msg">Finding your location…</div>');
+  navigator.geolocation.getCurrentPosition(pos=>{
+    btn.classList.remove('busy');
+    nearState={lat:pos.coords.latitude,lng:pos.coords.longitude,acc:pos.coords.accuracy};
+    showNearby(true);
+  },err=>{
+    btn.classList.remove('busy');
+    openSheet('<div class="near-h">Near me</div><div class="near-msg">'+(err.code===1
+      ? 'Location access is blocked. Allow location for this site in your browser settings, then tap ◎ again.'
+      : 'Couldn’t get your location — try again in a moment.')+'</div>');
+  },{enableHighAccuracy:true,timeout:12000,maximumAge:60000});
+}
+function showNearby(fit){
+  const {lat,lng,acc}=nearState, me=[lat,lng];
+  if(meLayer) map.removeLayer(meLayer);
+  meLayer=L.layerGroup([
+    L.circle(me,{radius:Math.min(acc||0,3000),color:'#2563eb',weight:1,opacity:.4,fillOpacity:.07,interactive:false}),
+    L.marker(me,{icon:L.divIcon({className:'',html:'<div class="me-dot"></div>',iconSize:[16,16],iconAnchor:[8,8]}),interactive:false,keyboard:false,zIndexOffset:1000})
+  ]).addTo(map);
+  const near=LOCATIONS.map(l=>({l,d:miles(me,[l.lat,l.lng])})).sort((a,b)=>a.d-b.d).slice(0,8);
+  const comps=(COMPETITORS.places||[]).filter(p=>miles(me,[p.lat,p.lng])<=5);
+  const byBrand={}; comps.forEach(p=>{ byBrand[p.b]=(byBrand[p.b]||0)+1; });
+  const fmtMi=d=>d<10?d.toFixed(1)+' mi':Math.round(d).toLocaleString()+' mi';
+  const compHtml = comps.length
+    ? `<b>${comps.length}</b> tracked competitor studio${comps.length>1?'s':''} within 5 mi:`+
+      Object.entries(byBrand).sort((a,b)=>b[1]-a[1]).map(([b,n])=>`<span style="white-space:nowrap"><i style="background:${COMP_COLOR[b]||'#64748b'}"></i>${COMP_NAME[b]||b} ${n}</span>`).join('')
+    : 'No tracked competitor studios within 5 mi of you.';
+  const rows=near.map(({l,d})=>`
+    <div class="near-row" data-n="${encodeURIComponent(l.n)}">
+      <div class="near-d">${fmtMi(d)}</div>
+      <div class="near-info"><div class="near-n">${l.n}</div>
+        <div class="near-m">${l.coming_soon?'Coming soon':(l.rating!=null?'★ '+l.rating.toFixed(1)+' · '+(l.review_count||0)+' reviews':'Open')}${operatorOf(l)?' · '+operatorOf(l):''}</div></div>
+    </div>`).join('');
+  openSheet(`<div class="near-h">Nearest Alloy studios</div><div class="near-comp">${compHtml}</div>${rows}`);
+  sheetBody.querySelectorAll('.near-row').forEach(r=>r.addEventListener('click',()=>{
+    const l=LOCATIONS.find(x=>x.n===decodeURIComponent(r.dataset.n)); if(!l) return;
+    if(PHONE.matches) sheetBack=()=>showNearby(false);
+    focusLocation(l);
+  }));
+  if(fit){
+    revealMap();
+    const close=near.filter(x=>x.d<=30).slice(0,3), frame=close.length?close:near.slice(0,1);
+    const b=L.latLngBounds([me,...frame.map(x=>[x.l.lat,x.l.lng])]);
+    const bottom=PHONE.matches?sheet.offsetHeight+20:40, left=PHONE.matches?20:sheet.offsetWidth+70;
+    map.fitBounds(b,{paddingTopLeft:[left,50],paddingBottomRight:[30,bottom],maxZoom:12});
+  }
+}
 
 function ratingTier(r){
   if(r==null) return 'none';
@@ -1200,7 +1458,7 @@ function showLoans(key){
   document.getElementById('loan-modal').classList.add('show');
 }
 function hideLoans(){ document.getElementById('loan-modal').classList.remove('show'); }
-document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ hideLoans(); if(typeof hideOperator==='function') hideOperator(); if(typeof hideDirectory==='function') hideDirectory(); } });
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ hideLoans(); if(typeof hideOperator==='function') hideOperator(); if(typeof hideDirectory==='function') hideDirectory(); if(typeof closeSheet==='function') closeSheet(); } });
 
 const cluster = L.markerClusterGroup({maxClusterRadius:40,spiderfyOnMaxZoom:true,showCoverageOnHover:false});
 map.addLayer(cluster);
@@ -2001,7 +2259,7 @@ function renderWhitespace(){
 // ── Whitespace markers ──
 WHITESPACE.forEach(w=>{
   wsMarkerGroup.addLayer(L.marker([w.lat,w.lng],{icon:wsIcon}).bindPopup(
-    `<div class="pop-name" style="color:#6b7280">${w.name}</div>`+
+    `<div class="pop-name" style="color:var(--muted)">${w.name}</div>`+
     `<div class="pop-addr">${w.state} metro · ${(w.pop/1e6).toFixed(1)}M population</div>`+
     `<div style="margin-top:6px;font-size:12px;color:var(--red);font-weight:600">No Alloy location yet</div>`
   ));
@@ -2026,7 +2284,9 @@ document.getElementById('radiusSel').addEventListener('change',()=>{
 // ── Choropleth ──
 const STATE_NAME_TO_ABBR={'Alabama':'AL','Alaska':'AK','Arizona':'AZ','Arkansas':'AR','California':'CA','Colorado':'CO','Connecticut':'CT','Delaware':'DE','Florida':'FL','Georgia':'GA','Hawaii':'HI','Idaho':'ID','Illinois':'IL','Indiana':'IN','Iowa':'IA','Kansas':'KS','Kentucky':'KY','Louisiana':'LA','Maine':'ME','Maryland':'MD','Massachusetts':'MA','Michigan':'MI','Minnesota':'MN','Mississippi':'MS','Missouri':'MO','Montana':'MT','Nebraska':'NE','Nevada':'NV','New Hampshire':'NH','New Jersey':'NJ','New Mexico':'NM','New York':'NY','North Carolina':'NC','North Dakota':'ND','Ohio':'OH','Oklahoma':'OK','Oregon':'OR','Pennsylvania':'PA','Rhode Island':'RI','South Carolina':'SC','South Dakota':'SD','Tennessee':'TN','Texas':'TX','Utah':'UT','Vermont':'VT','Virginia':'VA','Washington':'WA','West Virginia':'WV','Wisconsin':'WI','Wyoming':'WY','District of Columbia':'DC'};
 const CHORO_COLORS=['#f3f4f6','#fee2e2','#fca5a5','#f87171','#ef4444','#dc2626','#991b1b'];
-function choroColor(n){ if(!n)return CHORO_COLORS[0]; if(n<=2)return CHORO_COLORS[1]; if(n<=5)return CHORO_COLORS[2]; if(n<=10)return CHORO_COLORS[3]; if(n<=15)return CHORO_COLORS[4]; if(n<=20)return CHORO_COLORS[5]; return CHORO_COLORS[6]; }
+function choroColor(n){ if(!n)return isDarkTheme()?'#243041':CHORO_COLORS[0]; if(n<=2)return CHORO_COLORS[1]; if(n<=5)return CHORO_COLORS[2]; if(n<=10)return CHORO_COLORS[3]; if(n<=15)return CHORO_COLORS[4]; if(n<=20)return CHORO_COLORS[5]; return CHORO_COLORS[6]; }
+function choroStyle(f){ const n=stateCounts[STATE_NAME_TO_ABBR[f.properties.name]]||0; return{fillColor:choroColor(n),weight:1,opacity:.6,color:isDarkTheme()?'#4b5563':'#9ca3af',fillOpacity:.65}; }
+function restyleChoropleth(){ if(choroLayer) choroLayer.setStyle(choroStyle); }
 async function loadChoropleth(){ if(choroGeoJson)return choroGeoJson; try{ const r=await fetch('https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json'); choroGeoJson=await r.json(); return choroGeoJson; }catch(e){ return null; } }
 async function toggleChoropleth(on){
   const legendEl=document.getElementById('choro-legend');
@@ -2034,7 +2294,7 @@ async function toggleChoropleth(on){
   const gj=await loadChoropleth();
   if(!gj){ alert('Could not load state boundaries.'); document.getElementById('toggleChoropleth').checked=false; return; }
   choroLayer=L.geoJson(gj,{
-    style:f=>{ const abbr=STATE_NAME_TO_ABBR[f.properties.name]; const n=stateCounts[abbr]||0; return{fillColor:choroColor(n),weight:1,opacity:.6,color:'#9ca3af',fillOpacity:.65}; },
+    style:choroStyle,
     onEachFeature:(f,layer)=>{ const abbr=STATE_NAME_TO_ABBR[f.properties.name]; const n=stateCounts[abbr]||0; layer.bindTooltip(`<b>${f.properties.name}</b>: ${n} location${n!==1?'s':''}`,{sticky:true}); }
   }).addTo(map);
   legendEl.style.display='block';

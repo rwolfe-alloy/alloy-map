@@ -14,7 +14,7 @@ Legend — **Impact**: ⭐ high / ◐ medium / ○ nice-to-have · **Effort**: S
 - **Theme 2 — Market intelligence** ✅ *(Phase 12)* — Census ACS demographics (zip + CBSA), competitor density (OTF/F45/StretchLab via Places), **site-quality score** + map layer, **scored Whitespace ranking**, income in Top Markets. *(Drive-time trade areas deferred.)*
 - **Theme 3 — Time & trajectory** ✅ *(Phases 11+13)* — snapshot **Trending** (velocity, momentum layer, watch list), map **growth time-lapse**, FDD Table 5 **pipeline** (61 signed / 48 projected, by state), **cohort ramp/quality** charts.
 - **Theme 4 — Context & credibility** — ✅ *item 1 (Phase 15)*: peer-FDD benchmarking — 6 peer FDDs auto-downloaded from WI DFI, outlet math verified, AUVs curated, "How Alloy Stacks Up" panel on Overview. *Remaining: franchise economics deep-dive (Items 5–7 payback model), methodology/sources page.*
-- **Theme 5 — Presentation** — one-click PDF report, dark mode, mobile polish.
+- **Theme 5 — Presentation** — one-click PDF report (open); dark mode ✓, mobile polish ✓.
 
 ---
 
@@ -62,7 +62,7 @@ The next leap is to **synthesize it into a single ranked view of rollup targets*
 | 14 | **Export** ✅ *(done)* — CSV of the current filtered locations (Locations tab) and the ranked operator table (Ownership tab) | People want the data *out* for spreadsheets/decks | ⭐ | — |
 | 15 | **Shareable deep links** ✅ *(done)* — active filters/search/tab encoded in the URL, restored on load | Send a colleague "the 4.5★ TX multi-unit view" | ◐ | — |
 | 16 | **Address search / "nearest Alloy"** — geocode an address, fly + list nearest | Common first thing a user tries | ◐ | S |
-| 17 | **Mobile polish + dark mode** | Mobile ✓ (Oct 2026): List/Split/Map switch, collapsible layers + filters, compact header, iOS no-zoom inputs, stacked directory cards. Dark mode still open | ◐ | M |
+| 17 | **Mobile polish + dark mode** | ✓ Oct 2026: List/Split/Map switch, bottom-sheet details, Near me (geolocation + 5-mi competitor count), home-screen app icon/manifest, desktop sidebar collapse, dark mode (auto/light/dark, Esri dark tiles) | ✓ | M |
 
 ---
 
