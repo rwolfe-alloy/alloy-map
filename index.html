@@ -428,6 +428,11 @@ tr.dir-last td{border-bottom:1px solid var(--line)}
 .near-ctl a.busy{color:var(--red)}
 .me-dot{width:16px;height:16px;border-radius:50%;background:#2563eb;border:3px solid #fff;box-shadow:0 0 0 6px rgba(37,99,235,.25)}
 
+/* Phone split divider (shown only in Split view at phone widths) */
+#splitHandle{display:none;flex:none;height:24px;align-items:center;justify-content:center;background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line);touch-action:none;cursor:row-resize;outline:none}
+#splitHandle span{width:44px;height:5px;border-radius:3px;background:var(--faint);transition:background .15s,width .15s}
+#splitHandle:focus-visible span,#app.resizing #splitHandle span{background:var(--red);width:56px}
+
 /* Phone view switch (List / Split / Map) — shown only at phone widths */
 #viewToggle{display:none}
 [data-theme="dark"] #viewToggle{background:#0b1120;border:1px solid var(--line)}
@@ -515,6 +520,13 @@ tr.dir-last td{border-bottom:1px solid var(--line)}
   #app.view-list #map-container{display:none}
   #app.view-map #sidebar{display:none}
   #app.view-map #map-container{height:100%}
+
+  /* Split view: draggable divider sets the list/map ratio (--split) */
+  #app.view-split #sidebar{height:var(--split,50%);border-bottom:none}
+  #app.view-split #map-container{height:auto;flex:1 1 0;min-height:0}
+  #app.view-split #splitHandle{display:flex}
+  #app.resizing{user-select:none;-webkit-user-select:none}
+  #app.resizing #map-container{pointer-events:none}
 
   #viewToggle{display:flex;position:fixed;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom));z-index:1500;background:var(--ink);border-radius:24px;padding:4px;gap:2px;box-shadow:0 6px 20px rgba(0,0,0,.28)}
   #viewToggle button{border:none;background:none;color:var(--faint);font-size:13px;font-weight:700;padding:8px 14px;border-radius:20px;cursor:pointer;white-space:nowrap}
@@ -854,6 +866,8 @@ tr.dir-last td{border-bottom:1px solid var(--line)}
     </div>
   </aside>
 
+  <div id="splitHandle" role="separator" aria-orientation="horizontal" aria-label="Resize map — drag up or down" tabindex="0" title="Drag to resize · double-tap to reset"><span></span></div>
+
   <!-- MAP -->
   <div id="map-container">
     <div id="map"></div>
@@ -1150,6 +1164,53 @@ layerHead.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.pr
 setViewMode(viewMode);
 setLayerPanel(!PHONE.matches);
 PHONE.addEventListener('change',()=>{ setLayerPanel(!PHONE.matches); closeSheet(); map.invalidateSize({animate:false}); });
+
+// ── Phone split divider: drag to resize; drag to an edge to go full map / full list ──
+(()=>{
+  const app=document.getElementById('app'), handle=document.getElementById('splitHandle');
+  const MIN=.12, MAX=.88, SNAP_MAP=.08, SNAP_LIST=.90;   // ratios of screen height given to the list
+  let ratio=(()=>{ try{ const v=parseFloat(localStorage.getItem('alloySplit')); return v>=MIN&&v<=MAX?v:.5; }catch(e){ return .5; } })();
+  const apply=r=>{ app.style.setProperty('--split',(r*100).toFixed(2)+'%'); };
+  const save=()=>{ try{ localStorage.setItem('alloySplit',ratio.toFixed(3)); }catch(e){} };
+  let raf=0; const refit=()=>{ if(raf) return; raf=requestAnimationFrame(()=>{ raf=0; map.invalidateSize({animate:false}); }); };
+  apply(ratio);
+
+  let dragging=false, live=ratio, y0=0, lastTap=0;
+  handle.addEventListener('pointerdown',e=>{
+    dragging=true; live=ratio; y0=e.clientY;
+    try{ handle.setPointerCapture(e.pointerId); }catch(err){}
+    app.classList.add('resizing'); e.preventDefault();
+  });
+  handle.addEventListener('pointermove',e=>{
+    if(!dragging) return;
+    const box=app.getBoundingClientRect();
+    live=Math.min(.97,Math.max(.03,(e.clientY-box.top)/box.height));
+    apply(Math.min(MAX,Math.max(MIN,live)));
+    refit();
+  });
+  const reset=()=>{ ratio=.5; apply(ratio); save(); map.invalidateSize({animate:false}); };
+  const end=e=>{
+    if(!dragging) return; dragging=false; app.classList.remove('resizing');
+    if(Math.abs((e.clientY??y0)-y0)<6){            // a tap, not a drag
+      const now=Date.now();
+      if(now-lastTap<350){ lastTap=0; reset(); } else { lastTap=now; apply(ratio); }
+      return;
+    }
+    lastTap=0;
+    if(live<=SNAP_MAP){ apply(ratio); setViewMode('map'); return; }     // pushed all the way up
+    if(live>=SNAP_LIST){ apply(ratio); setViewMode('list'); return; }   // pulled all the way down
+    ratio=Math.min(MAX,Math.max(MIN,live)); apply(ratio); save();
+    map.invalidateSize({animate:false});
+  };
+  handle.addEventListener('pointerup',end);
+  handle.addEventListener('pointercancel',end);
+  handle.addEventListener('keydown',e=>{
+    if(e.key!=='ArrowUp'&&e.key!=='ArrowDown') return;
+    e.preventDefault();
+    ratio=Math.min(MAX,Math.max(MIN,ratio+(e.key==='ArrowDown'?.05:-.05)));
+    apply(ratio); save(); map.invalidateSize({animate:false});
+  });
+})();
 
 // ── Desktop: hide/show the sidebar ──
 function setSidebarHidden(hidden){
